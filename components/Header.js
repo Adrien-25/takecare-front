@@ -6,10 +6,10 @@ import {CartContext} from "@/components/CartContext";
 import BarsIcon from "@/components/icons/Bars";
 
 const StyledHeader = styled.header`
-  background-color: #222;
+  background-color: #fff;
 `;
 const Logo = styled(Link)`
-  color:#fff;
+  color:#000;
   text-decoration:none;
   position: relative;
   z-index: 3;
@@ -32,7 +32,7 @@ const StyledNav = styled.nav`
   left: 0;
   right: 0;
   padding: 70px 20px 20px;
-  background-color: #222;
+  background-color: transparent;
   @media screen and (min-width: 768px) {
     display: flex;
     position: static;
@@ -41,7 +41,7 @@ const StyledNav = styled.nav`
 `;
 const NavLink = styled(Link)`
   display: block;
-  color:#aaa;
+  color:#000;
   text-decoration:none;
   padding: 10px 0;
   @media screen and (min-width: 768px) {
@@ -69,7 +69,7 @@ export default function Header() {
     <StyledHeader>
       <Center>
         <Wrapper>
-          <Logo href={'/'}>Ecommerce</Logo>
+          <Logo href={'/'}>Take Care</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
             <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/products'}>All products</NavLink>
