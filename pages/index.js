@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Featured from "@/components/Featured";
 import {Product} from "@/models/Product";
 import {mongooseConnect} from "@/lib/mongoose";
@@ -10,6 +11,7 @@ export default function HomePage({featuredProduct,newProducts}) {
       <Header />
       <Featured product={featuredProduct} />
       <NewProducts products={newProducts} />
+      <Footer />
     </div>
   );
 }
