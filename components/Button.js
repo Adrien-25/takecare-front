@@ -12,7 +12,7 @@ export const ButtonStyle = css`
   font-family: 'Poppins', sans-serif;
   font-weight:500;
   svg{
-    height: 16px;
+    height: 20px;
     margin-right: 5px;
   }
   ${props => props.block && css`

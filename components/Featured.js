@@ -10,7 +10,7 @@ const Bg = styled.div`
   background-color: rgba(18, 18, 18, 0.1);
   color:#000;
   padding: 50px 0;
-  height:80vh;
+  height:70vh;
   display:flex;
   align-items:center;
 `;
@@ -36,29 +36,7 @@ const Desc = styled.p`
   color:#000;
   font-size:1rem;
 `;
-// const ColumnsWrapper = styled.div`
-//  < // display: grid;
-//   // grid-template-columns: 1fr;
-//   // gap: 40px;
-//   // img{
-//   //   max-width: 100%;
-//   //   max-height: 200px;
-//   //   display: block;
-//   //   margin: 0 auto;
-//   // }
-//   // div:nth-child(1) {
-//   //   order: 2;
-//   // }
-//   // @media screen and (min-width: 768px) {
-//   //   grid-template-columns: 1.1fr 0.9fr;
-//   //   div:nth-child(1) {
-//   //     order: 0;
-//   //   }
-//   //   img{
-//   //     max-width: 100%;
-//   //   }
-//   // }>
-// `;
+
 const Column = styled.div`
   display: flex;
   align-items: center;
@@ -96,10 +74,6 @@ export default function Featured({product}) {
               </ButtonsWrapper>
             </div>
           </Column>
-          {/* <Column>
-            <img src="https://dawid-next-ecommerce.s3.amazonaws.com/1679151719649.png" alt=""/>
-          </Column> */}
-        {/* </ColumnsWrapper> */}
       </Center>
 
     </Bg>
