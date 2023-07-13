@@ -16,6 +16,9 @@ const Column = styled.div`
     font-size: 0.8rem;
     padding: 5px 0;
   }
+  span{
+    margin-right:30px
+  }
 `;
 const TopWrapper = styled.div`
   display: grid;
