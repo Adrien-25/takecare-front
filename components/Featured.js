@@ -1,10 +1,10 @@
 import Center from "@/components/Center";
 import styled from "styled-components";
-import Button from "@/components/Button";
 import ButtonLink from "@/components/ButtonLink";
-import CartIcon from "@/components/icons/CartIcon";
-import {useContext} from "react";
-import {CartContext} from "@/components/CartContext";
+// import Button from "@/components/Button";
+// import CartIcon from "@/components/icons/CartIcon";
+// import {useContext} from "react";
+// import {CartContext} from "@/components/CartContext";
 
 const Bg = styled.div`
   background-color: rgba(18, 18, 18, 0.1);
@@ -51,10 +51,10 @@ const ButtonsWrapper = styled.div`
 `;
 
 export default function Featured({product}) {
-  const {addProduct} = useContext(CartContext);
-  function addFeaturedToCart() {
-    addProduct(product._id);
-  }
+  // const {addProduct} = useContext(CartContext);
+  // function addFeaturedToCart() {
+  //   addProduct(product._id);
+  // }
   return (
     <Bg>
       <Center>
@@ -65,8 +65,8 @@ export default function Featured({product}) {
               <Title>Jusqu'à 50% de réduction*</Title>
               <Desc>Temps chaud. Offres plus chaudes.</Desc>
               <ButtonsWrapper>
-                <ButtonLink href={'/product/'+product._id} outline={1} black={1}>Femme</ButtonLink>
-                <ButtonLink href={'/product/'+product._id} outline={1} black={1}>Homme</ButtonLink>
+                <ButtonLink href={'/product/'} outline={1} black={1}>Femme</ButtonLink>
+                <ButtonLink href={'/product/'} outline={1} black={1}>Homme</ButtonLink>
                 {/* <Button white onClick={addFeaturedToCart}>
                   <CartIcon />
                   Add to cart

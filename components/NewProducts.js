@@ -11,7 +11,7 @@ const Title = styled.h2`
 export default function NewProducts({products}) {
   return (
     <Center>
-      <Title>New Arrivals</Title>
+      <Title>Nouveautés</Title>
       <ProductsGrid products={products} />
     </Center>
   );

@@ -4,7 +4,8 @@ import Link from "next/link";
 const StyledFooter = styled.footer`
   background-color: #000;
   color: #fff;
-  padding: 40px 40px 20px 40px;
+  // padding: 40px 40px 20px 40px;
+  padding:40px;
 `;
 const Column = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Column = styled.div`
 const TopWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   gap: 20px;
 `;
 const Title = styled.h4`

@@ -112,11 +112,11 @@ export default function Header() {
         <Wrapper>
           <Logo href={"/"}>Take Care</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={"/"}>Accueil</NavLink>
-            <NavLink href={"/products"}>All products</NavLink>
-            <NavLink href={"/categories"}>Categories</NavLink>
-            <NavLink href={"/categories"}>Homme</NavLink>
-            <NavLink href={"/categories"}>Femme</NavLink>
+            <NavLink href={"/products"}>Nouveautés</NavLink>
+            <NavLink href={"/categories/homme"}>Homme</NavLink>
+            <NavLink href={"/categories/femme"}>Femme</NavLink>
+            <NavLink href={"/categories/enfant"}>Enfant</NavLink>
+            <NavLink href={"/categories/soldes"}>Soldes</NavLink>
           </StyledNav>
 
           <StyledNav>

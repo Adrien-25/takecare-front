@@ -51,6 +51,12 @@ export default function CategoriesSection() {
         />
         <CategoryTitle>Femme</CategoryTitle>
       </Column>
+      <Column href="/categories/enfant">
+        <CategoryBackground
+          style={{ backgroundImage: "url('/enfant.jpg')" }}
+        />
+        <CategoryTitle>Enfant</CategoryTitle>
+      </Column>
     </StyledCategoriesSection>
   );
 }
