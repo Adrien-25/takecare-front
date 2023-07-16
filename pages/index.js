@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Featured from "@/components/Featured";
 import CategoriesSection from "@/components/CategoriesSection";
 import ReassuranceSection from "@/components/ReassuranceSection";
+import PromotedSection from "@/components/PromotedSection";
 import {Product} from "@/models/Product";
 import {mongooseConnect} from "@/lib/mongoose";
 import NewProducts from "@/components/NewProducts";
@@ -15,6 +16,7 @@ export default function HomePage({featuredProduct,newProducts}) {
       <ReassuranceSection />
       <CategoriesSection />
       <NewProducts products={newProducts} />
+      <PromotedSection/>
       <Footer />
     </div>
   );
