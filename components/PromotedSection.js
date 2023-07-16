@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import Link from "next/link";
+import ButtonLink from "@/components/ButtonLink";
 
 const StyledPromotionSection = styled.section`
-  background-color: #f9f9f9;
+  // background-color: #f9f9f9;
+  background-color: #fff;
   padding: 40px 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const Title = styled.h2`
@@ -21,7 +24,14 @@ const Subtitle = styled.p`
   margin-bottom: 30px;
 `;
 
-// const Button = styled.a`
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+  justify-content: center;
+`;
+
+// const Button = styled.a
 //   display: inline-block;
 //   padding: 12px 24px;
 //   background-color: #6fdcff;
@@ -42,10 +52,11 @@ export default function PromotedSection() {
     <StyledPromotionSection>
       <Title>La beauté de la maternité</Title>
       <Subtitle>Découvrez notre sélection pour les femmes enceintes</Subtitle>
-      <Link href="/categories/femme-enceinte">
-        {/* <Button>Explorer la catégorie</Button> */}
-        Explorer la catégorie
-      </Link>
+      <ButtonsWrapper>
+        <ButtonLink href={"/categories/femme-enceinte"} outline={0} black={1}>
+          Découvrir
+        </ButtonLink>
+      </ButtonsWrapper>
     </StyledPromotionSection>
   );
 }
