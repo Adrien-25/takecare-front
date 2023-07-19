@@ -44,7 +44,7 @@ const PriceRow = styled.div`
   }
   align-items: center;
   justify-content:space-between;
-  margin-top:2px;
+  margin-top:10px;
 `;
 
 const Price = styled.div`
@@ -59,7 +59,7 @@ const Price = styled.div`
 `;
 
 export default function ProductBox({_id,title,description,price,images}) {
-  const {addProduct} = useContext(CartContext);
+  // const {addProduct} = useContext(CartContext);
   const url = '/product/'+_id;
   return (
     <ProductWrapper>
@@ -72,11 +72,11 @@ export default function ProductBox({_id,title,description,price,images}) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>
-            ${price}
+            {price} €
           </Price>
-          <Button block onClick={() => addProduct(_id)} primary outline>
+          {/* <Button block onClick={() => addProduct(_id)} primary outline>
             Add to cart
-          </Button>
+          </Button> */}
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>

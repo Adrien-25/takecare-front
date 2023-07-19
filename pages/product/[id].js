@@ -1,5 +1,6 @@
 import Center from "@/components/Center";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Title from "@/components/Title";
 import {mongooseConnect} from "@/lib/mongoose";
 import {Product} from "@/models/Product";
@@ -55,6 +56,7 @@ export default function ProductPage({product}) {
           </div>
         </ColWrapper>
       </Center>
+      <Footer />
     </>
   );
 }
