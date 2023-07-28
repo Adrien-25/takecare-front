@@ -3,8 +3,8 @@ import {primary} from "@/lib/colors";
 
 export const ButtonStyle = css`
   border:0;
-  padding: 5px 15px;
-  border-radius: 5px;
+  padding: 10px 15px;
+  border-radius: 0px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -26,7 +26,10 @@ export const ButtonStyle = css`
   ${props => props.white && props.outline && css`
     background-color: transparent;
     color: #fff;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
+    hover {
+
+    }
   `}
   ${props => props.black && !props.outline && css`
     background-color: #000;

@@ -23,13 +23,13 @@ const Column = styled.div`
 `;
 const TopWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   padding-bottom: 40px;
   gap: 20px;
 `;
 const Title = styled.h4`
   margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   font-weight: bold;
   font-size: 0.9rem;
   @media screen and (min-width: 768px) {
@@ -38,9 +38,10 @@ const Title = styled.h4`
 `;
 const BottomWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  padding-top:50px;
 `;
 
 const FooterLink = styled(Link)`
@@ -48,7 +49,10 @@ const FooterLink = styled(Link)`
   text-decoration: none;
   margin-right: 10px;
 `;
-
+const LogoImg = styled.img`
+  width: 100px;
+  height: auto;
+`;
 export default function Footer() {
   return (
     <StyledFooter>
@@ -84,6 +88,14 @@ export default function Footer() {
           <Link href={"/"}>Retours</Link>
           <Link href={"/"}>Modes de paiement</Link>
           <Link href={"/"}>Nous contacter</Link>
+        </Column>
+        <Column>
+          <span>Take Care</span>
+          <span>
+            Bienvenue chez Take Care, votre destination en ligne pour les
+            vêtements de seconde main d’occasion les plus tendance et
+            éco-responsables.
+          </span>
         </Column>
       </TopWrapper>
       <BottomWrapper>

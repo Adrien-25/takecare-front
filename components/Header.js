@@ -16,6 +16,10 @@ const Logo = styled(Link)`
   position: relative;
   z-index: 3;
 `;
+const LogoImg = styled.img`
+  width: 100px;
+  height: auto;
+`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -110,7 +114,9 @@ export default function Header() {
     <StyledHeader>
       <Center>
         <Wrapper>
-          <Logo href={"/"}>Take Care</Logo>
+          <Logo href={"/"}>
+            <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
+          </Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
             <NavLink href={"/products"}>Nouveautés</NavLink>
             <NavLink href={"/categories/homme"}>Homme</NavLink>
@@ -120,10 +126,10 @@ export default function Header() {
           </StyledNav>
 
           <StyledNav>
-            <IconLink href={"/account"} white>
+            <IconLink href={"/account"}>
               <MyAccount />
             </IconLink>
-            <IconLink href={"/cart"} white>
+            <IconLink href={"/cart"} >
               <CartIcon />
               <CartCount>{cartProducts.length}</CartCount>
             </IconLink>

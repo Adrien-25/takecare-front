@@ -10,10 +10,11 @@ const StyledReassuranceSection = styled.section`
   justify-content: center;
   background-color: #6fdcff;
   padding: 0;
+  gap:4vw;
 `;
 
 const Column = styled.div`
-  flex: 1;
+  // flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -21,16 +22,12 @@ const Column = styled.div`
   padding: 0 20px;
   gap: 15px;
   display: flex;
-  // display: ${(props) => (props.active ? "flex" : "none")};
-  // opacity: ${(props) => (props.active ? 1 : 0)};
-  // visibility: ${(props) => (props.active ? "active" :"hidden")};
-  // transform: translateY(${(props) => (props.active ? "0" : "100%")});
-  // transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 `;
 
 const ReassuranceText = styled.p`
   font-size: 16px;
   line-height: 1.5;
+  font-weight:bold;
 `;
 
 export default function ReassuranceSection() {
