@@ -34,7 +34,7 @@ const StyledNav = styled.nav`
       : `
     display: none;
   `}
-  gap: 15px;
+  gap: 30px;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -54,10 +54,23 @@ const NavLink = styled(Link)`
   color: #000;
   text-decoration: none;
   padding: 10px 0;
+  text-transform:uppercase;
+  font-weight:bold;
+  font-size:0.9rem;
   @media screen and (min-width: 768px) {
     padding: 0;
   }
 `;
+const NavLinkBg = styled.div`
+  display: block;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 0;
+  @media screen and (min-width: 768px) {
+    padding: 0;
+  }
+`;
+
 const IconLink = styled(Link)`
   position: relative;
   display: flex;
@@ -81,7 +94,6 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
   @media screen and (min-width: 768px) {
     display: none;
   }
@@ -118,18 +130,26 @@ export default function Header() {
             <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
           </Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={"/products"}>Nouveautés</NavLink>
-            <NavLink href={"/categories/homme"}>Homme</NavLink>
-            <NavLink href={"/categories/femme"}>Femme</NavLink>
-            <NavLink href={"/categories/enfant"}>Enfant</NavLink>
-            <NavLink href={"/categories/soldes"}>Soldes</NavLink>
+            {/* <NavLink href={"/products"}>Nouveautés</NavLink> */}
+            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>
+              Homme
+              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
+            </NavLink>
+            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
+              Femme
+              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
+            </NavLink>
+            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
+              Enfant
+              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
+            </NavLink>
           </StyledNav>
 
           <StyledNav>
             <IconLink href={"/account"}>
               <MyAccount />
             </IconLink>
-            <IconLink href={"/cart"} >
+            <IconLink href={"/cart"}>
               <CartIcon />
               <CartCount>{cartProducts.length}</CartCount>
             </IconLink>
