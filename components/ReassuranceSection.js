@@ -54,7 +54,7 @@ export default function ReassuranceSection() {
       <Column active={activeColumn === 0}>
         <Truck />
         <ReassuranceText>
-          Livraison gratuite à partir de 50 €
+          Livraison gratuite dès 50 €
         </ReassuranceText>
       </Column>
       <Column active={activeColumn === 1}>
