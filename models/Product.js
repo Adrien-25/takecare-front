@@ -1,5 +1,7 @@
+// Import necessary libraries and modules from Mongoose
 import mongoose, {model, Schema, models} from "mongoose";
 
+// Create a new Mongoose Schema for the Product model
 const ProductSchema = new Schema({
   reference: {type:Number, required:true},
   title: {type:String, required:true},

@@ -1,3 +1,4 @@
+// Import necessary components and dependencies
 import Header from "@/components/Header";
 import styled from "styled-components";
 import Center from "@/components/Center";
@@ -11,21 +12,26 @@ import { CartContext } from "@/components/CartContext";
 import { useState } from "react";
 import Footer from "@/components/Footer";
 
+// Styled component for flex container
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
+// CategoriesPage component
 export default function CategoriesPage({ products, category }) {
+  // Get the number of products in the current category
   const numberOfProductsInCategory = products.length;
 
+  // State to manage the selected sort option
   const [sortOption, setSortOption] = useState("default");
 
+  // Handler for changing the sort option
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
   };
 
-  // Fonction pour trier les produits en fonction de l'option de tri sélectionnée
+  // Function to sort the products based on the selected sort option
   const sortProducts = () => {
     switch (sortOption) {
       case "price-asc":
@@ -45,6 +51,7 @@ export default function CategoriesPage({ products, category }) {
     }
   };
 
+  // Sort the products based on the selected sort option
   const sortedProducts = sortProducts();
 
   return (
@@ -67,14 +74,23 @@ export default function CategoriesPage({ products, category }) {
   );
 }
 
+// Function to fetch data from the server
 export async function getServerSideProps(context) {
+  // Connect to the MongoDB database using Mongoose
   await mongooseConnect();
+
+  // Get the "id" parameter from the context query
   const { id } = context.query;
+
+  // Fetch the products with the specified category ID from the database and sort them by ID in descending order
   const products = await Product.find({ category: id }, null, {
     sort: { _id: -1 },
   });
+
+  // Fetch the category with the specified ID from the database
   const category = await Category.findById(id);
 
+  // Return the fetched product and category data as props for the CategoriesPage component
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
@@ -82,6 +98,8 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+// Styled components for sort selector
 const SortSelectorContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -94,6 +112,7 @@ const SortSelect = styled.select`
   border-radius: 4px;
 `;
 
+// SortSelector component for rendering the sort options
 function SortSelector({ value, onChange }) {
   return (
     <SortSelectorContainer>

@@ -1,3 +1,4 @@
+// Import necessary components and dependencies
 import Center from "@/components/Center";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,6 +13,7 @@ import CartIcon from "@/components/icons/CartIcon";
 import {useContext} from "react";
 import {CartContext} from "@/components/CartContext";
 
+// Styled component for grid layout
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -21,16 +23,22 @@ const ColWrapper = styled.div`
   gap: 40px;
   margin: 40px 0;
 `;
+
+// Styled component for price row
 const PriceRow = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
 `;
+
+// Styled component for price
 const Price = styled.span`
   font-size: 1.4rem;
 `;
 
+// ProductPage component
 export default function ProductPage({product}) {
+  // Get the "addProduct" function from the CartContext using useContext
   const {addProduct} = useContext(CartContext);
   return (
     <>
@@ -61,8 +69,12 @@ export default function ProductPage({product}) {
   );
 }
 
+// Function to fetch data from the server
 export async function getServerSideProps(context) {
+  // Connect to the MongoDB database using Mongoose
   await mongooseConnect();
+
+  
   const {id} = context.query;
   const product = await Product.findById(id);
   return {
