@@ -14,16 +14,16 @@ const StyledFooter = styled.footer`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
   a {
     color: #7e7e7e;
     text-decoration: none;
     font-size: 0.8rem;
     padding: 5px 0;
   }
-  span {
-    margin-right: 30px;
-  }
+  // span {
+  //   margin-right: 30px;
+  // }
 `;
 
 // Styled component for the top part of the footer
@@ -31,7 +31,13 @@ const TopWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding-bottom: 40px;
-  gap: 20px;
+  gap: 30px;
+  @media screen and (max-width: 980px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 // Styled component for the title in each column
@@ -39,9 +45,12 @@ const Title = styled.h4`
   margin: 0;
   padding-bottom: 5px;
   font-weight: bold;
-  font-size: 0.9rem;
-  @media screen and (min-width: 768px) {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
+  @media screen and (max-width: 980px) {
+    text-align: center;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -51,14 +60,18 @@ const BottomWrapper = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  padding-top: 50px;
+  padding-top: 0px;
 `;
 
 // Styled component for the links in the footer
 const FooterLink = styled(Link)`
-  color: #fff;
+  color: #7e7e7e;
   text-decoration: none;
-  margin-right: 10px;
+  font-size: 0.8rem;
+  padding: 5px 0;
+  @media screen and (max-width: 980px) {
+    text-align: center;
+  }
 `;
 
 // Styled component for the logo image in the footer (currently not used in the code)
@@ -74,7 +87,7 @@ export default function Footer() {
       {/* Top section with four columns */}
       <TopWrapper>
         <Column>
-          <span>Take Care</span>
+          <Title>Take Care</Title>
           <span>
             Bienvenue chez Take Care, votre destination en ligne pour les
             vêtements de seconde main d’occasion les plus tendance et
@@ -83,27 +96,27 @@ export default function Footer() {
         </Column>
         <Column>
           <Title>Boutique</Title>
-          <Link href={"/"}>Homme</Link>
-          <Link href={"/"}>Femme</Link>
-          <Link href={"/"}>Enfant</Link>
-          <Link href={"/"}>Modes de paiement</Link>
-          <Link href={"/"}>Nous contacter</Link>
+          <FooterLink href={"/"}>Homme</FooterLink>
+          <FooterLink href={"/"}>Femme</FooterLink>
+          <FooterLink href={"/"}>Enfant</FooterLink>
+          <FooterLink href={"/"}>Modes de paiement</FooterLink>
+          <FooterLink href={"/"}>Nous contacter</FooterLink>
         </Column>
         <Column>
-          <Title>À propos de Take Care</Title>
-          <Link href={"/"}>Statut de commande</Link>
-          <Link href={"/"}>Expédition et livraison</Link>
-          <Link href={"/"}>Retours</Link>
-          <Link href={"/"}>Modes de paiement</Link>
-          <Link href={"/"}>Nous contacter</Link>
+          <Title>À propos</Title>
+          <FooterLink href={"/"}>Statut de commande</FooterLink>
+          <FooterLink href={"/"}>Expédition et livraison</FooterLink>
+          <FooterLink href={"/"}>Retours</FooterLink>
+          <FooterLink href={"/"}>Modes de paiement</FooterLink>
+          <FooterLink href={"/"}>Nous contacter</FooterLink>
         </Column>
         <Column>
           <Title>Aide</Title>
-          <Link href={"/"}>Statut de commande</Link>
-          <Link href={"/"}>Expédition et livraison</Link>
-          <Link href={"/"}>Retours</Link>
-          <Link href={"/"}>Modes de paiement</Link>
-          <Link href={"/"}>Nous contacter</Link>
+          <FooterLink href={"/"}>Statut de commande</FooterLink>
+          <FooterLink href={"/"}>Expédition et livraison</FooterLink>
+          <FooterLink href={"/"}>Retours</FooterLink>
+          <FooterLink href={"/"}>Modes de paiement</FooterLink>
+          <FooterLink href={"/"}>Nous contacter</FooterLink>
         </Column>
       </TopWrapper>
       {/* Botoom section with four columns */}

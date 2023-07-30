@@ -11,16 +11,23 @@ const StyledPromotionSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin:0;
+  margin: 0;
 `;
 
 // Styled component for the title
 const Title = styled.h2`
-  font-size: 70px;
+  // font-size: 70px;
+  font-size: 4.5rem;
   font-weight: bold;
   text-align: center;
   padding-bottom: 20px;
-  margin:0;
+  margin: 0;
+  @media screen and (max-width: 980px) {
+    font-size: 3rem;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 // Styled component for the subtitle
@@ -28,6 +35,12 @@ const Subtitle = styled.p`
   font-size: 18px;
   text-align: center;
   margin-bottom: 30px;
+  @media screen and (max-width: 980px) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
 `;
 
 // Styled component for the container of buttons

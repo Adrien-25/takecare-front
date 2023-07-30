@@ -11,17 +11,20 @@ const Bg = styled.div`
   height: 70vh;
   display: flex;
   align-items: center;
-  position:relative;
-  overflow:hidden;
+  position: relative;
+  overflow: hidden;
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d);
+  background-size: cover;
+  background-position-x: center;
 `;
 
 // Styled component for the background image
 const HeroBg = styled.img`
   width: 100%;
   height: auto;
-  position:absolute;
-  top:0;
-  z-index:-1;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 `;
 
 // Styled component for the sub-title
@@ -29,9 +32,9 @@ const SubTitle = styled.h2`
   margin: 0;
   padding-bottom: 20px;
   font-weight: bold;
-  font-size: 1.3rem;
-  @media screen and (min-width: 768px) {
-    font-size: 3rem;
+  font-size: 3rem;
+  @media screen and (max-width: 600px) {
+    font-size: 1.3rem;
   }
 `;
 
@@ -40,9 +43,12 @@ const Title = styled.h1`
   margin: 0;
   padding-bottom: 20px;
   font-weight: bold;
-  font-size: 1.8rem;
-  @media screen and (min-width: 768px) {
-    font-size: 5rem;
+  font-size: 5rem;
+  @media screen and (max-width: 980px) {
+    font-size: 3rem;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
   }
 `;
 
@@ -66,6 +72,12 @@ const ButtonsWrapper = styled.div`
   gap: 20px;
   margin-top: 25px;
   justify-content: center;
+  @media screen and (max-width: 600px) {
+    a{
+      justify-content:center;
+    }
+    flex-direction:column;
+  }
 `;
 
 // Featured functional component
@@ -100,7 +112,7 @@ export default function Featured({ product }) {
         </Column>
       </Center>
       {/* Background image */}
-      <HeroBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d"/>
+      {/* <HeroBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" /> */}
     </Bg>
   );
 }

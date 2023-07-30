@@ -12,6 +12,11 @@ const StyledReassuranceSection = styled.section`
   background-color: #6fdcff;
   padding: 0;
   gap:4vw;
+  @media screen and (max-width: 980px) {
+    flex-direction:column;
+  }
+  @media screen and (max-width: 600px) {
+  }
 `;
 
 // Styled component for each reassurance column

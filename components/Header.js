@@ -173,9 +173,9 @@ export default function Header() {
           {/* Icon links */}
           <StyledNav>
             {/* Account icon link */}
-            <IconLink href={"/account"}>
+            {/* <IconLink href={"/account"}>
               <MyAccount />
-            </IconLink>
+            </IconLink> */}
             {/* Cart icon link */}
             <IconLink href={"/cart"}>
               <CartIcon />
