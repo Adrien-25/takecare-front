@@ -10,6 +10,9 @@ const StyledCategoriesSection = styled.section`
   align-items: center;
   background-color: transparent;
   padding: 40px 0; 
+  @media screen and (max-width: 980px) {
+  flex-direction:column
+  }
 `;
 
 // Styled component for each individual category column
@@ -26,6 +29,11 @@ const Column = styled(Link)`
   hover{
     opacity:0.5;
   }
+  @media screen and (max-width: 980px) {
+  }
+  @media screen and (max-width: 600px) {
+    margin: 20px 0px;
+  }
 `;
 
 // Styled component for the background image of each category
@@ -38,12 +46,16 @@ const CategoryBackground = styled.img`
 
 // Styled component for the category title
 const CategoryTitle = styled.h2`
-  font-size: 1.2rem;
   margin-bottom: 10px;
   position: absolute;
   top: 10px;
-  @media screen and (min-width: 768px) {
-    font-size: 4rem;
+  font-size: 4rem;
+
+  @media screen and (max-width: 980px) {
+    font-size: 2.5rem;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 1.5rem;
   }
 `;
 

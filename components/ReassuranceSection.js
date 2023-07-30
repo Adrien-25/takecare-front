@@ -11,9 +11,9 @@ const StyledReassuranceSection = styled.section`
   justify-content: center;
   background-color: #6fdcff;
   padding: 0;
-  gap:4vw;
+  gap: 4vw;
   @media screen and (max-width: 980px) {
-    flex-direction:column;
+    flex-direction: column;
   }
   @media screen and (max-width: 600px) {
   }
@@ -29,13 +29,21 @@ const Column = styled.div`
   padding: 0 20px;
   gap: 15px;
   display: flex;
+  @media screen and (max-width: 980px) {
+    left:0;
+    right:0;
+    position: ${(props) => (props.active ? "relative" : "absolute")};
+    opacity: ${(props) => (props.active ? 1 : 0)};
+    transform: ${(props) => (props.active ? "none" : "translateX(-100%)")};
+    transition: all 0.5s ease;
+  }
 `;
 
 // Styled component for the reassurance text
 const ReassuranceText = styled.p`
   font-size: 16px;
   line-height: 1.5;
-  font-weight:bold;
+  font-weight: bold;
 `;
 
 // ReassuranceSection functional component
@@ -46,7 +54,7 @@ export default function ReassuranceSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveColumn((prevColumn) => (prevColumn + 1) % 3);
-    }, 5000);
+    }, 3000);
 
     return () => {
       clearInterval(timer);
@@ -58,9 +66,7 @@ export default function ReassuranceSection() {
     <StyledReassuranceSection>
       <Column active={activeColumn === 0}>
         <Truck />
-        <ReassuranceText>
-          Livraison gratuite dès 50 €
-        </ReassuranceText>
+        <ReassuranceText>Livraison gratuite dès 50 €</ReassuranceText>
       </Column>
       <Column active={activeColumn === 1}>
         <Arrowback />
