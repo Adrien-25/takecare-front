@@ -1,7 +1,9 @@
+// Import the required dependencies
 import styled from "styled-components";
 import Link from "next/link";
 import Center from "@/components/Center";
 
+// Define a set of reusable CSS styles for the categories section
 const StyledCategoriesSection = styled.section`
   display: flex;
   justify-content: center;
@@ -10,6 +12,7 @@ const StyledCategoriesSection = styled.section`
   padding: 40px 0; 
 `;
 
+// Styled component for each individual category column
 const Column = styled(Link)`
   flex: 1;
   display: flex;
@@ -25,6 +28,7 @@ const Column = styled(Link)`
   }
 `;
 
+// Styled component for the background image of each category
 const CategoryBackground = styled.img`
   width: 100%;
   height: auto;
@@ -32,6 +36,7 @@ const CategoryBackground = styled.img`
   background-size: cover;
 `;
 
+// Styled component for the category title
 const CategoryTitle = styled.h2`
   font-size: 1.2rem;
   margin-bottom: 10px;
@@ -42,15 +47,18 @@ const CategoryTitle = styled.h2`
   }
 `;
 
+// CategoriesSection functional component
 export default function CategoriesSection() {
   return (
     <Center>
-
     <StyledCategoriesSection>
+      {/* First category column */}
       <Column href="/category/64b23fdeabeec0c37de97e6a">
         <CategoryBackground src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FCategorie-Femme.webp?alt=media&token=997dc904-2711-48c7-bb0c-99b2c5cce556" />
         <CategoryTitle>Femme</CategoryTitle>
       </Column>
+
+      {/* Second category column */}
       <Column href="/category/64b23fe3abeec0c37de97e6d">
         <CategoryBackground src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FCategorie-Homme.webp?alt=media&token=a6a6ca6c-4d6c-407b-a784-97c62ca20823" />
         <CategoryTitle>Homme</CategoryTitle>

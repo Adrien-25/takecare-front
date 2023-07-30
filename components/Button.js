@@ -1,6 +1,8 @@
+// Import the required dependencies
 import styled, {css} from "styled-components";
 import {primary} from "@/lib/colors";
 
+// Define a set of reusable CSS styles for the button
 export const ButtonStyle = css`
   border:0;
   padding: 10px 35px;
@@ -16,6 +18,7 @@ export const ButtonStyle = css`
     height: 20px;
     margin-right: 5px;
   }
+  /* Conditional styles based on props */
   ${props => props.block && css`
     display: block;
     width: 100%;
@@ -63,10 +66,12 @@ export const ButtonStyle = css`
   `}
 `;
 
+// Create a styled component for the button using the ButtonStyle
 const StyledButton = styled.button`
   ${ButtonStyle}
 `;
 
+// Export a functional component Button which renders the StyledButton
 export default function Button({children,...rest}) {
   return (
     <StyledButton {...rest}>{children}</StyledButton>

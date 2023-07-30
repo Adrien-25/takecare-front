@@ -1,12 +1,16 @@
+// Import the required dependencies
 import styled from "styled-components";
 import Link from "next/link";
 
+// Define a set of reusable CSS styles for the footer
 const StyledFooter = styled.footer`
   background-color: #000;
   color: #fff;
   // padding: 40px 40px 20px 40px;
-  padding:40px;
+  padding: 40px;
 `;
+
+// Styled component for each column in the footer
 const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,16 +21,20 @@ const Column = styled.div`
     font-size: 0.8rem;
     padding: 5px 0;
   }
-  span{
-    margin-right:30px
+  span {
+    margin-right: 30px;
   }
 `;
+
+// Styled component for the top part of the footer
 const TopWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding-bottom: 40px;
   gap: 20px;
 `;
+
+// Styled component for the title in each column
 const Title = styled.h4`
   margin: 0;
   padding-bottom: 5px;
@@ -36,26 +44,34 @@ const Title = styled.h4`
     font-size: 1.2rem;
   }
 `;
+
+// Styled component for the bottom part of the footer
 const BottomWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  padding-top:50px;
+  padding-top: 50px;
 `;
 
+// Styled component for the links in the footer
 const FooterLink = styled(Link)`
   color: #fff;
   text-decoration: none;
   margin-right: 10px;
 `;
+
+// Styled component for the logo image in the footer (currently not used in the code)
 const LogoImg = styled.img`
   width: 100px;
   height: auto;
 `;
+
+// Footer functional component
 export default function Footer() {
   return (
     <StyledFooter>
+      {/* Top section with four columns */}
       <TopWrapper>
         <Column>
           <span>Take Care</span>
@@ -90,6 +106,7 @@ export default function Footer() {
           <Link href={"/"}>Nous contacter</Link>
         </Column>
       </TopWrapper>
+      {/* Botoom section with four columns */}
       <BottomWrapper>
         <div>
           <span>© 2023 Take Care. Tous droits réservés.</span>

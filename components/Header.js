@@ -1,3 +1,4 @@
+// Import the required dependencies
 import Link from "next/link";
 import styled from "styled-components";
 import Center from "@/components/Center";
@@ -7,24 +8,33 @@ import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import BarsIcon from "@/components/icons/Bars";
 
+// Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
   background-color: #fff;
 `;
+
+// Styled component for the logo link
 const Logo = styled(Link)`
   color: #000;
   text-decoration: none;
   position: relative;
   z-index: 3;
 `;
+
+// Styled component for the logo image
 const LogoImg = styled.img`
   width: 100px;
   height: auto;
 `;
+
+// Styled component for the header wrapper
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
 `;
+
+// Styled component for the navigation (for mobile view)
 const StyledNav = styled.nav`
   ${(props) =>
     props.mobileNavActive
@@ -49,18 +59,22 @@ const StyledNav = styled.nav`
     align-items: center;
   }
 `;
+
+// Styled component for the navigation links
 const NavLink = styled(Link)`
   display: block;
   color: #000;
   text-decoration: none;
   padding: 10px 0;
-  text-transform:uppercase;
-  font-weight:bold;
-  font-size:0.9rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9rem;
   @media screen and (min-width: 768px) {
     padding: 0;
   }
 `;
+
+// Styled component for the background of navigation links (for mobile view)
 const NavLinkBg = styled.div`
   display: block;
   color: #000;
@@ -71,6 +85,7 @@ const NavLinkBg = styled.div`
   }
 `;
 
+// Styled component for the icon links in the navigation
 const IconLink = styled(Link)`
   position: relative;
   display: flex;
@@ -82,6 +97,7 @@ const IconLink = styled(Link)`
   }
 `;
 
+// Styled component for the mobile navigation button
 const NavButton = styled.button`
   background-color: transparent;
   width: 30px;
@@ -98,6 +114,8 @@ const NavButton = styled.button`
     display: none;
   }
 `;
+
+// Styled component for the cart count badge
 const CartCount = styled.div`
   background-color: #000;
   color: #fff;
@@ -115,22 +133,29 @@ const CartCount = styled.div`
   justify-content: center;
 `;
 
+// Header functional component
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
   const [mobileNavActive, setMobileNavActive] = useState(false);
-  const iconNav = "font-size:10px";
-  function addFeaturedToCart() {
-    addProduct(product._id);
-  }
+  // To be used with CartContext, but currently commented out
+  // function addFeaturedToCart() {
+  //   addProduct(product._id);
+  // }
   return (
+    // Header section
     <StyledHeader>
+      {/* Center component to horizontally center the content */}
       <Center>
         <Wrapper>
+          {/* Logo link */}
           <Logo href={"/"}>
+            {/* Logo image */}
             <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
           </Logo>
+
+          {/* Mobile navigation */}
           <StyledNav mobileNavActive={mobileNavActive}>
-            {/* <NavLink href={"/products"}>Nouveautés</NavLink> */}
+            {/* Navigation links */}
             <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>
               Homme
               <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
@@ -145,15 +170,21 @@ export default function Header() {
             </NavLink>
           </StyledNav>
 
+          {/* Icon links */}
           <StyledNav>
+            {/* Account icon link */}
             <IconLink href={"/account"}>
               <MyAccount />
             </IconLink>
+            {/* Cart icon link */}
             <IconLink href={"/cart"}>
               <CartIcon />
+              {/* Cart count badge */}
               <CartCount>{cartProducts.length}</CartCount>
             </IconLink>
           </StyledNav>
+
+          {/* Mobile navigation button */}
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <BarsIcon />
           </NavButton>

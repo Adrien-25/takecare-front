@@ -1,14 +1,11 @@
+// Import the required dependencies
 import styled from "styled-components";
-import Button from "@/components/Button";
-import CartIcon from "@/components/icons/CartIcon";
 import Link from "next/link";
-import {useContext} from "react";
-import {CartContext} from "@/components/CartContext";
 
-const ProductWrapper = styled.div`
-  
-`;
+// Styled component for the product wrapper
+const ProductWrapper = styled.div``;
 
+// Styled component for the white box containing the product information
 const WhiteBox = styled(Link)`
   background-color: #fff;
   padding: 20px;
@@ -24,6 +21,7 @@ const WhiteBox = styled(Link)`
   }
 `;
 
+// Styled component for the product title
 const Title = styled(Link)`
   font-weight: normal;
   font-size:.9rem;
@@ -32,10 +30,12 @@ const Title = styled(Link)`
   margin:0;
 `;
 
+// Styled component for the product info box
 const ProductInfoBox = styled.div`
   margin-top: 5px;
 `;
 
+// Styled component for the price row
 const PriceRow = styled.div`
   display: block;
   @media screen and (min-width: 768px) {
@@ -47,6 +47,7 @@ const PriceRow = styled.div`
   margin-top:10px;
 `;
 
+// Styled component for the product price
 const Price = styled.div`
   font-size: 1rem;
   font-weight:400;
@@ -58,10 +59,13 @@ const Price = styled.div`
   }
 `;
 
+// ProductBox functional component
 export default function ProductBox({_id,title,description,price,images}) {
+  // To be used with CartContext, but currently commented out
   // const {addProduct} = useContext(CartContext);
   const url = '/product/'+_id;
   return (
+    // Product wrapper
     <ProductWrapper>
       <WhiteBox href={url}>
         <div>

@@ -1,5 +1,7 @@
+// Import the required dependencies
 import styled from "styled-components";
 
+// Styled component for the input element
 const StyledInput = styled.input`
   width: 100%;
   padding: 5px;
@@ -9,6 +11,8 @@ const StyledInput = styled.input`
   box-sizing:border-box;
 `;
 
+// Input functional component
 export default function Input(props) {
+  // Renders the styled input element with the provided props
   return <StyledInput {...props} />
 }

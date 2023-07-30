@@ -1,10 +1,11 @@
-import styled, { keyframes } from "styled-components";
+// Import the required dependencies
+import styled from "styled-components";
 import { useState, useEffect } from "react";
 import ShieldCheck from "@/components/icons/ShieldCheck";
-// import Gift from "@/components/icons/Gift";
 import Arrowback from "@/components/icons/ArrowBack";
 import Truck from "@/components/icons/Truck";
 
+// Styled component for the reassurance section container
 const StyledReassuranceSection = styled.section`
   display: flex;
   justify-content: center;
@@ -13,6 +14,7 @@ const StyledReassuranceSection = styled.section`
   gap:4vw;
 `;
 
+// Styled component for each reassurance column
 const Column = styled.div`
   // flex: 1;
   flex-direction: row;
@@ -24,15 +26,18 @@ const Column = styled.div`
   display: flex;
 `;
 
+// Styled component for the reassurance text
 const ReassuranceText = styled.p`
   font-size: 16px;
   line-height: 1.5;
   font-weight:bold;
 `;
 
+// ReassuranceSection functional component
 export default function ReassuranceSection() {
   const [activeColumn, setActiveColumn] = useState(0);
 
+  // UseEffect to update the activeColumn and animate the reassurance columns
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveColumn((prevColumn) => (prevColumn + 1) % 3);
@@ -43,6 +48,7 @@ export default function ReassuranceSection() {
     };
   }, []);
 
+  // Render the reassurance section
   return (
     <StyledReassuranceSection>
       <Column active={activeColumn === 0}>

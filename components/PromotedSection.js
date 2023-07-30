@@ -1,7 +1,9 @@
+// Import the required dependencies
 import styled from "styled-components";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 
+// Styled component for the promotion section container
 const StyledPromotionSection = styled.section`
   // background-color: #f9f9f9;
   background-color: #fff;
@@ -12,6 +14,7 @@ const StyledPromotionSection = styled.section`
   margin:0;
 `;
 
+// Styled component for the title
 const Title = styled.h2`
   font-size: 70px;
   font-weight: bold;
@@ -20,12 +23,14 @@ const Title = styled.h2`
   margin:0;
 `;
 
+// Styled component for the subtitle
 const Subtitle = styled.p`
   font-size: 18px;
   text-align: center;
   margin-bottom: 30px;
 `;
 
+// Styled component for the container of buttons
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 10px;
@@ -49,8 +54,10 @@ const ButtonsWrapper = styled.div`
 //   }
 // `;
 
+// PromotedSection functional component
 export default function PromotedSection() {
   return (
+    // Styled container for the promotion section
     <StyledPromotionSection>
       <Title>La beauté de la maternité</Title>
       <Subtitle>Découvrez notre sélection pour les femmes enceintes</Subtitle>
