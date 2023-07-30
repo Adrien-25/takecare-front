@@ -23,7 +23,7 @@ const Column = styled.div`
 `;
 const TopWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding-bottom: 40px;
   gap: 20px;
 `;
@@ -88,14 +88,6 @@ export default function Footer() {
           <Link href={"/"}>Retours</Link>
           <Link href={"/"}>Modes de paiement</Link>
           <Link href={"/"}>Nous contacter</Link>
-        </Column>
-        <Column>
-          <span>Take Care</span>
-          <span>
-            Bienvenue chez Take Care, votre destination en ligne pour les
-            vêtements de seconde main d’occasion les plus tendance et
-            éco-responsables.
-          </span>
         </Column>
       </TopWrapper>
       <BottomWrapper>

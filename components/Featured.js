@@ -45,9 +45,7 @@ const Title = styled.h1`
 const Desc = styled.p`
   color: #fff;
   font-size: 1.1rem;
-  
 `;
-
 const Column = styled.div`
   display: flex;
   align-items: center;
@@ -76,11 +74,14 @@ export default function Featured({ product }) {
             <Title>Jusqu'à 50% de réduction*</Title>
             <Desc>Temps chaud. Offres plus chaudes.</Desc>
             <ButtonsWrapper>
-              <ButtonLink href={"/product/"} outline={1} white={1}>
-                Boutique Femme
+              <ButtonLink href={"/product/"} outline={0} white={1}>
+                Femme
               </ButtonLink>
-              <ButtonLink href={"/product/"} outline={1} white={1}>
-                Boutique Homme
+              <ButtonLink href={"/product/"} outline={0} white={1}>
+                Homme
+              </ButtonLink>
+              <ButtonLink href={"/product/"} outline={0} white={1}>
+                Enfant
               </ButtonLink>
             </ButtonsWrapper>
           </div>

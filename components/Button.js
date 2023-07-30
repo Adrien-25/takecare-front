@@ -3,7 +3,7 @@ import {primary} from "@/lib/colors";
 
 export const ButtonStyle = css`
   border:0;
-  padding: 10px 15px;
+  padding: 10px 35px;
   border-radius: 0px;
   cursor: pointer;
   display: inline-flex;
@@ -11,6 +11,7 @@ export const ButtonStyle = css`
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
   font-weight:500;
+  transition: all 0.3s ease;
   svg{
     height: 20px;
     margin-right: 5px;
@@ -22,18 +23,21 @@ export const ButtonStyle = css`
   ${props => props.white && !props.outline && css`
     background-color: #fff;
     color: #000;
+    &:hover {
+      background-color: #e5e5e5;
+    }
   `}
   ${props => props.white && props.outline && css`
     background-color: transparent;
     color: #fff;
     border: 2px solid #fff;
-    hover {
-
-    }
   `}
   ${props => props.black && !props.outline && css`
     background-color: #000;
     color: #fff;
+    &:hover {
+      background-color: #232323;
+    }
   `}
   ${props => props.black && props.outline && css`
     background-color: transparent;

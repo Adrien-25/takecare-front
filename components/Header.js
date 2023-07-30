@@ -23,7 +23,7 @@ const LogoImg = styled.img`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 10px 0;
 `;
 const StyledNav = styled.nav`
   ${(props) =>

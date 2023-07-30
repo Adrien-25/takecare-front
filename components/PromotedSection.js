@@ -9,13 +9,15 @@ const StyledPromotionSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin:0;
 `;
 
 const Title = styled.h2`
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
+  margin:0;
 `;
 
 const Subtitle = styled.p`
