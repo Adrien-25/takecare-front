@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import Header from "@/components/Header";
 import styled from "styled-components";
 import Center from "@/components/Center";
@@ -8,6 +9,7 @@ import axios from "axios";
 import Table from "@/components/Table";
 import Input from "@/components/Input";
 
+// Styled components for layout and styling
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -66,8 +68,11 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 
+// CartPage component
 export default function CartPage() {
+  // Use the CartContext to access cart products and functions
   const {cartProducts,addProduct,removeProduct,clearCart} = useContext(CartContext);
+  // States for managing form inputs and order status
   const [products,setProducts] = useState([]);
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
@@ -76,6 +81,8 @@ export default function CartPage() {
   const [streetAddress,setStreetAddress] = useState('');
   const [country,setCountry] = useState('');
   const [isSuccess,setIsSuccess] = useState(false);
+
+  // Fetch product data when the cartProducts change
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post('/api/cart', {ids:cartProducts})
@@ -86,6 +93,8 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+
+  // Check for order success when the component mounts
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
@@ -95,12 +104,18 @@ export default function CartPage() {
       clearCart();
     }
   }, []);
+
+  // Increase the quantity of a product in the cart
   function moreOfThisProduct(id) {
     addProduct(id);
   }
+
+  // Decrease the quantity of a product in the cart
   function lessOfThisProduct(id) {
     removeProduct(id);
   }
+
+  // Proceed to payment and handle the response
   async function goToPayment() {
     const response = await axios.post('/api/checkout', {
       name,email,city,postalCode,streetAddress,country,
@@ -110,12 +125,15 @@ export default function CartPage() {
       window.location = response.data.url;
     }
   }
+
+  // Calculate the total price of the items in the cart
   let total = 0;
   for (const productId of cartProducts) {
     const price = products.find(p => p._id === productId)?.price || 0;
     total += price;
   }
 
+  // Render the success message if the order is successful
   if (isSuccess) {
     return (
       <>
@@ -131,6 +149,8 @@ export default function CartPage() {
       </>
     );
   }
+
+  // Render the cart and order form
   return (
     <>
       <Header />
