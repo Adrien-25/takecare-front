@@ -1,6 +1,28 @@
 // Import the required dependencies
 import styled from "styled-components";
 import { useState } from "react";
+// Styles pour l'affichage en mobile
+const MobileGallery = styled.div`
+  @media screen and (min-width: 980px) {
+    display: none;
+  }
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+`;
+
+// Styles pour l'affichage en desktop
+const DesktopGallery = styled.div`
+  @media screen and (max-width: 980px) {
+    display: none;
+  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  overflow: hidden;
+`;
+
+const ImageContainer = styled.div``;
 
 // Define a set of reusable CSS styles for the product image
 const Image = styled.img`
@@ -49,20 +71,33 @@ export default function ProductImages({ images }) {
   const [activeImage, setActiveImage] = useState(images?.[0]);
   return (
     <>
-      <BigImageWrapper>
-        <BigImage src={activeImage} />
-      </BigImageWrapper>
-      <ImageButtons>
-        {images.map((image) => (
-          <ImageButton
-            key={image}
-            active={image === activeImage}
-            onClick={() => setActiveImage(image)}
-          >
-            <Image src={image} alt="" />
-          </ImageButton>
+      <MobileGallery>
+        <BigImageWrapper>
+          <BigImage src={activeImage} />
+        </BigImageWrapper>
+        <ImageButtons>
+          {images.map((image) => (
+            <ImageButton
+              key={image}
+              active={image === activeImage}
+              onClick={() => setActiveImage(image)}
+            >
+              <Image src={image} alt="" />
+            </ImageButton>
+          ))}
+        </ImageButtons>
+      </MobileGallery>
+
+      {/* Affichage en desktop */}
+      <DesktopGallery>
+        {images.map((image, index) => (
+          <ImageContainer>
+            {/* <img key={index} src={image} alt={`Image ${index + 1}`} /> */}
+            <Image src={image} key={index} alt={`Image ${index + 1}`} />
+
+          </ImageContainer>
         ))}
-      </ImageButtons>
+      </DesktopGallery>
     </>
   );
 }

@@ -18,8 +18,8 @@ import NewProducts from "@/components/Product/NewProducts";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  @media screen and (min-width: 768px) {
-    grid-template-columns: .8fr 1.2fr;
+  @media screen and (min-width: 960px) {
+    grid-template-columns: 1.3fr 0.7fr;
   }
   gap: 40px;
   margin: 40px 0;
@@ -37,6 +37,13 @@ const Price = styled.span`
   font-size: 1.4rem;
 `;
 
+// Styled component for product content
+const ProductContent = styled.div`
+height: fit-content;
+position: sticky;
+top: 0;
+`;
+
 // ProductPage component
 export default function ProductPage({product,relatedProducts}) {
   // Get the "addProduct" function from the CartContext using useContext
@@ -49,8 +56,9 @@ export default function ProductPage({product,relatedProducts}) {
           <WhiteBox>
             <ProductImages images={product.images} />
           </WhiteBox>
-          <div>
+          <ProductContent>
             <Title>{product.title}</Title>
+            <Title>{product.marque}</Title>
             <p>{product.description}</p>
             <PriceRow>
               <div>
@@ -62,7 +70,7 @@ export default function ProductPage({product,relatedProducts}) {
                 </Button>
               </div>
             </PriceRow>
-          </div>
+          </ProductContent>
         </ColWrapper>
       </Center>
       <NewProducts products={relatedProducts} />
@@ -79,7 +87,6 @@ export async function getServerSideProps(context) {
   const {id} = context.query;
   const product = await Product.findById(id);
 
-  console.log(product.category);
   const CategoryProduct = product.category;
   // const relatedProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:4});
   const relatedProducts = await Product.find({ category: CategoryProduct }, null, { sort: { '_id': -1 }, limit: 4 });
