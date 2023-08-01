@@ -82,13 +82,23 @@ export async function getServerSideProps(context) {
   // Get the "id" parameter from the context query
   const { id } = context.query;
 
-  // Fetch the products with the specified category ID from the database and sort them by ID in descending order
-  const products = await Product.find({ category: id }, null, {
-    sort: { _id: -1 },
-  });
-
   // Fetch the category with the specified ID from the database
   const category = await Category.findById(id);
+  const subCategories = await Category.find({ parent: id });
+  const subCategoryIds = subCategories.map((subCategory) => subCategory._id);
+  subCategoryIds.push(id);
+
+  // Fetch the products with the specified category ID from the database and sort them by ID in descending order
+  // const products = await Product.find({ category: id }, null, {
+  //   sort: { _id: -1 },
+  // });
+  const products = await Product.find(
+    { category: { $in: subCategoryIds } },
+    null,
+    {
+      sort: { _id: -1 },
+    }
+  );
 
   // Return the fetched product and category data as props for the CategoriesPage component
   return {

@@ -75,7 +75,7 @@ export default function PromotedSection() {
       <Title>La beauté de la maternité</Title>
       <Subtitle>Découvrez notre sélection pour les femmes enceintes</Subtitle>
       <ButtonsWrapper>
-        <ButtonLink href={"/categories/femme-enceinte"} outline={0} black={1}>
+        <ButtonLink href={"/category/64b24813abeec0c37de97ee3"} outline={0} black={1}>
           Découvrir
         </ButtonLink>
       </ButtonsWrapper>
