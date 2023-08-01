@@ -5,8 +5,8 @@ import Center from "@/components/UI/Center";
 import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 
-import CartIcon from "../Icons/CartIcon";
-import BarsIcon from "../Icons/Bars";
+import CartIcon from "../icons/CartIcon";
+import BarsIcon from "../icons/Bars";
 
 
 // Define a set of reusable CSS styles for the header

@@ -1,9 +1,9 @@
 // Import the required dependencies
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import ShieldCheck from "../Icons/ShieldCheck";
-import Arrowback from "../Icons/ArrowBack";
-import Truck from "../Icons/Truck";
+import ShieldCheck from "../icons/ShieldCheck";
+import Arrowback from "../icons/ArrowBack";
+import Truck from "../icons/Truck";
 // import ShieldCheck from "@/components/Icons/ShieldCheck";
 // import Arrowback from "@/components/Icons/ArrowBack";
 // import Truck from "@/components/Icons/Truck";

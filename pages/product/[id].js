@@ -9,7 +9,7 @@ import styled from "styled-components";
 import WhiteBox from "@/components/UI/WhiteBox";
 import ProductImages from "@/components/Product/ProductImages";
 import Button from "@/components/UI/Button";
-import CartIcon from "@/components/Icons/CartIcon";
+import CartIcon from "@/components/icons/CartIcon";
 import {useContext} from "react";
 import {CartContext} from "@/components/CartContext";
 import NewProducts from "@/components/Product/NewProducts";
