@@ -2,11 +2,12 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Center from "@/components/UI/Center";
-import MyAccount from "@/components/Icons/MyAccount";
-import CartIcon from "@/components/Icons/CartIcon";
 import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
-import BarsIcon from "@/components/Icons/Bars";
+
+import CartIcon from "../Icons/CartIcon";
+import BarsIcon from "../Icons/Bars";
+
 
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
@@ -172,10 +173,6 @@ export default function Header() {
 
           {/* Icon links */}
           <StyledNav>
-            {/* Account icon link */}
-            {/* <IconLink href={"/account"}>
-              <MyAccount />
-            </IconLink> */}
             {/* Cart icon link */}
             <IconLink href={"/cart"}>
               <CartIcon />
