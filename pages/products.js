@@ -1,12 +1,12 @@
 // Import necessary components and dependencies
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
 import styled from "styled-components";
-import Center from "@/components/Center";
+import Center from "@/components/UI/Center";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-import ProductsGrid from "@/components/ProductsGrid";
-import Title from "@/components/Title";
+import ProductsGrid from "@/components/Product/ProductsGrid";
+import Title from "@/components/UI/Title";
 
 // ProductsPage component
 export default function ProductsPage({ products }) {

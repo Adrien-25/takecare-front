@@ -1,7 +1,7 @@
 // Import the required dependencies
-import Center from "@/components/Center";
+import Center from "@/components/UI/Center";
 import styled from "styled-components";
-import ButtonLink from "@/components/ButtonLink";
+import ButtonLink from "@/components/UI/ButtonLink";
 
 // Define a set of reusable CSS styles for the featured
 const Bg = styled.div`

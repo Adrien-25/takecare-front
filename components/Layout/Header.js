@@ -1,12 +1,12 @@
 // Import the required dependencies
 import Link from "next/link";
 import styled from "styled-components";
-import Center from "@/components/Center";
-import MyAccount from "@/components/icons/MyAccount";
-import CartIcon from "@/components/icons/CartIcon";
+import Center from "@/components/UI/Center";
+import MyAccount from "@/components/Icons/MyAccount";
+import CartIcon from "@/components/Icons/CartIcon";
 import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
-import BarsIcon from "@/components/icons/Bars";
+import BarsIcon from "@/components/Icons/Bars";
 
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`

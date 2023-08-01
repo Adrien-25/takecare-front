@@ -1,7 +1,7 @@
 // Import the required dependencies
 import styled from "styled-components";
 import Link from "next/link";
-import ButtonLink from "@/components/ButtonLink";
+import ButtonLink from "@/components/UI/ButtonLink";
 
 // Styled component for the promotion section container
 const StyledPromotionSection = styled.section`

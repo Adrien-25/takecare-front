@@ -1,13 +1,13 @@
 // Import necessary dependencies and components
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Featured from "@/components/Featured";
-import CategoriesSection from "@/components/CategoriesSection";
-import ReassuranceSection from "@/components/ReassuranceSection";
-import PromotedSection from "@/components/PromotedSection";
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
+import Featured from "@/components/Sections/Featured";
+import CategoriesSection from "@/components/Sections/CategoriesSection";
+import ReassuranceSection from "@/components/Sections/ReassuranceSection";
+import PromotedSection from "@/components/Sections/PromotedSection";
 import {Product} from "@/models/Product";
 import {mongooseConnect} from "@/lib/mongoose";
-import NewProducts from "@/components/NewProducts";
+import NewProducts from "@/components/Product/NewProducts";
 
 // HomePage component
 export default function HomePage({featuredProduct,newProducts}) {
@@ -35,7 +35,7 @@ export async function getServerSideProps() {
   const featuredProduct = await Product.findById(featuredProductId);
 
   // Fetch the latest 10 products for the new products section
-  const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:10});
+  const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:4});
   
   // Return the fetched data as props for the HomePage component
   return {

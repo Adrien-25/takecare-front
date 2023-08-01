@@ -1,6 +1,6 @@
 // Import the required dependencies
 import styled from "styled-components";
-import ProductBox from "@/components/ProductBox";
+import ProductBox from "@/components/Product/ProductBox";
 
 // Styled component for the products grid container
 const StyledProductsGrid = styled.div`

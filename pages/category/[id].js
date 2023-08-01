@@ -1,16 +1,16 @@
 // Import necessary components and dependencies
-import Header from "@/components/Header";
+import Header from "@/components/Layout/Header";
 import styled from "styled-components";
-import Center from "@/components/Center";
+import Center from "@/components/UI/Center";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import { Category } from "@/models/Category";
-import ProductsGrid from "@/components/ProductsGrid";
-import Title from "@/components/Title";
+import ProductsGrid from "@/components/Product/ProductsGrid";
+import Title from "@/components/UI/Title";
 import { useContext } from "react";
 import { CartContext } from "@/components/CartContext";
 import { useState } from "react";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Layout/Footer";
 
 // Styled component for flex container
 const Wrapper = styled.div`

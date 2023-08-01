@@ -1,7 +1,7 @@
 // Import the required dependencies
 import Link from "next/link";
 import styled from "styled-components";
-import {ButtonStyle} from "@/components/Button";
+import {ButtonStyle} from "@/components/UI/Button";
 
 // Create a styled component for the Link using the ButtonStyle from the Button component
 const StyledLink = styled(Link)`

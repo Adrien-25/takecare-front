@@ -1,7 +1,7 @@
 // Import the required dependencies
 import styled from "styled-components";
 import Link from "next/link";
-import Center from "@/components/Center";
+import Center from "@/components/UI/Center";
 
 // Define a set of reusable CSS styles for the categories section
 const StyledCategoriesSection = styled.section`

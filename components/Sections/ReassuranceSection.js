@@ -1,9 +1,9 @@
 // Import the required dependencies
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import ShieldCheck from "@/components/icons/ShieldCheck";
-import Arrowback from "@/components/icons/ArrowBack";
-import Truck from "@/components/icons/Truck";
+import ShieldCheck from "@/components/Icons/ShieldCheck";
+import Arrowback from "@/components/Icons/ArrowBack";
+import Truck from "@/components/Icons/Truck";
 
 // Styled component for the reassurance section container
 const StyledReassuranceSection = styled.section`

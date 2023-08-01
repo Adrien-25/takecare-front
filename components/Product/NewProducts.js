@@ -1,7 +1,7 @@
 // Import the required dependencies
 import styled from "styled-components";
-import Center from "@/components/Center";
-import ProductsGrid from "@/components/ProductsGrid";
+import Center from "@/components/UI/Center";
+import ProductsGrid from "@/components/Product/ProductsGrid";
 
 // Styled component for the title
 const Title = styled.h2`

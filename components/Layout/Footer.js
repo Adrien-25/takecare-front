@@ -103,20 +103,21 @@ export default function Footer() {
           <FooterLink href={"/"}>Nous contacter</FooterLink>
         </Column>
         <Column>
-          <Title>À propos</Title>
-          <FooterLink href={"/"}>Statut de commande</FooterLink>
+          <Title>À propos de Take Care</Title>
+          <FooterLink href={"/"}>Qui sommes-nous?</FooterLink>
           <FooterLink href={"/"}>Expédition et livraison</FooterLink>
           <FooterLink href={"/"}>Retours</FooterLink>
           <FooterLink href={"/"}>Modes de paiement</FooterLink>
           <FooterLink href={"/"}>Nous contacter</FooterLink>
         </Column>
         <Column>
-          <Title>Aide</Title>
-          <FooterLink href={"/"}>Statut de commande</FooterLink>
-          <FooterLink href={"/"}>Expédition et livraison</FooterLink>
-          <FooterLink href={"/"}>Retours</FooterLink>
-          <FooterLink href={"/"}>Modes de paiement</FooterLink>
-          <FooterLink href={"/"}>Nous contacter</FooterLink>
+          <Title>Aide et Assistance</Title>
+          <FooterLink href={"/"}>FAQ</FooterLink>
+          <FooterLink href={"/"}>Livraison</FooterLink>
+          <FooterLink href={"/"}>Retours et remboursements</FooterLink>
+          <FooterLink href={"/"}>Commandes et paiements</FooterLink>
+          <FooterLink href={"/"}>Guide des tailles</FooterLink>
+          <FooterLink href={"/"}>FAQ</FooterLink>
         </Column>
       </TopWrapper>
       {/* Botoom section with four columns */}
