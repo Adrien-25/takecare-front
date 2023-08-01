@@ -8,10 +8,16 @@ import { CartContext } from "@/components/CartContext";
 import CartIcon from "../icons/CartIcon";
 import BarsIcon from "../icons/Bars";
 
-
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
   background-color: #fff;
+  @media screen and (max-width: 980px) {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:2;
+  }
 `;
 
 // Styled component for the logo link
@@ -33,31 +39,43 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
+  @media screen and (max-width: 980px) {
+    // display: grid;
+  }
 `;
 
 // Styled component for the navigation (for mobile view)
 const StyledNav = styled.nav`
-  ${(props) =>
-    props.mobileNavActive
-      ? `
-    display: block;
-  `
-      : `
-    display: none;
-  `}
+  transition: all 0.5s ease;
+  display: flex;
+  position: static;
+  padding: 0;
+  align-items: center;
   gap: 30px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 70px 20px 20px;
-  background-color: transparent;
-  @media screen and (min-width: 768px) {
-    display: flex;
-    position: static;
-    padding: 0;
-    align-items: center;
+
+  @media screen and (max-width: 980px) {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    // left: 0;
+    right: 0;
+    height: calc(100vh - 65px);
+    width: 400px;
+    max-width:100%;
+    padding: 0px 20px 20px;
+    background-color: white;
+    z-index: 2;
+    border-top: 1px solid #eee;
+    flex-direction: column;
+    ${(props) =>
+      props.mobileNavActive
+        ? `
+      transform: translateX(0);
+    `
+        : `    
+      transform: translateX(100%);
+  
+    `}
   }
 `;
 
@@ -70,21 +88,21 @@ const NavLink = styled(Link)`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 0.9rem;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 980px) {
     padding: 0;
   }
 `;
 
 // Styled component for the background of navigation links (for mobile view)
-const NavLinkBg = styled.div`
-  display: block;
-  color: #000;
-  text-decoration: none;
-  padding: 10px 0;
-  @media screen and (min-width: 768px) {
-    padding: 0;
-  }
-`;
+// const NavLinkBg = styled.div`
+//   display: block;
+//   color: #000;
+//   text-decoration: none;
+//   padding: 10px 0;
+//   @media screen and (min-width: 980px) {
+//     padding: 0;
+//   }
+// `;
 
 // Styled component for the icon links in the navigation
 const IconLink = styled(Link)`
@@ -101,17 +119,17 @@ const IconLink = styled(Link)`
 // Styled component for the mobile navigation button
 const NavButton = styled.button`
   background-color: transparent;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: 0;
-  color: white;
+  color: black;
   cursor: pointer;
   position: relative;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 980px) {
     display: none;
   }
 `;
@@ -128,10 +146,14 @@ const CartCount = styled.div`
   position: absolute;
   display: inline-block;
   right: -6px;
-  top: -5px;
+  top: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+const IconContainer = styled.div`
+  display:flex;
+  gap:10px;
 `;
 
 // Header functional component
@@ -159,32 +181,30 @@ export default function Header() {
             {/* Navigation links */}
             <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>
               Homme
-              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
             </NavLink>
             <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
               Femme
-              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
             </NavLink>
             <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
               Enfant
-              <NavLinkBg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FHero-Bg-Dark.jpg?alt=media&token=5d2ec159-418f-4227-98bf-89090a07717d" />
             </NavLink>
           </StyledNav>
 
           {/* Icon links */}
-          <StyledNav>
+          <IconContainer>
             {/* Cart icon link */}
             <IconLink href={"/cart"}>
               <CartIcon />
               {/* Cart count badge */}
               <CartCount>{cartProducts.length}</CartCount>
             </IconLink>
-          </StyledNav>
+            {/* </StyledNav> */}
 
-          {/* Mobile navigation button */}
-          <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
-            <BarsIcon />
-          </NavButton>
+            {/* Mobile navigation button */}
+            <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
+              <BarsIcon />
+            </NavButton>
+          </IconContainer>
         </Wrapper>
       </Center>
     </StyledHeader>
