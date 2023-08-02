@@ -32,6 +32,25 @@ const Logo = styled(Link)`
 const LogoImg = styled.img`
   width: 100px;
   height: auto;
+ 
+`;
+
+// Styled component for the reaseau images
+const Social = styled.img`
+  width: 40px;
+  height: auto;
+  // @media screen and (min-width: 980px) {
+  //   display: none;
+  // }
+`;
+
+const SocialContainer = styled.div`
+  display:flex;
+  gap:30px;
+  padding:5px 0;
+  @media screen and (min-width: 980px) {
+    display: none;
+  }
 `;
 
 // Styled component for the header wrapper
@@ -67,29 +86,32 @@ const StyledNav = styled.nav`
 
       svg {
         width: 20px;
-        transition:all 0.5s ease;
+        transition: all 0.5s ease;
       }
     }
     ul {
+      @media screen and (min-width: 980px) {
+        display: none;
+      }
       list-style-type: none;
       padding: 0;
       margin: 0;
       height: 0;
       overflow: hidden;
-
+      transition: height .5s ease-in-out;
       li {
         padding: 10px;
       }
     }
   }
-  .parent-category.expanded{
+  .parent-category.expanded {
     // border-color:transparent;
   }
   .parent-category.expanded ul {
     height: 100%;
   }
-  .parent-category.expanded > div svg{
-    transform:rotate(90deg)
+  .parent-category.expanded > div svg {
+    transform: rotate(90deg);
   }
 
   @media screen and (max-width: 980px) {
@@ -286,6 +308,12 @@ export default function Header({ ListCategory }) {
                 </ul>
               </div>
             ))}
+            {/* <SocialContainer>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
+            </SocialContainer> */}
           </StyledNav>
 
           {/* Icon links */}
