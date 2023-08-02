@@ -89,9 +89,6 @@ export async function getServerSideProps(context) {
   subCategoryIds.push(id);
 
   // Fetch the products with the specified category ID from the database and sort them by ID in descending order
-  // const products = await Product.find({ category: id }, null, {
-  //   sort: { _id: -1 },
-  // });
   const products = await Product.find(
     { category: { $in: subCategoryIds } },
     null,

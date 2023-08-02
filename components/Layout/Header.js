@@ -12,11 +12,11 @@ import BarsIcon from "../icons/Bars";
 const StyledHeader = styled.header`
   background-color: #fff;
   @media screen and (max-width: 980px) {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
   }
 `;
 
@@ -52,17 +52,57 @@ const StyledNav = styled.nav`
   padding: 0;
   align-items: center;
   gap: 30px;
+  .parent-category {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgb(0 0 0 / 13%);
+    transition: all 0.5s ease;
+
+    > div {
+      display: flex;
+      padding: 20px;
+      justify-content: space-between;
+      // border-bottom: 1px solid rgb(0 0 0 / 13%);
+
+      svg {
+        width: 20px;
+        transition:all 0.5s ease;
+      }
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      height: 0;
+      overflow: hidden;
+
+      li {
+        padding: 10px;
+      }
+    }
+  }
+  .parent-category.expanded{
+    // border-color:transparent;
+  }
+  .parent-category.expanded ul {
+    height: 100%;
+  }
+  .parent-category.expanded > div svg{
+    transform:rotate(90deg)
+  }
 
   @media screen and (max-width: 980px) {
     position: fixed;
+    gap: 0;
     top: 60px;
     bottom: 0;
     // left: 0;
     right: 0;
     height: calc(100vh - 65px);
     width: 400px;
-    max-width:100%;
-    padding: 0px 20px 20px;
+    max-width: 100%;
+    padding: 0px;
     background-color: white;
     z-index: 2;
     border-top: 1px solid #eee;
@@ -84,10 +124,15 @@ const NavLink = styled(Link)`
   display: block;
   color: #000;
   text-decoration: none;
-  padding: 10px 0;
+  padding: 20px;
+  margin: 0 10px;
+  box-sizing: border-box;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 0.9rem;
+  border-bottom: 1px solid rgb(0 0 0 / 13%);
+  width: 100%;
+
   @media screen and (min-width: 980px) {
     padding: 0;
   }
@@ -152,18 +197,32 @@ const CartCount = styled.div`
   justify-content: center;
 `;
 const IconContainer = styled.div`
-  display:flex;
-  gap:10px;
+  display: flex;
+  gap: 10px;
 `;
 
 // Header functional component
-export default function Header() {
+export default function Header({ ListCategory }) {
   const { cartProducts } = useContext(CartContext);
   const [mobileNavActive, setMobileNavActive] = useState(false);
+  const [expandedCategories, setExpandedCategories] = useState({});
   // To be used with CartContext, but currently commented out
   // function addFeaturedToCart() {
   //   addProduct(product._id);
   // }
+  // console.log(ListCategory);
+
+  const parentCategories = ListCategory.filter((category) => !category.parent);
+  const childCategories = ListCategory.filter((category) => category.parent);
+
+  const toggleCategoryExpansion = (categoryId) => {
+    setExpandedCategories((prevState) => ({
+      ...prevState,
+      [categoryId]: !prevState[categoryId],
+    }));
+  };
+
+  console.log(expandedCategories);
   return (
     // Header section
     <StyledHeader>
@@ -175,19 +234,58 @@ export default function Header() {
             {/* Logo image */}
             <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
           </Logo>
-
           {/* Mobile navigation */}
-          <StyledNav mobileNavActive={mobileNavActive}>
-            {/* Navigation links */}
-            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>
-              Homme
-            </NavLink>
-            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
-              Femme
-            </NavLink>
+          {/* <StyledNav mobileNavActive={mobileNavActive}>
+            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</NavLink>
+            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</NavLink>
             <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
               Enfant
             </NavLink>
+          </StyledNav> */}
+
+          <StyledNav mobileNavActive={mobileNavActive}>
+            {/* Display parent categories */}
+            {parentCategories.map((parentCategory) => (
+              <div
+                key={parentCategory._id}
+                className={`parent-category ${
+                  expandedCategories[parentCategory._id] ? "expanded" : ""
+                }`}
+              >
+                <div
+                  onClick={() => toggleCategoryExpansion(parentCategory._id)}
+                >
+                  {parentCategory.name}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </div>
+                {/* Display child categories inside a list */}
+                <ul>
+                  {childCategories
+                    .filter(
+                      (childCategory) =>
+                        childCategory.parent === parentCategory._id
+                    )
+                    .map((childCategory) => (
+                      <li key={childCategory._id} className="child-category">
+                        {childCategory.name}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
           </StyledNav>
 
           {/* Icon links */}
