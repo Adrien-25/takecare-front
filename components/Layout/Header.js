@@ -11,6 +11,7 @@ import BarsIcon from "../icons/Bars";
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
   background-color: #fff;
+  position: relative;
   @media screen and (max-width: 980px) {
     position: fixed;
     top: 0;
@@ -26,13 +27,14 @@ const Logo = styled(Link)`
   text-decoration: none;
   position: relative;
   z-index: 3;
+  display: flex;
+  alkign-items: center;
 `;
 
 // Styled component for the logo image
 const LogoImg = styled.img`
   width: 100px;
   height: auto;
- 
 `;
 
 // Styled component for the reaseau images
@@ -45,11 +47,11 @@ const Social = styled.img`
 `;
 
 const SocialContainer = styled.div`
-  display:flex;
-  gap:30px;
-  padding:5px 0;
+  display: flex;
+  gap: 30px;
+  padding: 5px 0;
   @media screen and (min-width: 980px) {
-    display: none;
+    //display: none;
   }
 `;
 
@@ -69,20 +71,46 @@ const StyledNav = styled.nav`
   display: flex;
   position: static;
   padding: 0;
+  padding: 20px 0px;
   align-items: center;
   gap: 30px;
+  position: fixed;
+  gap: 0;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  //right: 0;
+  height: calc(100vh - 60px);
+  width: 375px;
+  max-width: 100%;
+  padding: 0px;
+  background-color: white;
+  z-index: 2;
+  //border-top: 1px solid #eee;
+  flex-direction: column;
+
+  ${(props) =>
+    props.mobileNavActive
+      ? `
+      transform: translateX(0);
+    `
+      : `    
+      transform: translateX(-100%);
+  
+    `}
   .parent-category {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-bottom: 1px solid rgb(0 0 0 / 13%);
+    //border-bottom: 1px solid rgb(0 0 0 / 13%);
     transition: all 0.5s ease;
 
     > div {
       display: flex;
-      padding: 20px;
       justify-content: space-between;
       // border-bottom: 1px solid rgb(0 0 0 / 13%);
+      padding: 20px;
+      border-top: 0.1rem solid #e4e4e4;
 
       svg {
         width: 20px;
@@ -90,17 +118,31 @@ const StyledNav = styled.nav`
       }
     }
     ul {
-      @media screen and (min-width: 980px) {
-        display: none;
-      }
+      position: fixed;
+      left: 0;
       list-style-type: none;
       padding: 0;
       margin: 0;
-      height: 0;
       overflow: hidden;
-      transition: height .5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      width: 375px;
+      background-color: white;
+      transform: translateX(-100%);
+
       li {
-        padding: 10px;
+        padding: 15px;
+        border-top: 0.1rem solid #e4e4e4;
+        &.title {
+          background-color: black;
+          color: white;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 20px;
+        }
+        &:last-child {
+          border-bottom: 0.1rem solid #e4e4e4;
+        }
       }
     }
   }
@@ -108,36 +150,10 @@ const StyledNav = styled.nav`
     // border-color:transparent;
   }
   .parent-category.expanded ul {
-    height: 100%;
+    transform: translateX(0);
   }
   .parent-category.expanded > div svg {
-    transform: rotate(90deg);
-  }
-
-  @media screen and (max-width: 980px) {
-    position: fixed;
-    gap: 0;
-    top: 60px;
-    bottom: 0;
-    // left: 0;
-    right: 0;
-    height: calc(100vh - 65px);
-    width: 400px;
-    max-width: 100%;
-    padding: 0px;
-    background-color: white;
-    z-index: 2;
-    border-top: 1px solid #eee;
-    flex-direction: column;
-    ${(props) =>
-      props.mobileNavActive
-        ? `
-      transform: translateX(0);
-    `
-        : `    
-      transform: translateX(100%);
-  
-    `}
+    //transform: rotate(90deg);
   }
 `;
 
@@ -197,7 +213,7 @@ const NavButton = styled.button`
   align-items: center;
   justify-content: center;
   @media screen and (min-width: 980px) {
-    display: none;
+    //display: none;
   }
 `;
 
@@ -232,7 +248,7 @@ export default function Header({ ListCategory }) {
   // function addFeaturedToCart() {
   //   addProduct(product._id);
   // }
-  // console.log(ListCategory);
+  console.log(ListCategory);
 
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
@@ -244,13 +260,17 @@ export default function Header({ ListCategory }) {
     }));
   };
 
-  console.log(expandedCategories);
+  //console.log(expandedCategories);
   return (
     // Header section
     <StyledHeader>
       {/* Center component to horizontally center the content */}
       <Center>
         <Wrapper>
+          {/* Mobile navigation button */}
+          <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
+            <BarsIcon />
+          </NavButton>
           {/* Logo link */}
           <Logo href={"/"}>
             {/* Logo image */}
@@ -285,6 +305,7 @@ export default function Header({ ListCategory }) {
                     strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-6 h-6"
+                    width="20px"
                   >
                     <path
                       strokeLinecap="round"
@@ -295,6 +316,28 @@ export default function Header({ ListCategory }) {
                 </div>
                 {/* Display child categories inside a list */}
                 <ul>
+                  <li
+                    key={parentCategory._id}
+                    className="child-category title"
+                    onClick={() => toggleCategoryExpansion(parentCategory._id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                      width="20px"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 19.5L8.25 12l7.5-7.5"
+                      />
+                    </svg>
+                    {parentCategory.name}
+                  </li>
                   {childCategories
                     .filter(
                       (childCategory) =>
@@ -325,11 +368,6 @@ export default function Header({ ListCategory }) {
               <CartCount>{cartProducts.length}</CartCount>
             </IconLink>
             {/* </StyledNav> */}
-
-            {/* Mobile navigation button */}
-            <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
-              <BarsIcon />
-            </NavButton>
           </IconContainer>
         </Wrapper>
       </Center>
