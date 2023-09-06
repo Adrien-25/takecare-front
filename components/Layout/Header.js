@@ -128,6 +128,8 @@ const StyledNav = styled.nav`
       width: 375px;
       background-color: white;
       transform: translateX(-100%);
+      height: calc(100vh - 60px);
+      top:0;
 
       li {
         padding: 15px;
