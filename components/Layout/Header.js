@@ -331,7 +331,7 @@ export default function Header({ ListCategory }) {
                       <li key={childCategory._id} className="child-category">
                         <NavLink href={`/category/${childCategory._id}`}> {childCategory.name}</NavLink>
                       </li>
-                    ))}
+                    ))} 
                 </ul>
               </div>
             ))}
