@@ -7,6 +7,8 @@ import { CartContext } from "@/components/CartContext";
 
 import CartIcon from "../icons/CartIcon";
 import BarsIcon from "../icons/Bars";
+import ChevronRight from "../icons/ChevronRight";
+import ChevronLeft from "../icons/ChevronLeft";
 
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
@@ -129,7 +131,7 @@ const StyledNav = styled.nav`
       background-color: white;
       transform: translateX(-100%);
       height: calc(100vh - 60px);
-      top:0;
+      top: 0;
 
       li {
         padding: 15px;
@@ -250,7 +252,7 @@ export default function Header({ ListCategory }) {
   // function addFeaturedToCart() {
   //   addProduct(product._id);
   // }
-  console.log(ListCategory);
+  // console.log(ListCategory);
 
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
@@ -273,22 +275,10 @@ export default function Header({ ListCategory }) {
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <BarsIcon />
           </NavButton>
-          {/* Logo link */}
-          <Logo href={"/"}>
-            {/* Logo image */}
-            <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
-          </Logo>
-          {/* Mobile navigation */}
-          {/* <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</NavLink>
-            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</NavLink>
-            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
-              Enfant
-            </NavLink>
-          </StyledNav> */}
 
           <StyledNav mobileNavActive={mobileNavActive}>
             {/* Display parent categories */}
+            
             {parentCategories.map((parentCategory) => (
               <div
                 key={parentCategory._id}
@@ -300,21 +290,7 @@ export default function Header({ ListCategory }) {
                   onClick={() => toggleCategoryExpansion(parentCategory._id)}
                 >
                   {parentCategory.name}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                    width="20px"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
+                  <ChevronRight />
                 </div>
                 {/* Display child categories inside a list */}
                 <ul>
@@ -323,21 +299,7 @@ export default function Header({ ListCategory }) {
                     className="child-category title"
                     onClick={() => toggleCategoryExpansion(parentCategory._id)}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6"
-                      width="20px"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.75 19.5L8.25 12l7.5-7.5"
-                      />
-                    </svg>
+                    <ChevronLeft />
                     {parentCategory.name}
                   </li>
                   {childCategories
@@ -361,6 +323,21 @@ export default function Header({ ListCategory }) {
             </SocialContainer> */}
           </StyledNav>
 
+          {/* Logo link */}
+          <Logo href={"/"}>
+            {/* Logo image */}
+            <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
+          </Logo>
+          {/* Mobile navigation */}
+          {/* <StyledNav mobileNavActive={mobileNavActive}>
+            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</NavLink>
+            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</NavLink>
+            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
+              Enfant
+            </NavLink>
+          </StyledNav> */}
+
+          
           {/* Icon links */}
           <IconContainer>
             {/* Cart icon link */}

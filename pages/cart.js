@@ -9,6 +9,9 @@ import axios from "axios";
 import Table from "@/components/UI/Table";
 import Input from "@/components/UI/Input";
 
+import {Category} from "@/models/Category";
+import {mongooseConnect} from "@/lib/mongoose";
+
 // Styled components for layout and styling
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -69,7 +72,7 @@ const CityHolder = styled.div`
 `;
 
 // CartPage component
-export default function CartPage() {
+export default function CartPage({Categories}) {
   // Use the CartContext to access cart products and functions
   const {cartProducts,addProduct,removeProduct,clearCart} = useContext(CartContext);
   // States for managing form inputs and order status
@@ -137,7 +140,7 @@ export default function CartPage() {
   if (isSuccess) {
     return (
       <>
-        <Header />
+      <Header ListCategory={Categories}/>
         <Center>
           <ColumnsWrapper>
             <Box>
@@ -153,7 +156,7 @@ export default function CartPage() {
   // Render the cart and order form
   return (
     <>
-      <Header />
+      <Header ListCategory={Categories}/>
       <Center>
         <ColumnsWrapper>
           <Box>
@@ -248,3 +251,20 @@ export default function CartPage() {
     </>
   );
 }
+  // Function to fetch data from the server
+  export async function getServerSideProps() {
+    // Connect to the MongoDB database using Mongoose
+    await mongooseConnect();
+  
+  
+    const Categories = await Category.find();
+    console.log(Categories);
+  
+    // Return the fetched data as props for the HomePage component
+    return {
+      props: {
+        Categories: JSON.parse(JSON.stringify(Categories)),
+        
+      },
+    };
+  }

@@ -29,7 +29,7 @@ const ColWrapper = styled.div`
 // Styled component for price row
 const Brand = styled.div`
   // font-style: italic;
-  text-transform:uppercase;
+  text-transform: uppercase;
 `;
 
 // Styled component for price row
@@ -52,13 +52,13 @@ const ProductContent = styled.div`
 `;
 
 // ProductPage component
-export default function ProductPage({ product, relatedProducts }) {
+export default function ProductPage({ product, relatedProducts,Categories }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
   console.log(product.description);
   return (
     <>
-      <Header />
+      <Header ListCategory={Categories}/>
       <Center>
         <ColWrapper>
           <WhiteBox>
@@ -83,7 +83,7 @@ export default function ProductPage({ product, relatedProducts }) {
         </ColWrapper>
       </Center>
       <NewProducts products={relatedProducts} />
-      <ReassuranceSection/>
+      <ReassuranceSection />
       <Footer />
     </>
   );
@@ -105,10 +105,13 @@ export async function getServerSideProps(context) {
     { sort: { _id: -1 }, limit: 4 }
   );
 
+  const Categories = await Category.find();
+
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
       relatedProducts: JSON.parse(JSON.stringify(relatedProducts)),
+      Categories: JSON.parse(JSON.stringify(Categories)),
     },
   };
 }

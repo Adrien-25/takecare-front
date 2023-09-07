@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 // CategoriesPage component
-export default function CategoriesPage({ products, category }) {
+export default function CategoriesPage({ products, category, Categories }) {
   // Get the number of products in the current category
   const numberOfProductsInCategory = products.length;
 
@@ -56,7 +56,7 @@ export default function CategoriesPage({ products, category }) {
 
   return (
     <>
-      <Header />
+      <Header ListCategory={Categories}/>
       <Center>
         <Wrapper>
           <Title>
@@ -97,11 +97,15 @@ export async function getServerSideProps(context) {
     }
   );
 
+  const Categories = await Category.find();
+
   // Return the fetched product and category data as props for the CategoriesPage component
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
       category: JSON.parse(JSON.stringify(category)),
+      Categories: JSON.parse(JSON.stringify(Categories)),
+
     },
   };
 }

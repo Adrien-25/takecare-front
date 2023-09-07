@@ -4,7 +4,7 @@ import styled from "styled-components";
 // Styled component for the centering container
 const StyledDiv = styled.div`
   max-width: 1400px;
-  max-width: 95%;
+  width: 90%;
   margin: 0 auto;
   padding: 0 20px;
 `;
