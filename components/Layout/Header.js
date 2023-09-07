@@ -145,6 +145,7 @@ const StyledNav = styled.nav`
           align-items: center;
           gap: 10px; 
           padding: 20px;
+          cursor:pointer;
         }
         &:last-child {
           border-bottom: 0.1rem solid #e4e4e4;
@@ -314,6 +315,11 @@ export default function Header({ ListCategory }) {
                   >
                     <ChevronLeft />
                     {parentCategory.name}
+                  </li>
+                  <li
+                    className="child-category"
+                  >
+                    <NavLink href={`/category/${parentCategory._id}`}>Voir tout</NavLink>
                   </li>
                   {childCategories
                     .filter(

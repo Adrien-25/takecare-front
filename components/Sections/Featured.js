@@ -98,15 +98,13 @@ export default function Featured({ product }) {
             <Desc>Temps chaud. Offres plus chaudes.</Desc>
             {/* Buttons for different categories */}
             <ButtonsWrapper>
-              <ButtonLink href={"/product/"} outline={0} white={1}>
+              <ButtonLink href={"/category/64b23fdeabeec0c37de97e6a"} outline={0} white={1}>
                 Femme
               </ButtonLink>
-              <ButtonLink href={"/product/"} outline={0} white={1}>
+              <ButtonLink href={"/category/64b23fdeabeec0c37de97e6a"} outline={0} white={1}>
                 Homme
               </ButtonLink>
-              <ButtonLink href={"/product/"} outline={0} white={1}>
-                Enfant
-              </ButtonLink>
+         
             </ButtonsWrapper>
           </div>
         </Column>
