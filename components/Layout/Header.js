@@ -267,7 +267,6 @@ export default function Header({ ListCategory }) {
     }));
   };
 
-  //console.log(expandedCategories);
   return (
     // Header section
     <StyledHeader>
