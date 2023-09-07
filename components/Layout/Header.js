@@ -16,11 +16,11 @@ const StyledHeader = styled.header`
   background-color: #fff;
   position: relative;
   @media screen and (max-width: 980px) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // width: 100%;
+    // z-index: 2;
   }
 `;
 
@@ -62,6 +62,9 @@ const NavContainer = styled.div`
   gap: 20px;
   > div.cate-parent {
     cursor: pointer;
+    @media screen and (max-width: 980px) {
+      display: none;
+    }
   }
 `;
 const NoScroll = styled.div`
@@ -74,9 +77,9 @@ const NoScroll = styled.div`
   background-color: rgba(43, 43, 43, 0.65);
   cursor: revert;
   opacity: 0;
-  z-index:999;
-  overflow:hidden;
-  display:none;
+  z-index: 999;
+  overflow: hidden;
+  display: none;
   ${(props) =>
     props.mobileNavActive
       ? `
@@ -247,15 +250,15 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @media screen and (min-width: 980px) {
     //display: none;
   }
-  &.close-nav{
-    padding:20px;
-    padding-left:5%;
-    width:unset;
-    height:unset;
+  &.close-nav {
+    padding: 20px;
+    padding-left: 5%;
+    width: unset;
+    height: unset;
     width: 100%;
     justify-content: flex-start;
     background-color: black;
@@ -337,10 +340,12 @@ export default function Header({ ListCategory }) {
           ></NoScroll>
 
           <StyledNav mobileNavActive={mobileNavActive}>
-          <NavButton className="close-nav" onClick={() => setMobileNavActive((prev) => !prev)}>
-            <Xmark />
-
-          </NavButton>
+            <NavButton
+              className="close-nav"
+              onClick={() => setMobileNavActive((prev) => !prev)}
+            >
+              <Xmark />
+            </NavButton>
             {/* Display parent categories */}
             {parentCategories.map((parentCategory) => (
               <div

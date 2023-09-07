@@ -13,9 +13,37 @@ import { useState } from "react";
 import Footer from "@/components/Layout/Footer";
 
 // Styled component for flex container
+const Entete = styled.div`
+  padding: 10px 0;
+  background-color:black;
+  > div{
+    justify-content:center;
+    h1{
+      color:white;
+      @media screen and (min-width: 980px) {
+        font-size:2em;
+      }
+      @media screen and (max-width: 500px) {
+        font-size:1.2em;
+      }
+    }
+  }
+`;
+// Styled component for flex container
+const CateInfo = styled.div`
+  background-color: white;
+  margin-bottom: 35px;
+  padding: 10px 0;
+`;
 const Wrapper = styled.div`
+  max-width: 1400px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+ 
 `;
 
 // CategoriesPage component
@@ -56,17 +84,20 @@ export default function CategoriesPage({ products, category, Categories }) {
 
   return (
     <>
-      <Header ListCategory={Categories}/>
-      <Center>
+      <Header ListCategory={Categories} />
+      <Entete>
         <Wrapper>
-          <Title>
-            {category
-              ? `${category.name} (${numberOfProductsInCategory})`
-              : "Pas de Catégorie"}
-          </Title>
+          <Title>{category ? `${category.name} ` : "Pas de Catégorie"}</Title>
+        </Wrapper>
+      </Entete>
+
+      <CateInfo>
+        <Wrapper>
+          <div>{numberOfProductsInCategory} produits</div>
           <SortSelector value={sortOption} onChange={handleSortChange} />
         </Wrapper>
-
+      </CateInfo>
+      <Center>
         <ProductsGrid products={sortedProducts} />
       </Center>
       <Footer />
@@ -105,7 +136,6 @@ export async function getServerSideProps(context) {
       products: JSON.parse(JSON.stringify(products)),
       category: JSON.parse(JSON.stringify(category)),
       Categories: JSON.parse(JSON.stringify(Categories)),
-
     },
   };
 }

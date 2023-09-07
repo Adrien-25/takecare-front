@@ -12,8 +12,8 @@ import NewProducts from "@/components/Product/NewProducts";
 
 // HomePage component
 export default function HomePage({featuredProduct,newProducts, Categories}) {
-  console.log(newProducts);
-  console.log(Categories);
+  // console.log(newProducts);
+  // console.log(Categories);
   return (
     <div>
       <Header ListCategory={Categories}/>
