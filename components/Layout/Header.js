@@ -30,7 +30,8 @@ const Logo = styled(Link)`
   position: relative;
   z-index: 3;
   display: flex;
-  alkign-items: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 // Styled component for the logo image
@@ -39,31 +40,27 @@ const LogoImg = styled.img`
   height: auto;
 `;
 
-// Styled component for the reaseau images
-const Social = styled.img`
-  width: 40px;
-  height: auto;
-  // @media screen and (min-width: 980px) {
-  //   display: none;
-  // }
-`;
-
-const SocialContainer = styled.div`
-  display: flex;
-  gap: 30px;
-  padding: 5px 0;
-  @media screen and (min-width: 980px) {
-    //display: none;
-  }
-`;
-
 // Styled component for the header wrapper
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  @media screen and (max-width: 980px) {
-    // display: grid;
+  max-width: 95%;
+  width: 1600px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
+
+// Styled component for the header wrapper
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  > div {
+    cursor: pointer;
   }
 `;
 
@@ -81,20 +78,23 @@ const StyledNav = styled.nav`
   top: 60px;
   bottom: 0;
   left: 0;
-  //right: 0;
   height: calc(100vh - 60px);
   width: 375px;
   max-width: 100%;
   padding: 0px;
   background-color: white;
   z-index: 2;
-  //border-top: 1px solid #eee;
   flex-direction: column;
+  visibility:hidden;
+  opacity:0;
 
   ${(props) =>
     props.mobileNavActive
       ? `
       transform: translateX(0);
+      visibility:visible;
+      opacity:1;
+    
     `
       : `    
       transform: translateX(-100%);
@@ -104,15 +104,14 @@ const StyledNav = styled.nav`
     display: flex;
     flex-direction: column;
     width: 100%;
-    //border-bottom: 1px solid rgb(0 0 0 / 13%);
     transition: all 0.5s ease;
 
     > div {
       display: flex;
       justify-content: space-between;
-      // border-bottom: 1px solid rgb(0 0 0 / 13%);
       padding: 20px;
       border-top: 0.1rem solid #e4e4e4;
+      cursor:pointer;
 
       svg {
         width: 20px;
@@ -134,8 +133,11 @@ const StyledNav = styled.nav`
       top: 0;
 
       li {
-        padding: 15px;
         border-top: 0.1rem solid #e4e4e4;
+        a{
+          padding: 15px;
+          display: block;
+        }
         &.title {
           background-color: black;
           color: white;
@@ -149,6 +151,12 @@ const StyledNav = styled.nav`
         }
       }
     }
+    &:last-child > div{
+      border-bottom: 0.1rem solid #e4e4e4;
+
+    }
+  }
+  
   }
   .parent-category.expanded {
     // border-color:transparent;
@@ -163,33 +171,26 @@ const StyledNav = styled.nav`
 
 // Styled component for the navigation links
 const NavLink = styled(Link)`
-  display: block;
-  color: #000;
+  // display: block;
+  // padding: 20px;
+  // margin: 0 10px;
+  // box-sizing: border-box;
+  // text-transform: uppercase;
+  // font-weight: bold;
+  // font-size: 0.9rem;
+  // border-bottom: 1px solid rgb(0 0 0 / 13%);
+  // width: 100%;
+
+  // @media screen and (min-width: 980px) {
+  //   padding: 0;
+  // }
+
+
   text-decoration: none;
-  padding: 20px;
-  margin: 0 10px;
-  box-sizing: border-box;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.9rem;
-  border-bottom: 1px solid rgb(0 0 0 / 13%);
-  width: 100%;
+  color: #000;
 
-  @media screen and (min-width: 980px) {
-    padding: 0;
-  }
+
 `;
-
-// Styled component for the background of navigation links (for mobile view)
-// const NavLinkBg = styled.div`
-//   display: block;
-//   color: #000;
-//   text-decoration: none;
-//   padding: 10px 0;
-//   @media screen and (min-width: 980px) {
-//     padding: 0;
-//   }
-// `;
 
 // Styled component for the icon links in the navigation
 const IconLink = styled(Link)`
@@ -241,6 +242,7 @@ const CartCount = styled.div`
 const IconContainer = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: flex-end;
 `;
 
 // Header functional component
@@ -269,16 +271,27 @@ export default function Header({ ListCategory }) {
     // Header section
     <StyledHeader>
       {/* Center component to horizontally center the content */}
-      <Center>
-        <Wrapper>
-          {/* Mobile navigation button */}
+      <Wrapper>
+        {/* Mobile navigation button */}
+
+        <NavContainer>
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <BarsIcon />
           </NavButton>
+          {parentCategories.map((parentCategory) => (
+            <div
+              onClick={() => {
+                toggleCategoryExpansion(parentCategory._id);
+                setMobileNavActive((prev) => !prev);
+              }}
+            >
+              {parentCategory.name}
+            </div>
+          ))}
 
           <StyledNav mobileNavActive={mobileNavActive}>
             {/* Display parent categories */}
-            
+
             {parentCategories.map((parentCategory) => (
               <div
                 key={parentCategory._id}
@@ -308,48 +321,34 @@ export default function Header({ ListCategory }) {
                         childCategory.parent === parentCategory._id
                     )
                     .map((childCategory) => (
+
                       <li key={childCategory._id} className="child-category">
-                        {childCategory.name}
+                        <NavLink href={`/category/${childCategory._id}`}> {childCategory.name}</NavLink>
                       </li>
                     ))}
                 </ul>
               </div>
             ))}
-            {/* <SocialContainer>
-              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
-              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
-              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
-              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
-            </SocialContainer> */}
           </StyledNav>
+        </NavContainer>
 
-          {/* Logo link */}
-          <Logo href={"/"}>
-            {/* Logo image */}
-            <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
-          </Logo>
-          {/* Mobile navigation */}
-          {/* <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</NavLink>
-            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</NavLink>
-            <NavLink href={"/category/64b23fe3abeec0c37de97e6d"}>
-              Enfant
-            </NavLink>
-          </StyledNav> */}
+        {/* Logo link */}
+        <Logo href={"/"}>
+          {/* Logo image */}
+          <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FLogo-take-care-transparent.png?alt=media&token=df0a3a01-f1cb-4393-b712-545d7fea1829"></LogoImg>
+        </Logo>
 
-          
-          {/* Icon links */}
-          <IconContainer>
-            {/* Cart icon link */}
-            <IconLink href={"/cart"}>
-              <CartIcon />
-              {/* Cart count badge */}
-              <CartCount>{cartProducts.length}</CartCount>
-            </IconLink>
-            {/* </StyledNav> */}
-          </IconContainer>
-        </Wrapper>
-      </Center>
+        {/* Icon links */}
+        <IconContainer>
+          {/* Cart icon link */}
+          <IconLink href={"/cart"}>
+            <CartIcon />
+            {/* Cart count badge */}
+            <CartCount>{cartProducts.length}</CartCount>
+          </IconLink>
+          {/* </StyledNav> */}
+        </IconContainer>
+      </Wrapper>
     </StyledHeader>
   );
 }

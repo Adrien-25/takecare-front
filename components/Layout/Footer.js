@@ -120,8 +120,8 @@ export default function Footer() {
         <Column>
           <Title>Catalogue</Title>
           <FooterLink href={"/"}>Tous nos produits</FooterLink>
-          <FooterLink href={"/"}>Homme</FooterLink>
-          <FooterLink href={"/"}>Femme</FooterLink>
+          <FooterLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</FooterLink>
+          <FooterLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</FooterLink>
           <FooterLink href={"/"}>Enfant</FooterLink>
         </Column>
 
@@ -137,7 +137,6 @@ export default function Footer() {
       {/* Botoom section with four columns */}
       <BottomWrapper>
         <LogoImg src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2FTC-removebg-preview%20(1).png?alt=media&token=124597d4-e352-46cc-aab2-89e1f2172930"></LogoImg>
-
         <span>Tous droits d’auteur et conception par @Take Care – 2023</span>
       </BottomWrapper>
     </StyledFooter>
