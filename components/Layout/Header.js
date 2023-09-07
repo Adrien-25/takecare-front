@@ -63,17 +63,6 @@ const NavContainer = styled.div`
   > div.cate-parent {
     cursor: pointer;
   }
-  // .no-scroll {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   backdrop-filter: blur(6px);
-  //   background-color: rgba(43, 43, 43, 0.65);
-  //   cursor: revert;
-  //   opacity: 0;
-  // }
 `;
 const NoScroll = styled.div`
   position: fixed;
@@ -188,6 +177,7 @@ const StyledNav = styled.nav`
           gap: 10px; 
           padding: 20px;
           cursor:pointer;
+          border:none;
         }
         &:last-child {
           border-bottom: 0.1rem solid #e4e4e4;
@@ -257,6 +247,7 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  
   @media screen and (min-width: 980px) {
     //display: none;
   }
@@ -265,6 +256,10 @@ const NavButton = styled.button`
     padding-left:5%;
     width:unset;
     height:unset;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: black;
+    color: white;
   }
 `;
 
