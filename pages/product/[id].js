@@ -32,6 +32,7 @@ const ColWrapper = styled.div`
 const Brand = styled.div`
   // font-style: italic;
   text-transform: uppercase;
+  margin-bottom:30px;
 `;
 
 // Styled component for price row
@@ -44,6 +45,7 @@ const PriceRow = styled.div`
 // Styled component for price
 const Price = styled.span`
   font-size: 1.4rem;
+  margin-top:20px;
 `;
 
 // Styled component for product content
@@ -54,13 +56,13 @@ const ProductContent = styled.div`
 `;
 
 // ProductPage component
-export default function ProductPage({ product, relatedProducts,Categories }) {
+export default function ProductPage({ product, relatedProducts, Categories }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
   console.log(product.description);
   return (
     <>
-      <Header ListCategory={Categories}/>
+      <Header ListCategory={Categories} />
       <Center>
         <ColWrapper>
           <WhiteBox>
@@ -69,11 +71,11 @@ export default function ProductPage({ product, relatedProducts,Categories }) {
           <ProductContent>
             <Title>{product.title}</Title>
             <Brand>{product.marque}</Brand>
+
+            <Price>{product.price}€</Price>
+
             <p>{product.description}</p>
             <PriceRow>
-              <div>
-                <Price>{product.price}€</Price>
-              </div>
               <div>
                 <Button primary onClick={() => addProduct(product._id)}>
                   <CartIcon />

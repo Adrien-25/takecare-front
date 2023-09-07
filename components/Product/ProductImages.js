@@ -4,11 +4,14 @@ import { useState } from "react";
 // Styles pour l'affichage en mobile
 const MobileGallery = styled.div`
   @media screen and (min-width: 980px) {
-    display: none;
+    // display: none;
   }
   // display: flex;
   // flex-direction: column;
   // align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 30px;
 `;
 
 // Styles pour l'affichage en desktop
@@ -20,6 +23,7 @@ const DesktopGallery = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   overflow: hidden;
+  display: none;
 `;
 
 const ImageContainer = styled.div``;
@@ -30,18 +34,27 @@ const Image = styled.img`
   max-height: 100%;
 `;
 
+// Styled component for the container of the big image
+const BigImageWrapper = styled.div`
+  text-align: center;
+`;
+
 // Styled component for the large image displayed at the top
 const BigImage = styled.img`
   max-width: 100%;
-  max-height: 200px;
+  aspect-ratio: 500/500;
+  object-fit: cover;
+  border-radius: 20px;
 `;
 
 // Styled component for the container of image buttons/thumbnails
 const ImageButtons = styled.div`
   display: flex;
-  gap: 10px;
+  flex-direction:column;
+  gap: 20px;
   flex-grow: 0;
   margin-top: 10px;
+ 
 `;
 
 // Styled component for the individual image button/thumbnail
@@ -51,20 +64,29 @@ const ImageButton = styled.div`
     props.active
       ? `
       border-color: #ccc;
+      opacity:1;
+
     `
       : `
       border-color: transparent;
+      // opacity:0.8;
     `}
-  height: 40px;
+  height: 100px;
+  width:100px;
   padding: 2px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 20px;
+  overflow: hidden;
+  
+    > img{
+    width:100%;
+    max-width:unset;
+    object-fit: cover;
+
+  }
 `;
 
-// Styled component for the container of the big image
-const BigImageWrapper = styled.div`
-  text-align: center;
-`;
+
 
 // CategoriesSection functional component
 export default function ProductImages({ images }) {
@@ -94,7 +116,6 @@ export default function ProductImages({ images }) {
           <ImageContainer>
             {/* <img key={index} src={image} alt={`Image ${index + 1}`} /> */}
             <Image src={image} key={index} alt={`Image ${index + 1}`} />
-
           </ImageContainer>
         ))}
       </DesktopGallery>
