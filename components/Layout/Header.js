@@ -143,7 +143,7 @@ const StyledNav = styled.nav`
           color: white;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 10px; 
           padding: 20px;
         }
         &:last-child {
