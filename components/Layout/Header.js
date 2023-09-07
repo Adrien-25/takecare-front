@@ -9,6 +9,7 @@ import CartIcon from "../icons/CartIcon";
 import BarsIcon from "../icons/Bars";
 import ChevronRight from "../icons/ChevronRight";
 import ChevronLeft from "../icons/ChevronLeft";
+import Xmark from "../icons/Xmark";
 
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
@@ -59,11 +60,48 @@ const NavContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  > div {
+  > div.cate-parent {
     cursor: pointer;
   }
+  // .no-scroll {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   backdrop-filter: blur(6px);
+  //   background-color: rgba(43, 43, 43, 0.65);
+  //   cursor: revert;
+  //   opacity: 0;
+  // }
 `;
+const NoScroll = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(6px);
+  background-color: rgba(43, 43, 43, 0.65);
+  cursor: revert;
+  opacity: 0;
+  z-index:999;
+  overflow:hidden;
+  display:none;
+  ${(props) =>
+    props.mobileNavActive
+      ? `
+      cursor: unset;
+      opacity: 1;
+      overflow:hidden;
+      display:block;
 
+    `
+      : `    
+    cursor: revert;
+
+    `}
+`;
 // Styled component for the navigation (for mobile view)
 const StyledNav = styled.nav`
   transition: all 0.5s ease;
@@ -71,19 +109,21 @@ const StyledNav = styled.nav`
   position: static;
   padding: 0;
   padding: 20px 0px;
-  align-items: center;
+  align-items: flex-start;
   gap: 30px;
   position: fixed;
   gap: 0;
-  top: 60px;
+  // top: 60px;
   bottom: 0;
   left: 0;
-  height: calc(100vh - 60px);
+  // height: calc(100vh - 60px);
+  top:0;
+  height:100vh;
   width: 375px;
   max-width: 100%;
   padding: 0px;
   background-color: white;
-  z-index: 2;
+  z-index: 99999;
   flex-direction: column;
   visibility:hidden;
   opacity:0;
@@ -131,6 +171,8 @@ const StyledNav = styled.nav`
       transform: translateX(-100%);
       height: calc(100vh - 60px);
       top: 0;
+      z-index: 999999;
+
 
       li {
         border-top: 0.1rem solid #e4e4e4;
@@ -186,11 +228,8 @@ const NavLink = styled(Link)`
   //   padding: 0;
   // }
 
-
   text-decoration: none;
   color: #000;
-
-
 `;
 
 // Styled component for the icon links in the navigation
@@ -220,6 +259,12 @@ const NavButton = styled.button`
   justify-content: center;
   @media screen and (min-width: 980px) {
     //display: none;
+  }
+  &.close-nav{
+    padding:20px;
+    padding-left:5%;
+    width:unset;
+    height:unset;
   }
 `;
 
@@ -284,14 +329,22 @@ export default function Header({ ListCategory }) {
                 toggleCategoryExpansion(parentCategory._id);
                 setMobileNavActive((prev) => !prev);
               }}
+              className="cate-parent"
             >
               {parentCategory.name}
             </div>
           ))}
+          <NoScroll
+            mobileNavActive={mobileNavActive}
+            className="no-scroll"
+          ></NoScroll>
 
           <StyledNav mobileNavActive={mobileNavActive}>
-            {/* Display parent categories */}
+          <NavButton className="close-nav" onClick={() => setMobileNavActive((prev) => !prev)}>
+            <Xmark />
 
+          </NavButton>
+            {/* Display parent categories */}
             {parentCategories.map((parentCategory) => (
               <div
                 key={parentCategory._id}
@@ -315,10 +368,10 @@ export default function Header({ ListCategory }) {
                     <ChevronLeft />
                     {parentCategory.name}
                   </li>
-                  <li
-                    className="child-category"
-                  >
-                    <NavLink href={`/category/${parentCategory._id}`}>Voir tout</NavLink>
+                  <li className="child-category">
+                    <NavLink href={`/category/${parentCategory._id}`}>
+                      Voir tout
+                    </NavLink>
                   </li>
                   {childCategories
                     .filter(
@@ -326,11 +379,12 @@ export default function Header({ ListCategory }) {
                         childCategory.parent === parentCategory._id
                     )
                     .map((childCategory) => (
-
                       <li key={childCategory._id} className="child-category">
-                        <NavLink href={`/category/${childCategory._id}`}> {childCategory.name}</NavLink>
+                        <NavLink href={`/category/${childCategory._id}`}>
+                          {childCategory.name}
+                        </NavLink>
                       </li>
-                    ))} 
+                    ))}
                 </ul>
               </div>
             ))}

@@ -122,7 +122,6 @@ export default function Footer() {
           <FooterLink href={"/"}>Tous nos produits</FooterLink>
           <FooterLink href={"/category/64b23fdeabeec0c37de97e6a"}>Homme</FooterLink>
           <FooterLink href={"/category/64b23fe3abeec0c37de97e6d"}>Femme</FooterLink>
-          <FooterLink href={"/"}>Enfant</FooterLink>
         </Column>
 
         <Column>
