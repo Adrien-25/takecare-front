@@ -295,7 +295,9 @@ const IconContainer = styled.div`
 export default function Header({ ListCategory }) {
   const { cartProducts } = useContext(CartContext);
   const [mobileNavActive, setMobileNavActive] = useState(false);
+  // const [expandedCategories, setExpandedCategories] = useState({false});
   const [expandedCategories, setExpandedCategories] = useState({});
+
   // To be used with CartContext, but currently commented out
   // function addFeaturedToCart() {
   //   addProduct(product._id);

@@ -5,6 +5,8 @@ import Footer from "@/components/Layout/Footer";
 import Title from "@/components/UI/Title";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
+import { Category } from "@/models/Category";
+
 import styled from "styled-components";
 import WhiteBox from "@/components/UI/WhiteBox";
 import ProductImages from "@/components/Product/ProductImages";
