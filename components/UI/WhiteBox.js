@@ -9,6 +9,11 @@ const WhiteBox = styled.div`
     padding: 0px;
     background-color:transparent;
   }
+  @media screen and (max-width: 960px) {
+    padding: 5px;
+
+  }
+
 `;
 
 export default WhiteBox;

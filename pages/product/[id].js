@@ -22,9 +22,11 @@ const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   @media screen and (min-width: 960px) {
-    grid-template-columns: 1.3fr 0.7fr;
+    // grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 53% 44%;
+
   }
-  gap: 40px;
+  gap: 3%;
   margin: 40px 0;
 `;
 
