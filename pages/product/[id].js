@@ -24,7 +24,6 @@ const ColWrapper = styled.div`
   @media screen and (min-width: 960px) {
     // grid-template-columns: 1.3fr 0.7fr;
     grid-template-columns: 53% 44%;
-
   }
   gap: 3%;
   margin: 40px 0;
@@ -34,7 +33,7 @@ const ColWrapper = styled.div`
 const Brand = styled.div`
   // font-style: italic;
   text-transform: uppercase;
-  margin-bottom:30px;
+  margin-bottom: 20px;
 `;
 
 // Styled component for price row
@@ -42,12 +41,13 @@ const PriceRow = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: center;
 `;
 
 // Styled component for price
 const Price = styled.span`
   font-size: 1.4rem;
-  margin-top:20px;
+  margin-top: 20px;
 `;
 
 // Styled component for product content
@@ -55,6 +55,12 @@ const ProductContent = styled.div`
   height: fit-content;
   position: sticky;
   top: 0;
+  text-align: center;
+  > h1 {
+    max-width: 350px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
 `;
 
 // ProductPage component
@@ -71,19 +77,17 @@ export default function ProductPage({ product, relatedProducts, Categories }) {
             <ProductImages images={product.images} />
           </WhiteBox>
           <ProductContent>
-            <Title>{product.title}</Title>
             <Brand>{product.marque}</Brand>
+            <Title>{product.title}</Title>
 
             <Price>{product.price}€</Price>
 
             <p>{product.description}</p>
             <PriceRow>
-              <div>
-                <Button primary onClick={() => addProduct(product._id)}>
-                  <CartIcon />
-                  Ajouter au panier
-                </Button>
-              </div>
+              <Button primary onClick={() => addProduct(product._id)}>
+                <CartIcon />
+                Ajouter au panier
+              </Button>
             </PriceRow>
           </ProductContent>
         </ColWrapper>
