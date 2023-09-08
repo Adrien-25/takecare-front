@@ -5,13 +5,20 @@ import { useState } from "react";
 const MobileGallery = styled.div`
   @media screen and (max-width: 980px) {
     flex-direction: column;
+    padding: 10px;
+    gap: 10px;
 
   }
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
   // display: flex;
   // align-items: center;
   display: flex;
   flex-direction: row-reverse;
   gap: 30px;
+  position: sticky;
+  top: 0;
 `;
 
 // Styles pour l'affichage en desktop
@@ -56,9 +63,12 @@ const ImageButtons = styled.div`
   flex-grow: 0;
   margin-top: 10px;
   @media screen and (max-width: 980px) {
+    overflow-x:scroll;
+
     flex-direction:row;
+    gap: 10px;
+    
   }
- 
 `;
 
 // Styled component for the individual image button/thumbnail
@@ -80,17 +90,18 @@ const ImageButton = styled.div`
   padding: 2px;
   cursor: pointer;
   border-radius: 20px;
-  overflow: hidden;
+  // overflow: hidden;
   @media screen and (max-width: 980px) {
-    width:50px;
-    height: 50px;
+    width:70px;
+    height: 70px;
+    min-width: 70px;
 
   }
     > img{
     width:100%;
     max-width:unset;
     object-fit: cover;
-
+    border-radius: 20px;
   }
 `;
 
