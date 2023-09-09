@@ -302,6 +302,12 @@ export default function Header({ ListCategory }) {
   // }
   // console.log(ListCategory);
 
+  // Fonction pour désactiver le header
+  const disableHeader = () => {
+    setMobileNavActive(false);
+    setExpandedCategories({});
+  };
+
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
 
@@ -371,7 +377,8 @@ export default function Header({ ListCategory }) {
                     {parentCategory.name}
                   </li>
                   <li className="child-category">
-                    <NavLink href={`/category/${parentCategory._id}`}>
+                    <NavLink href={`/category/${parentCategory._id}`} onClick={disableHeader}>
+                    {/* <NavLink to={`/category/${parentCategory._id}`}> */}
                       Voir tout
                     </NavLink>
                   </li>
@@ -382,7 +389,7 @@ export default function Header({ ListCategory }) {
                     )
                     .map((childCategory) => (
                       <li key={childCategory._id} className="child-category">
-                        <NavLink href={`/category/${childCategory._id}`}>
+                        <NavLink href={`/category/${childCategory._id}`} onClick={disableHeader}>
                           {childCategory.name}
                         </NavLink>
                       </li>
