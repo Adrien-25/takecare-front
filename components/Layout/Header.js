@@ -254,6 +254,9 @@ const NavButton = styled.button`
   @media screen and (min-width: 980px) {
     //display: none;
   }
+  >svg{
+    color:black;
+  }
   &.close-nav {
     padding: 20px;
     padding-left: 5%;
@@ -263,6 +266,9 @@ const NavButton = styled.button`
     justify-content: flex-start;
     background-color: black;
     color: white;
+    >svg{
+      color:white;
+    }
   }
 `;
 
