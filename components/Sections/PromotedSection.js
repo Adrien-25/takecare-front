@@ -12,6 +12,9 @@ const StyledPromotionSection = styled.section`
   flex-direction: column;
   justify-content: center;
   margin: 0;
+  @media screen and (max-width: 980px) {
+    padding: 40px 5px;
+  }
 `;
 
 // Styled component for the title

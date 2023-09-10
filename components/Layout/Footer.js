@@ -30,6 +30,10 @@ const Column = styled.div`
     font-size: 25px;
     font-weight: bold;
   }
+  @media screen and (max-width: 980px) {
+    align-items: center;
+
+  }
 `;
 
 // Styled component for the top part of the footer
