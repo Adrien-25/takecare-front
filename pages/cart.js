@@ -258,7 +258,6 @@ export default function CartPage({Categories}) {
   
   
     const Categories = await Category.find();
-    console.log(Categories);
   
     // Return the fetched data as props for the HomePage component
     return {

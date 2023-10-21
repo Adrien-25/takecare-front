@@ -12,8 +12,6 @@ import NewProducts from "@/components/Product/NewProducts";
 
 // HomePage component
 export default function HomePage({featuredProduct,newProducts, Categories}) {
-  // console.log(newProducts);
-  // console.log(Categories);
   return (
     <div>
       <Header ListCategory={Categories}/>
@@ -41,8 +39,6 @@ export async function getServerSideProps() {
   const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:4});
 
   const Categories = await Category.find();
-  console.log(Categories);
-  console.log(newProducts);
 
   // Return the fetched data as props for the HomePage component
   return {

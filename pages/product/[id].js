@@ -59,7 +59,6 @@ const ProductContent = styled.div`
 export default function ProductPage({ product, relatedProducts, Categories }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
-  console.log(product.description);
   return (
     <>
       <Header ListCategory={Categories} />
