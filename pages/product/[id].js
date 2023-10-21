@@ -20,19 +20,20 @@ import ReassuranceSection from "@/components/Sections/ReassuranceSection";
 // Styled component for grid layout
 const ColWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   @media screen and (min-width: 960px) {
-    grid-template-columns: 1.3fr 0.7fr;
+    // grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 53% 44%;
   }
-  gap: 40px;
-  margin: 40px 0;
+  gap: 3%;
+  padding: 40px 0;
 `;
 
 // Styled component for price row
 const Brand = styled.div`
   // font-style: italic;
   text-transform: uppercase;
-  margin-bottom:30px;
+  margin-bottom: 20px;
 `;
 
 // Styled component for price row
@@ -40,19 +41,60 @@ const PriceRow = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: center;
+  margin-bottom:30px;
+  margin-top:20px;
 `;
 
 // Styled component for price
 const Price = styled.span`
   font-size: 1.4rem;
-  margin-top:20px;
+  margin-top: 20px;
 `;
 
 // Styled component for product content
 const ProductContent = styled.div`
-  height: fit-content;
+  // height: fit-content;
+  // height: 100%;
   position: sticky;
   top: 0;
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  @media screen and (max-width: 960px) {
+    padding: 10px;
+  }
+  > h1 {
+    max-width: 350px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  .bottom-detail{
+    border-top:1px solid #e5e8ec;
+    padding-top:30px;
+    >p{
+      margin:0;
+      margin-bottom:5px;
+      font-size:12px;
+    }
+    
+  }
+  .paiement-container{
+    position:relative;
+    border-radius:5px;
+    >div{
+      position:absolute;
+      top:0;
+      left:50%;
+      transform: translate(-50%) translateY(-50%);
+      padding:0 20px;
+      background-color:white;
+    }
+    padding: 25px 0  20px 0;
+    border: 1px solid #e5e8ec;
+    margin-top:30px;
+  }
 `;
 
 // ProductPage component
@@ -68,20 +110,30 @@ export default function ProductPage({ product, relatedProducts, Categories }) {
             <ProductImages images={product.images} />
           </WhiteBox>
           <ProductContent>
-            <Title>{product.title}</Title>
             <Brand>{product.marque}</Brand>
+            <Title>{product.title}</Title>
 
             <Price>{product.price}€</Price>
 
             <p>{product.description}</p>
             <PriceRow>
-              <div>
-                <Button primary onClick={() => addProduct(product._id)}>
-                  <CartIcon />
-                  Ajouter au panier
-                </Button>
-              </div>
+              <Button primary onClick={() => addProduct(product._id)}>
+                <CartIcon />
+                Ajouter au panier
+              </Button>
             </PriceRow>
+            <div className="bottom-detail">
+              <p>SKU : {product.reference}</p>
+              <p>Available : En stock</p>
+            </div>
+            <div className="paiement-container">
+              <div>Paiement sécurisé</div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Fpayment_1.avif?alt=media&token=68632f14-6581-48d1-af1b-0c1d41b75d60"
+                alt="Icones de paiements"
+              />
+            </div>
+            
           </ProductContent>
         </ColWrapper>
       </Center>

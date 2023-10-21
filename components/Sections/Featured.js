@@ -9,6 +9,7 @@ const Bg = styled.div`
   color: #fff;
   padding: 50px 0;
   height: 70vh;
+  min-height: 600px;
   display: flex;
   align-items: center;
   position: relative;
@@ -98,7 +99,7 @@ export default function Featured({ product }) {
             <Desc>Temps chaud. Offres plus chaudes.</Desc>
             {/* Buttons for different categories */}
             <ButtonsWrapper>
-              <ButtonLink href={"/category/64b23fdeabeec0c37de97e6a"} outline={0} white={1}>
+              <ButtonLink href={"/category/64b23fe3abeec0c37de97e6d"} outline={0} white={1}>
                 Femme
               </ButtonLink>
               <ButtonLink href={"/category/64b23fdeabeec0c37de97e6a"} outline={0} white={1}>

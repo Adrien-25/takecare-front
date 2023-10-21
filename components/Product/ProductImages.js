@@ -3,15 +3,22 @@ import styled from "styled-components";
 import { useState } from "react";
 // Styles pour l'affichage en mobile
 const MobileGallery = styled.div`
-  @media screen and (min-width: 980px) {
-    // display: none;
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+
   }
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
   // display: flex;
-  // flex-direction: column;
   // align-items: center;
   display: flex;
   flex-direction: row-reverse;
   gap: 30px;
+  position: sticky;
+  top: 0;
 `;
 
 // Styles pour l'affichage en desktop
@@ -37,6 +44,7 @@ const Image = styled.img`
 // Styled component for the container of the big image
 const BigImageWrapper = styled.div`
   text-align: center;
+  padding:3px;
 `;
 
 // Styled component for the large image displayed at the top
@@ -54,7 +62,13 @@ const ImageButtons = styled.div`
   gap: 20px;
   flex-grow: 0;
   margin-top: 10px;
- 
+  @media screen and (max-width: 980px) {
+    overflow-x:scroll;
+
+    flex-direction:row;
+    gap: 10px;
+    
+  }
 `;
 
 // Styled component for the individual image button/thumbnail
@@ -76,13 +90,18 @@ const ImageButton = styled.div`
   padding: 2px;
   cursor: pointer;
   border-radius: 20px;
-  overflow: hidden;
-  
+  // overflow: hidden;
+  @media screen and (max-width: 980px) {
+    width:70px;
+    height: 70px;
+    min-width: 70px;
+
+  }
     > img{
     width:100%;
     max-width:unset;
     object-fit: cover;
-
+    border-radius: 20px;
   }
 `;
 

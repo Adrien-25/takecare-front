@@ -192,7 +192,7 @@ export default function CartPage({Categories}) {
                           onClick={() => moreOfThisProduct(product._id)}>+</Button>
                       </td>
                       <td>
-                        ${cartProducts.filter(id => id === product._id).length * product.price}
+                        {cartProducts.filter(id => id === product._id).length * product.price} €
                       </td>
                     </tr>
                   ))}

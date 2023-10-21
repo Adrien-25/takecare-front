@@ -24,6 +24,16 @@ const Column = styled.div`
     margin-right: 30px;
     font-size: 13px;
   }
+  .brand-name{
+    margin-bottom:30px;
+    text-transform:uppercase;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  @media screen and (max-width: 980px) {
+    align-items: center;
+
+  }
 `;
 
 // Styled component for the top part of the footer
@@ -55,6 +65,9 @@ const SocialContainer = styled.div`
   padding: 5px 0;
   @media screen and (min-width: 980px) {
     //display: none;
+  }
+  > a{
+    padding:0;
   }
 `;
 
@@ -109,11 +122,20 @@ export default function Footer() {
       {/* Top section with four columns */}
       <TopWrapper>
         <Column>
+          <div class="brand-name">Take Care</div>
           <SocialContainer>
-            <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
-            <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Finstagram.png?alt=media&token=ec81a6d5-15cc-4aa5-b124-3da3bfe1a4aa"></Social>
-            <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Flinkedin.png?alt=media&token=9258499f-e67c-44d0-a3b9-f55291271f40"></Social>
-            <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Fyoutube.png?alt=media&token=cd99e6eb-3a76-4bfa-b88f-59cd68496f60"></Social>
+            <Link href={"https://www.facebook.com/?locale=fr_FR"}>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>
+            </Link>
+            <Link href={"https://www.facebook.com/?locale=fr_FR"}>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Finstagram.png?alt=media&token=ec81a6d5-15cc-4aa5-b124-3da3bfe1a4aa"></Social>
+            </Link>
+            <Link href={"https://www.facebook.com/?locale=fr_FR"}>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Flinkedin.png?alt=media&token=9258499f-e67c-44d0-a3b9-f55291271f40"></Social>
+            </Link>
+            <Link href={"https://www.facebook.com/?locale=fr_FR"}>
+              <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Fyoutube.png?alt=media&token=cd99e6eb-3a76-4bfa-b88f-59cd68496f60"></Social>
+            </Link>
           </SocialContainer>
         </Column>
 

@@ -254,6 +254,9 @@ const NavButton = styled.button`
   @media screen and (min-width: 980px) {
     //display: none;
   }
+  >svg{
+    color:black;
+  }
   &.close-nav {
     padding: 20px;
     padding-left: 5%;
@@ -263,6 +266,9 @@ const NavButton = styled.button`
     justify-content: flex-start;
     background-color: black;
     color: white;
+    >svg{
+      color:white;
+    }
   }
 `;
 
@@ -301,6 +307,12 @@ export default function Header({ ListCategory }) {
   //   addProduct(product._id);
   // }
   // console.log(ListCategory);
+
+  // Fonction pour désactiver le header
+  const disableHeader = () => {
+    setMobileNavActive(false);
+    setExpandedCategories({});
+  };
 
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
@@ -371,7 +383,8 @@ export default function Header({ ListCategory }) {
                     {parentCategory.name}
                   </li>
                   <li className="child-category">
-                    <NavLink href={`/category/${parentCategory._id}`}>
+                    <NavLink href={`/category/${parentCategory._id}`} onClick={disableHeader}>
+                    {/* <NavLink to={`/category/${parentCategory._id}`}> */}
                       Voir tout
                     </NavLink>
                   </li>
@@ -382,7 +395,7 @@ export default function Header({ ListCategory }) {
                     )
                     .map((childCategory) => (
                       <li key={childCategory._id} className="child-category">
-                        <NavLink href={`/category/${childCategory._id}`}>
+                        <NavLink href={`/category/${childCategory._id}`} onClick={disableHeader}>
                           {childCategory.name}
                         </NavLink>
                       </li>
