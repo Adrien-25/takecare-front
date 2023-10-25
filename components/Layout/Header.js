@@ -6,10 +6,13 @@ import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 
 import CartIcon from "../icons/CartIcon";
+import AccountIcon from "../icons/Account";
 import BarsIcon from "../icons/Bars";
 import ChevronRight from "../icons/ChevronRight";
 import ChevronLeft from "../icons/ChevronLeft";
 import Xmark from "../icons/Xmark";
+import Heart from "../icons/Heart";
+import SearchIcon from "../icons/SearchIcon";
 
 // Define a set of reusable CSS styles for the header
 const StyledHeader = styled.header`
@@ -87,7 +90,6 @@ const NoScroll = styled.div`
       opacity: 1;
       overflow:hidden;
       display:block;
-
     `
       : `    
     cursor: revert;
@@ -291,7 +293,7 @@ const CartCount = styled.div`
 `;
 const IconContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
   justify-content: flex-end;
 `;
 
@@ -317,20 +319,21 @@ export default function Header({ ListCategory }) {
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
 
+  
   const toggleCategoryExpansion = (categoryId) => {
     setExpandedCategories((prevState) => ({
       ...prevState,
       [categoryId]: !prevState[categoryId],
     }));
   };
-
+  
+  console.log(cartProducts);
+  console.log(CartContext);
+  
   return (
     // Header section
     <StyledHeader>
-      {/* Center component to horizontally center the content */}
-      <Wrapper>
-        {/* Mobile navigation button */}
-
+      <Wrapper>        
         <NavContainer>
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <BarsIcon />
@@ -415,10 +418,19 @@ export default function Header({ ListCategory }) {
         {/* Icon links */}
         <IconContainer>
           {/* Cart icon link */}
+          {/* <IconLink href={"/search"}>
+            <SearchIcon />
+          </IconLink> */}
           <IconLink href={"/cart"}>
             <CartIcon />
-            {/* Cart count badge */}
             <CartCount>{cartProducts.length}</CartCount>
+          </IconLink>
+          <IconLink href={"/wishlist"}>
+            <Heart />
+            {/* <CartCount>{cartProducts.length}</CartCount> */}
+          </IconLink>
+          <IconLink href={"/my-account"}>
+            <AccountIcon />
           </IconLink>
           {/* </StyledNav> */}
         </IconContainer>

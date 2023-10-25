@@ -122,7 +122,7 @@ export default function Footer() {
       {/* Top section with four columns */}
       <TopWrapper>
         <Column>
-          <div class="brand-name">Take Care</div>
+          <div className="brand-name">Take Care</div>
           <SocialContainer>
             <Link href={"https://www.facebook.com/?locale=fr_FR"}>
               <Social src="https://firebasestorage.googleapis.com/v0/b/take-care-f1ac3.appspot.com/o/images%2Ffacebook.png?alt=media&token=b0c0a541-7ee0-4e5f-977d-90ff0fa679ce"></Social>

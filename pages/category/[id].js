@@ -1,5 +1,4 @@
 // Import necessary components and dependencies
-import Header from "@/components/Layout/Header";
 import styled from "styled-components";
 import Center from "@/components/UI/Center";
 import { mongooseConnect } from "@/lib/mongoose";
@@ -43,11 +42,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
 `;
 
 // CategoriesPage component
-export default function CategoriesPage({ products, category, Categories }) {
+export default function CategoriesPage({ products, category }) {
   // Get the number of products in the current category
   const numberOfProductsInCategory = products.length;
 
@@ -84,7 +82,6 @@ export default function CategoriesPage({ products, category, Categories }) {
 
   return (
     <>
-      <Header ListCategory={Categories} />
       <Entete>
         <Wrapper>
           <Title>{category ? `${category.name} ` : "Pas de Catégorie"}</Title>
@@ -128,14 +125,11 @@ export async function getServerSideProps(context) {
     }
   );
 
-  const Categories = await Category.find();
-
   // Return the fetched product and category data as props for the CategoriesPage component
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
       category: JSON.parse(JSON.stringify(category)),
-      Categories: JSON.parse(JSON.stringify(Categories)),
     },
   };
 }

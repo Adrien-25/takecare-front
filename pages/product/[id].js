@@ -98,7 +98,7 @@ const ProductContent = styled.div`
 `;
 
 // ProductPage component
-export default function ProductPage({ product, relatedProducts, Categories }) {
+export default function ProductPage({ product, relatedProducts }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
   return (
@@ -160,13 +160,11 @@ export async function getServerSideProps(context) {
     { sort: { _id: -1 }, limit: 4 }
   );
 
-  const Categories = await Category.find();
 
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
       relatedProducts: JSON.parse(JSON.stringify(relatedProducts)),
-      Categories: JSON.parse(JSON.stringify(Categories)),
     },
   };
 }
