@@ -7,6 +7,7 @@ import Header from "@/components/Layout/Header";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/Category";
 import axios from "axios";
+import { SessionProvider } from "next-auth/react";
 
 // Global styles for the entire application
 const GlobalStyles = createGlobalStyle`
@@ -19,8 +20,10 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 // App component - Entry point of the application
-export default function App({ Component, pageProps }) {
+export default function App({  Component, pageProps: { session, ...pageProps }
+}) {
   const [Categories, setCategories] = useState([]);
+  
 
   // useEffect hook to fetch categories data from the API when the component mounts
   useEffect(() => {
@@ -38,10 +41,13 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyles />
+      <SessionProvider session={session}>
       <CartContextProvider>
         <Header ListCategory={Categories} />
         <Component {...pageProps} />
       </CartContextProvider>
+      </SessionProvider>
+
     </>
   );
 }

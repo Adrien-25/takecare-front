@@ -82,9 +82,6 @@ function DashboardNavigation({ children }) {
                 <Link href="/my-account/orders">Commandes</Link>
               </li>
               <li>
-                <Link href="/my-account/downloads">Téléchargements</Link>
-              </li>
-              <li>
                 <Link href="/my-account/addresses">Addresses</Link>
               </li>
               <li>

@@ -3,6 +3,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 // const adminEmails = ['adrien.schmidt7@gmail.com'];
 // const adminRole = ['admin'];
@@ -10,6 +11,26 @@ import GithubProvider from "next-auth/providers/github";
 export const authOptions = {
   secret: process.env.SECRET,
   providers: [
+    CredentialsProvider({
+      type: "credentials",
+      credentials: {},
+      async authorize(credentials, req) {
+        const { email, password } = credentials;
+        // Effectuez votre logique d'authentification
+        // Recherchez l'utilisateur dans la base de données
+        if (email !== "john@gmail.com" || password !== "1234") {
+          throw new Error("Informations d'identification non valides");
+        }
+    
+        // Si tout se passe bien
+        return {
+          id: "1234",
+          name: "John Doe",
+          email: "john@gmail.com",
+          role: "user",
+        };
+      },
+    }),
     GoogleProvider({
       profile(profile) {
         return {
@@ -43,6 +64,13 @@ export const authOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/auth/error', // Error code passed in query string as ?error=
+    verifyRequest: '/auth/verify-request', // (used for check email message)
+    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  }
 };
 
 export default NextAuth(authOptions);
