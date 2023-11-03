@@ -4,31 +4,53 @@ import clientPromise from "@/lib/mongodb";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-
-// const adminEmails = ['adrien.schmidt7@gmail.com'];
-// const adminRole = ['admin'];
+import { mongooseConnect } from "@/lib/mongoose";
 
 export const authOptions = {
   secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {},
+      credentials: {
+        // name: { label: "Text", type: "name" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials, req) {
+        const res = await fetch("/api/register", {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" }
+        })
+        const user = await res.json()
+
+
+        await mongooseConnect();
         const { email, password } = credentials;
-        // Effectuez votre logique d'authentification
-        // Recherchez l'utilisateur dans la base de données
-        if (email !== "john@gmail.com" || password !== "1234") {
+        const existingUser = await User.findOne({ email });
+
+        if (existingUser) {
           throw new Error("Informations d'identification non valides");
+        } else {
         }
-    
-        // Si tout se passe bien
-        return {
-          id: "1234",
-          name: "John Doe",
-          email: "john@gmail.com",
-          role: "user",
-        };
+
+        // const passwordHash = await hash(password, 10);
+
+        // const newUser = new User({
+        //   email,
+        //   passwordHash,
+        // });
+
+        // await newUser.save();
+
+
+        if (res.ok && user) {
+          return user; //<---- is this actually returning the full user object to the session?
+        } else {
+          return null;
+        }
+
+        
       },
     }),
     GoogleProvider({
@@ -65,23 +87,24 @@ export const authOptions = {
     },
   },
   pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // (used for check email message)
-    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
+    signIn: "/account/login",
+    signUp: "/account/register",
+    signOut: "/account/signout",
+    error: "/account/error", // Error code passed in query string as ?error=
+    verifyRequest: "/account/verify-request", // (used for check email message)
+    newUser: "/my-account", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
 };
 
 export default NextAuth(authOptions);
 
-export async function isAdminRequest(req, res) {
-  const session = await getServerSession(req, res, authOptions);
-  if (session?.user?.role == "admin") {
-    res.status(401);
-    res.end();
-    throw "not an admin";
-  }
-}
+// export async function isAdminRequest(req, res) {
+//   const session = await getServerSession(req, res, authOptions);
+//   if (session?.user?.role == "admin") {
+//     res.status(401);
+//     res.end();
+//     throw "not an admin";
+//   }
+// }
 
 // export { handler as GET, handler as POST };

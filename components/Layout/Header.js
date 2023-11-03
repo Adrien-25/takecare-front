@@ -111,16 +111,16 @@ const StyledNav = styled.nav`
   bottom: 0;
   left: 0;
   // height: calc(100vh - 60px);
-  top:0;
-  height:100vh;
+  top: 0;
+  height: 100vh;
   width: 375px;
   max-width: 100%;
   padding: 0px;
   background-color: white;
   z-index: 99999;
   flex-direction: column;
-  visibility:hidden;
-  opacity:0;
+  visibility: hidden;
+  opacity: 0;
 
   ${(props) =>
     props.mobileNavActive
@@ -145,7 +145,7 @@ const StyledNav = styled.nav`
       justify-content: space-between;
       padding: 20px;
       border-top: 0.1rem solid #e4e4e4;
-      cursor:pointer;
+      cursor: pointer;
 
       svg {
         width: 20px;
@@ -167,10 +167,9 @@ const StyledNav = styled.nav`
       top: 0;
       z-index: 999999;
 
-
       li {
         border-top: 0.1rem solid #e4e4e4;
-        a{
+        a {
           padding: 15px;
           display: block;
         }
@@ -179,23 +178,21 @@ const StyledNav = styled.nav`
           color: white;
           display: flex;
           align-items: center;
-          gap: 10px; 
+          gap: 10px;
           padding: 20px;
-          cursor:pointer;
-          border:none;
+          cursor: pointer;
+          border: none;
         }
         &:last-child {
           border-bottom: 0.1rem solid #e4e4e4;
         }
       }
     }
-    &:last-child > div{
+    &:last-child > div {
       border-bottom: 0.1rem solid #e4e4e4;
-
     }
   }
-  
-  }
+
   .parent-category.expanded {
     // border-color:transparent;
   }
@@ -233,9 +230,16 @@ const IconLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all 300ms ease-in-out;
   svg {
     height: 22px;
     color: #000;
+  }
+  &:hover {
+    background-color: rgba(245, 245, 245);
   }
 `;
 
@@ -256,8 +260,8 @@ const NavButton = styled.button`
   @media screen and (min-width: 980px) {
     //display: none;
   }
-  >svg{
-    color:black;
+  > svg {
+    color: black;
   }
   &.close-nav {
     padding: 20px;
@@ -268,8 +272,8 @@ const NavButton = styled.button`
     justify-content: flex-start;
     background-color: black;
     color: white;
-    >svg{
-      color:white;
+    > svg {
+      color: white;
     }
   }
 `;
@@ -285,7 +289,7 @@ const CartCount = styled.div`
   border-radius: 100%;
   position: absolute;
   display: inline-block;
-  right: -6px;
+  right: -3px;
   top: 0px;
   display: flex;
   align-items: center;
@@ -293,8 +297,11 @@ const CartCount = styled.div`
 `;
 const IconContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: flex-end;
+  @media screen and (max-width: 980px) {
+    gap: 0;
+  }
 `;
 
 // Header functional component
@@ -319,21 +326,20 @@ export default function Header({ ListCategory }) {
   const parentCategories = ListCategory.filter((category) => !category.parent);
   const childCategories = ListCategory.filter((category) => category.parent);
 
-  
   const toggleCategoryExpansion = (categoryId) => {
     setExpandedCategories((prevState) => ({
       ...prevState,
       [categoryId]: !prevState[categoryId],
     }));
   };
-  
-  console.log(cartProducts);
-  console.log(CartContext);
-  
+
+  // console.log(cartProducts);
+  // console.log(CartContext);
+
   return (
     // Header section
     <StyledHeader>
-      <Wrapper>        
+      <Wrapper>
         <NavContainer>
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <BarsIcon />
@@ -386,8 +392,11 @@ export default function Header({ ListCategory }) {
                     {parentCategory.name}
                   </li>
                   <li className="child-category">
-                    <NavLink href={`/category/${parentCategory._id}`} onClick={disableHeader}>
-                    {/* <NavLink to={`/category/${parentCategory._id}`}> */}
+                    <NavLink
+                      href={`/category/${parentCategory._id}`}
+                      onClick={disableHeader}
+                    >
+                      {/* <NavLink to={`/category/${parentCategory._id}`}> */}
                       Voir tout
                     </NavLink>
                   </li>
@@ -398,7 +407,10 @@ export default function Header({ ListCategory }) {
                     )
                     .map((childCategory) => (
                       <li key={childCategory._id} className="child-category">
-                        <NavLink href={`/category/${childCategory._id}`} onClick={disableHeader}>
+                        <NavLink
+                          href={`/category/${childCategory._id}`}
+                          onClick={disableHeader}
+                        >
                           {childCategory.name}
                         </NavLink>
                       </li>

@@ -103,7 +103,7 @@ export default function ProductPage({ product, relatedProducts }) {
   const { addProduct } = useContext(CartContext);
   return (
     <>
-      <Header ListCategory={Categories} />
+      {/* <Header ListCategory={Categories} /> */}
       <Center>
         <ColWrapper>
           <WhiteBox>
