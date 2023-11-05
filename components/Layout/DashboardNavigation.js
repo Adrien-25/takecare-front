@@ -66,7 +66,7 @@ const DashboardLayout = styled.div`
           }
         }
       }
-      li.active a:after{
+      li.active a:after {
         width: 100%;
       }
     }
@@ -121,7 +121,7 @@ const Entete = styled.div`
   }
 `;
 
-function DashboardNavigation({ children,selectedTab, handleTabChange, }) {
+function DashboardNavigation({ children, selectedTab, handleTabChange }) {
   // const [selectedTab, setSelectedTab] = useState("Dashboard");
 
   // const handleTabChange = (tab) => {
@@ -135,7 +135,7 @@ function DashboardNavigation({ children,selectedTab, handleTabChange, }) {
     await router.push("/");
     await signOut();
   }
-console.log(selectedTab);
+
   return (
     <>
       <Entete>

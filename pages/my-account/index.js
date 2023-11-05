@@ -34,7 +34,8 @@ function MyAccount({ clientOrders }) {
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
   };
-  console.log(selectedTab);
+
+  console.log(session);
   return (
     <div>
       <DashboardNavigation
@@ -48,7 +49,8 @@ function MyAccount({ clientOrders }) {
             <b className="btn-logout" onClick={logout}>
               {" "}
               Se déconnecter
-            </b>
+            </b>{" "}
+            )
             <p>
               À partir du tableau de bord de votre compte, vous pouvez consulter
               vos commandes récentes, gérer vos adresses de livraison et de
@@ -77,11 +79,19 @@ function MyAccount({ clientOrders }) {
           <>
             <div className="form-item">
               <label htmlFor="name">Nom</label>
-              <input value={session?.user?.name || ""} type="name"onChange={null} />
+              <input
+                value={session?.user?.name || ""}
+                type="name"
+                onChange={null}
+              />
             </div>
             <div className="form-item">
               <label htmlFor="email">Adresse mail</label>
-              <input value={session?.user?.email || ""} type="email" onChange={null}/>
+              <input
+                value={session?.user?.email || ""}
+                type="email"
+                onChange={null}
+              />
             </div>
           </>
         ) : (
@@ -97,6 +107,7 @@ export default MyAccount;
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   let clientOrders = [];
+  
   console.log(session);
 
   if (session) {

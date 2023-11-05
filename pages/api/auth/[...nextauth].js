@@ -61,6 +61,10 @@ export const authOptions = {
           email: profile.email,
           image: profile.picture,
           role: profile.role ?? "user",
+          city: profile.city ?? "",
+          postalCode: profile.postalCode ?? "",
+          streetAddress: profile.streetAddress ?? "",
+          country: profile.country ?? "",
         };
       },
       clientId: process.env.GOOGLE_ID,
@@ -74,6 +78,10 @@ export const authOptions = {
           email: profile.email,
           image: profile.picture,
           role: profile.role ?? "user",
+          city: profile.city ?? "",
+          postalCode: profile.postalCode ?? "",
+          streetAddress: profile.streetAddress ?? "",
+          country: profile.country ?? "",
         };
       },
       clientId: process.env.GITHUB_ID,
@@ -81,6 +89,9 @@ export const authOptions = {
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
+  session: {
+    jwt: true,
+  },
   callbacks: {
     session: ({ session, token, user }) => {
       return session;
