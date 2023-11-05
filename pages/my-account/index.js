@@ -9,6 +9,7 @@ import { Order } from "@/models/Order";
 import { mongooseConnect } from "@/lib/mongoose";
 import Link from "next/link";
 import Button from "@/components/UI/Button";
+import Title from "@/components/UI/Title";
 
 function MyAccount({ clientOrders }) {
   const { data: session, status, loading } = useSession();
@@ -44,6 +45,7 @@ function MyAccount({ clientOrders }) {
       >
         {selectedTab === "Dashboard" || selectedTab === undefined ? (
           <>
+            <h2>Dashboard</h2>
             Bonjour <b>{session?.user?.name}</b> ( Vous n'êtes pas
             <b> {session?.user?.name}</b> ?
             <b className="btn-logout" onClick={logout}>
@@ -60,6 +62,8 @@ function MyAccount({ clientOrders }) {
           </>
         ) : selectedTab === "Commandes" ? (
           <>
+            <h2>Commandes</h2>
+
             {clientOrders ? (
               clientOrders.map((order) => (
                 <div key={order.id}>{order.name}</div>
@@ -74,9 +78,13 @@ function MyAccount({ clientOrders }) {
             )}
           </>
         ) : selectedTab === "Carnet d'adresse" ? (
-          <p>Contenu pour l'onglet "Adresse"</p>
+          <>
+            <h2>Carnet d'adresse</h2>
+            <p>Contenu pour l'onglet "Adresse"</p>
+          </>
         ) : selectedTab === "Details du compte" ? (
           <>
+            <h2>Details du compte</h2>
             <div className="form-item">
               <label htmlFor="name">Nom</label>
               <input
@@ -107,7 +115,7 @@ export default MyAccount;
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   let clientOrders = [];
-  
+
   console.log(session);
 
   if (session) {

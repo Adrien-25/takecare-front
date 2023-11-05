@@ -16,7 +16,10 @@ const DashboardLayout = styled.div`
   grid-template-columns: 25% 75%;
   font-size: 14px;
   /* align-items: center; */
-
+  h2 {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
   @media screen and (max-width: 980px) {
     flex-direction: column;
     grid-template-columns: 100%;
