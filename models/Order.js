@@ -11,6 +11,8 @@ const OrderSchema = new Schema({
   streetAddress:String,
   country:String,
   paid:Boolean,
+  // user: {type:mongoose.Types.ObjectId, ref:'User'},
+
 }, {
   timestamps: true,
 });

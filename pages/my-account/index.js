@@ -36,7 +36,8 @@ function MyAccount({ clientOrders }) {
     setSelectedTab(tab);
   };
 
-  console.log(session);
+  const UpdateAddress = () => {};
+  // console.log(session);
   return (
     <div>
       <DashboardNavigation
@@ -80,49 +81,65 @@ function MyAccount({ clientOrders }) {
         ) : selectedTab === "Carnet d'adresse" ? (
           <>
             <h2>Carnet d'adresse</h2>
-            
-            <div className="form-item">
-              <label htmlFor="country">Pays</label>
-              <input
-                value={session?.user?.address.country || ""}
-                type="country"
-                onChange={null}
-              />
-            </div>
+
             <div className="form-item">
               <label htmlFor="postalCode">Code Postal</label>
-              <input
+              <span>{session?.user?.address.postalCode}</span>
+              {/* <input
                 value={session?.user?.address.postalCode || ""}
                 type="postalCode"
                 onChange={null}
-              />
+              /> */}
             </div>
             <div className="form-item">
               <label htmlFor="city">Ville</label>
-              <input
+              <span>{session?.user?.address.city}</span>
+              {/* <input
                 value={session?.user?.address.city || ""}
                 type="city"
                 onChange={null}
-              />
+              /> */}
             </div>
             <div className="form-item">
               <label htmlFor="streetAddress">Adresse</label>
-              <input
+              <span>{session?.user?.address.streetAddress}</span>
+
+              {/* <input
                 value={session?.user?.address.streetAddress || ""}
                 type="streetAddress"
                 onChange={null}
-              />
+              /> */}
             </div>
-            {/* <p>{session?.user?.address.city}</p>
-            <p>{session?.user?.address.country}</p>
-            <p>{session?.user?.address.postalCode}</p>
-            <p>{session?.user?.address.streetAddress}</p> */}
+            <div className="form-item">
+              <label htmlFor="country">Pays</label>
+              <span>{session?.user?.address.country}</span>
 
+              {/* <input
+                value={session?.user?.address.country || ""}
+                type="country"
+                onChange={null}
+              /> */}
+            </div>
+            {/* <Button primary onClick={UpdateAddress}>
+              Sauvegarder l'adresse
+            </Button> */}
           </>
         ) : selectedTab === "Details du compte" ? (
           <>
             <h2>Details du compte</h2>
             <div className="form-item">
+              <b>Nom</b>
+
+              <span>{session?.user?.name}</span>
+            </div>
+
+            <div className="form-item">
+              <b>Adresse mail</b>
+
+              <span>{session?.user?.email}</span>
+            </div>
+
+            {/* <div className="form-item">
               <label htmlFor="name">Nom</label>
               <input
                 value={session?.user?.name || ""}
@@ -137,7 +154,7 @@ function MyAccount({ clientOrders }) {
                 type="email"
                 onChange={null}
               />
-            </div>
+            </div> */}
           </>
         ) : (
           <p></p>

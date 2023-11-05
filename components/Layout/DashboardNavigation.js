@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const DashboardLayout = styled.div`
-  margin: 100px 0;
+  margin: 50px 0;
   padding: 40px;
   border: 2px solid #e2e2e2;
   display: grid;
@@ -87,16 +87,18 @@ const DashboardLayout = styled.div`
   .no-order {
     margin-bottom: 20px;
   }
+
   // Detail du compte
   .form-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     max-width: 400px;
     gap: 5px;
 
     label {
-      text-transform: uppercase;
+      /* text-transform: uppercase; */
+      font-weight: bold;
     }
     input {
       padding: 10px 15px;

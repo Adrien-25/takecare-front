@@ -31,7 +31,7 @@ const SigninContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
   h2 {
     font-size: 16px;
   }
