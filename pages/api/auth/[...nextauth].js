@@ -18,12 +18,11 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         const res = await fetch("/api/register", {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
-
+          headers: { "Content-Type": "application/json" },
+        });
+        const user = await res.json();
 
         await mongooseConnect();
         const { email, password } = credentials;
@@ -43,14 +42,11 @@ export const authOptions = {
 
         // await newUser.save();
 
-
         if (res.ok && user) {
           return user; //<---- is this actually returning the full user object to the session?
         } else {
           return null;
         }
-
-        
       },
     }),
     GoogleProvider({
@@ -89,13 +85,30 @@ export const authOptions = {
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
-  session: {
-    jwt: true,
-  },
+  // session: {
+  //   jwt: true,
+  // },
   callbacks: {
     session: ({ session, token, user }) => {
+      session.user.address = {
+        city: user.city || "",
+        postalCode: user.postalCode || "",
+        streetAddress: user.streetAddress || "",
+        country: user.country || "",
+      };
       return session;
     },
+
+    // async session(session, user) {
+    //   session.user.address = {
+    //     city: userWithAddress.city || "",
+    //     postalCode: userWithAddress.postalCode || "",
+    //     streetAddress: userWithAddress.streetAddress || "",
+    //     country: userWithAddress.country || "",
+    //   };
+
+    //   return session;
+    // },
   },
   pages: {
     signIn: "/account/login",

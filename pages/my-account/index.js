@@ -80,7 +80,44 @@ function MyAccount({ clientOrders }) {
         ) : selectedTab === "Carnet d'adresse" ? (
           <>
             <h2>Carnet d'adresse</h2>
-            <p>Contenu pour l'onglet "Adresse"</p>
+            
+            <div className="form-item">
+              <label htmlFor="country">Pays</label>
+              <input
+                value={session?.user?.address.country || ""}
+                type="country"
+                onChange={null}
+              />
+            </div>
+            <div className="form-item">
+              <label htmlFor="postalCode">Code Postal</label>
+              <input
+                value={session?.user?.address.postalCode || ""}
+                type="postalCode"
+                onChange={null}
+              />
+            </div>
+            <div className="form-item">
+              <label htmlFor="city">Ville</label>
+              <input
+                value={session?.user?.address.city || ""}
+                type="city"
+                onChange={null}
+              />
+            </div>
+            <div className="form-item">
+              <label htmlFor="streetAddress">Adresse</label>
+              <input
+                value={session?.user?.address.streetAddress || ""}
+                type="streetAddress"
+                onChange={null}
+              />
+            </div>
+            {/* <p>{session?.user?.address.city}</p>
+            <p>{session?.user?.address.country}</p>
+            <p>{session?.user?.address.postalCode}</p>
+            <p>{session?.user?.address.streetAddress}</p> */}
+
           </>
         ) : selectedTab === "Details du compte" ? (
           <>
@@ -116,7 +153,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let clientOrders = [];
 
-  console.log(session);
+  // console.log(session);
 
   if (session) {
     const userId = session.user.id;
