@@ -8,6 +8,8 @@ import axios from "axios";
 import Table from "@/components/UI/Table";
 import Input from "@/components/UI/Input";
 import Xmark from "@/components/icons/Xmark";
+import { useSession } from "next-auth/react";
+import Footer from "@/components/Layout/Footer";
 
 // Styled components for layout and styling
 const ColumnsWrapper = styled.div`
@@ -20,6 +22,7 @@ const ColumnsWrapper = styled.div`
 
   gap: 40px;
   margin-top: 40px;
+  margin-bottom: 40px;
   .panier {
   }
   .infos-commande {
@@ -65,11 +68,10 @@ const Box = styled.div`
     justify-content: end;
     .delete-wish {
       cursor: pointer;
-      >svg{
+      > svg {
         width: 16px;
         stroke-width: 3;
-            }
-      
+      }
     }
     .price {
       font-weight: 600;
@@ -144,8 +146,13 @@ const CityHolder = styled.div`
 // CartPage component
 export default function CartPage({ Categories }) {
   // Use the CartContext to access cart products and functions
-  const { cartProducts, addProduct, removeProduct, clearCart,removeAllProducts } =
-    useContext(CartContext);
+  const {
+    cartProducts,
+    addProduct,
+    removeProduct,
+    clearCart,
+    removeAllProducts,
+  } = useContext(CartContext);
   // States for managing form inputs and order status
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -156,8 +163,10 @@ export default function CartPage({ Categories }) {
   const [country, setCountry] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [step, setPaid] = useState(false);
+  const [step, setStep] = useState(false);
   const [productQuantities, setProductQuantities] = useState({});
+
+  const { data: session, status, loading } = useSession();
 
   // Fetch product data when the cartProducts change
   useEffect(() => {
@@ -218,21 +227,26 @@ export default function CartPage({ Categories }) {
     total += price;
   }
   function goToInfos() {
-    setPaid(true);
+    setStep(true);
+    if (status === "unauthenticated") {
+      router.push("/account/login");
+    }
   }
 
-  console.log(cartProducts);
+  // console.log(cartProducts);
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    setProductQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: parseInt(newQuantity, 10),
-    }));
-  };
+  // const handleQuantityChange = (productId, newQuantity) => {
+  //   setProductQuantities((prevQuantities) => ({
+  //     ...prevQuantities,
+  //     [productId]: parseInt(newQuantity, 10),
+  //   }));
+  // };
 
   const productLink = (id) => {
-    window.location.href = '/product/'+id;;
+    window.location.href = "/product/" + id;
   };
+
+  console.log(step);
 
   // Render the success message if the order is successful
   if (isSuccess) {
@@ -259,66 +273,108 @@ export default function CartPage({ Categories }) {
       <Center>
         <ColumnsWrapper>
           <Box className="panier">
-            <h2>Panier</h2>
             {!cartProducts?.length && <div>Votre panier est vide</div>}
-            {products?.length > 0 && (
-              <Table>
-                <tbody>
-                  {products.map((product) => (
-                    <tr key={product._id}>
-                      <ProductInfoCell>
-                        <ProductImageBox onClick={() => productLink(product._id)}>
-                          <img src={product.images[0]} alt="" />
-                        </ProductImageBox>
-                        {product.title}
-                      </ProductInfoCell>
-                     
-                      <td>
-                        <div className="right-content">
-                          <div>
-                            {/* <select
-                              className="select-price"
-                              value={productQuantities[product._id] || 1}
-                              onChange={(e) =>
-                                handleQuantityChange(
-                                  product._id,
-                                  e.target.value
-                                )
-                              }
-                            >
-                              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((quantity) => (
-                                <option
-                                  key={quantity}
-                                  value={quantity}
-                                  data-quantity={quantity}
-                                >
-                                  {quantity}
-                                </option>
-                              ))}
-                            </select> */}
-                            <p className="price">
-                              <span className="total-text">TOTAL </span>
-                              {cartProducts.filter((id) => id === product._id)
-                                .length * product.price}{" "}
-                              €
-                            </p>
-                          </div>
-
-                          <div
-                            className="delete-wish"
-                            onClick={() => removeAllProducts(product._id)}
+            {!step && products?.length > 0 && (
+              // {products?.length > 0 && (
+              <>
+                <h2>Panier</h2>
+                <Table>
+                  <tbody>
+                    {products.map((product) => (
+                      <tr key={product._id}>
+                        <ProductInfoCell>
+                          <ProductImageBox
+                            onClick={() => productLink(product._id)}
                           >
-                            <Xmark className="" />
+                            <img src={product.images[0]} alt="" />
+                          </ProductImageBox>
+                          {product.title}
+                        </ProductInfoCell>
+
+                        <td>
+                          <div className="right-content">
+                            <div>
+                              <p className="price">
+                                <span className="total-text">TOTAL </span>
+                                {cartProducts.filter((id) => id === product._id)
+                                  .length * product.price}{" "}
+                                €
+                              </p>
+                            </div>
+
+                            <div
+                              className="delete-wish"
+                              onClick={() => removeAllProducts(product._id)}
+                            >
+                              <Xmark className="" />
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </>
+            )}
+            {step && cartProducts.length > 0 && (
+              // Afficher le formulaire de paiement
+              <>
+                {" "}
+                <Box className="infos-commande">
+                  <h2>Informations sur la commande</h2>
+                  <Input
+                    type="text"
+                    placeholder="Nom"
+                    value={name}
+                    name="name"
+                    onChange={(ev) => setName(ev.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    placeholder="E-mail"
+                    value={email}
+                    name="email"
+                    onChange={(ev) => setEmail(ev.target.value)}
+                  />
+                  <CityHolder>
+                    <Input
+                      type="text"
+                      placeholder="Ville"
+                      value={city}
+                      name="city"
+                      onChange={(ev) => setCity(ev.target.value)}
+                    />
+                    <Input
+                      type="text"
+                      placeholder="Code Postal"
+                      value={postalCode}
+                      name="postalCode"
+                      onChange={(ev) => setPostalCode(ev.target.value)}
+                    />
+                  </CityHolder>
+                  <Input
+                    type="text"
+                    placeholder="Adresse"
+                    value={streetAddress}
+                    name="streetAddress"
+                    onChange={(ev) => setStreetAddress(ev.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Pays"
+                    value={country}
+                    name="country"
+                    onChange={(ev) => setCountry(ev.target.value)}
+                  />
+                  <Button black block onClick={goToPayment}>
+                    Continuer vers le paiement
+                  </Button>
+                </Box>
+              </>
             )}
           </Box>
-          {!!cartProducts?.length && (
+          {/* {!!cartProducts?.length && ( */}
+          {!step && products?.length > 0 && (
             <>
               <Box className="infos-commande">
                 <h2>Récapitulatif</h2>
@@ -338,61 +394,11 @@ export default function CartPage({ Categories }) {
                   Valider la commande
                 </Button>
               </Box>
-              <Box className="infos-commande">
-                <h2>Informations sur la commande</h2>
-                <Input
-                  type="text"
-                  placeholder="Nom"
-                  value={name}
-                  name="name"
-                  onChange={(ev) => setName(ev.target.value)}
-                />
-                <Input
-                  type="text"
-                  placeholder="E-mail"
-                  value={email}
-                  name="email"
-                  onChange={(ev) => setEmail(ev.target.value)}
-                />
-                <CityHolder>
-                  <Input
-                    type="text"
-                    placeholder="Ville"
-                    value={city}
-                    name="city"
-                    onChange={(ev) => setCity(ev.target.value)}
-                  />
-                  <Input
-                    type="text"
-                    placeholder="Code Postal"
-                    value={postalCode}
-                    name="postalCode"
-                    onChange={(ev) => setPostalCode(ev.target.value)}
-                  />
-                </CityHolder>
-                <Input
-                  type="text"
-                  placeholder="Adresse"
-                  value={streetAddress}
-                  name="streetAddress"
-                  onChange={(ev) => setStreetAddress(ev.target.value)}
-                />
-                <Input
-                  type="text"
-                  placeholder="Pays"
-                  value={country}
-                  name="country"
-                  onChange={(ev) => setCountry(ev.target.value)}
-                />
-                <Button black block onClick={goToPayment}>
-                  Continuer vers le paiement
-                </Button>
-              </Box>
             </>
           )}
         </ColumnsWrapper>
       </Center>
+      <Footer/>
     </>
   );
 }
-
