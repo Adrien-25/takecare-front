@@ -11,27 +11,69 @@ import Input from "@/components/UI/Input";
 // Styled components for layout and styling
 const ColumnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  /* grid-template-columns: 1fr;
   @media screen and (min-width: 980px) {
     grid-template-columns: 1.2fr 0.8fr;
-  }
+  } */
+  grid-template-columns: 1fr;
+
   gap: 40px;
   margin-top: 40px;
+  .panier {
+  }
+  .infos-commande {
+    max-width: 600px;
+    justify-self: end;
+  }
 `;
 
 const Box = styled.div`
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
+  .select-price {
+    min-width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    background-origin: content-box;
+    background-position: right -1.78308rem center;
+    border-radius: 5px;
+  }
+  .price {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    .total-text {
+      margin-right: 5px;
+    }
+  }
+  table {
+    border-top: 1px solid rgb(128 128 128 / 20%);
+    &:last-child{
+      border-bottom: 1px solid rgb(128 128 128 / 20%);
+    }
+    tbody {
+      tr {
+        td {
+          border: 0;
+        }
+      }
+    }
+  }
 `;
 
 const ProductInfoCell = styled.td`
   padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const ProductImageBox = styled.div`
   width: 70px;
-  height: 100px;
+  height: 70px;
   padding: 2px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
@@ -44,11 +86,11 @@ const ProductImageBox = styled.div`
   }
   @media screen and (min-width: 768px) {
     padding: 10px;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     img {
-      max-width: 80px;
-      max-height: 80px;
+      max-width: 60px;
+      max-height: 60px;
     }
   }
 `;
@@ -161,18 +203,18 @@ export default function CartPage({ Categories }) {
     <>
       <Center>
         <ColumnsWrapper>
-          <Box>
+          <Box className="panier">
             <h2>Panier</h2>
             {!cartProducts?.length && <div>Votre panier est vide</div>}
             {products?.length > 0 && (
               <Table>
-                <thead>
+                {/* <thead>
                   <tr>
                     <th>Produit</th>
                     <th>Quantité</th>
                     <th>Prix</th>
                   </tr>
-                </thead>
+                </thead> */}
                 <tbody>
                   {products.map((product) => (
                     <tr key={product._id}>
@@ -182,7 +224,7 @@ export default function CartPage({ Categories }) {
                         </ProductImageBox>
                         {product.title}
                       </ProductInfoCell>
-                      <td>
+                      {/* <td>
                         <Button onClick={() => lessOfThisProduct(product._id)}>
                           -
                         </Button>
@@ -195,25 +237,64 @@ export default function CartPage({ Categories }) {
                         <Button onClick={() => moreOfThisProduct(product._id)}>
                           +
                         </Button>
-                      </td>
+                      </td> */}
                       <td>
-                        {cartProducts.filter((id) => id === product._id)
-                          .length * product.price}{" "}
-                        €
+                        <select id="" class="select-price">
+                          <option
+                            value="1"
+                            data-quantity="1"
+                            selected="selected"
+                          >
+                            1
+                          </option>
+
+                          <option value="2" data-quantity="2">
+                            2
+                          </option>
+
+                          <option value="3" data-quantity="3">
+                            3
+                          </option>
+
+                          <option value="4" data-quantity="4">
+                            4
+                          </option>
+
+                          <option value="5" data-quantity="5">
+                            5
+                          </option>
+
+                          <option value="6" data-quantity="6">
+                            6
+                          </option>
+
+                          <option value="7" data-quantity="7">
+                            7
+                          </option>
+
+                          <option value="8" data-quantity="8">
+                            8
+                          </option>
+
+                          <option value="9" data-quantity="9">
+                            9
+                          </option>
+                        </select>
+                        <p className="price">
+                          <span className="total-text">TOTAL </span>
+                          {cartProducts.filter((id) => id === product._id)
+                            .length * product.price}{" "}
+                          €
+                        </p>
                       </td>
                     </tr>
                   ))}
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>{total} €</td>
-                  </tr>
                 </tbody>
               </Table>
             )}
           </Box>
           {!!cartProducts?.length && (
-            <Box>
+            <Box className="infos-commande">
               <h2>Informations sur la commande</h2>
               <Input
                 type="text"
