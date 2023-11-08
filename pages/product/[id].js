@@ -16,6 +16,8 @@ import { useContext } from "react";
 import { CartContext } from "@/components/CartContext";
 import NewProducts from "@/components/Product/NewProducts";
 import ReassuranceSection from "@/components/Sections/ReassuranceSection";
+import Heart from "@/components/icons/Heart";
+import Cookies from "js-cookie";
 
 // Styled component for grid layout
 const ColWrapper = styled.div`
@@ -42,8 +44,14 @@ const PriceRow = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: center;
-  margin-bottom:30px;
-  margin-top:20px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  .add-wish {
+    padding: 10px 20px;
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 // Styled component for price
@@ -70,30 +78,29 @@ const ProductContent = styled.div`
     margin: 0 auto;
     margin-bottom: 30px;
   }
-  .bottom-detail{
-    border-top:1px solid #e5e8ec;
-    padding-top:30px;
-    >p{
-      margin:0;
-      margin-bottom:5px;
-      font-size:12px;
+  .bottom-detail {
+    border-top: 1px solid #e5e8ec;
+    padding-top: 30px;
+    > p {
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 12px;
     }
-    
   }
-  .paiement-container{
-    position:relative;
-    border-radius:5px;
-    >div{
-      position:absolute;
-      top:0;
-      left:50%;
+  .paiement-container {
+    position: relative;
+    border-radius: 5px;
+    > div {
+      position: absolute;
+      top: 0;
+      left: 50%;
       transform: translate(-50%) translateY(-50%);
-      padding:0 20px;
-      background-color:white;
+      padding: 0 20px;
+      background-color: white;
     }
-    padding: 25px 0  20px 0;
+    padding: 25px 0 20px 0;
     border: 1px solid #e5e8ec;
-    margin-top:30px;
+    margin-top: 30px;
   }
 `;
 
@@ -101,6 +108,20 @@ const ProductContent = styled.div`
 export default function ProductPage({ product, relatedProducts }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
+
+  const addWish = (wishId) => {
+    if (localStorage.getItem("wishlist")) {
+      const existingWishlist = JSON.parse(localStorage.getItem("wishlist"));
+      if (!existingWishlist.includes(wishId)) {
+        existingWishlist.push(wishId);
+        localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
+      }
+    } else {
+      const newWishlist = [wishId];
+      localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+    }
+  };
+
   return (
     <>
       {/* <Header ListCategory={Categories} /> */}
@@ -121,6 +142,15 @@ export default function ProductPage({ product, relatedProducts }) {
                 <CartIcon />
                 Ajouter au panier
               </Button>
+              <Button
+                black
+                outline
+                className="add-wish"
+                onClick={() => addWish(product._id)}
+              >
+                <Heart />
+                Wishlist
+              </Button>
             </PriceRow>
             <div className="bottom-detail">
               <p>SKU : {product.reference}</p>
@@ -133,7 +163,6 @@ export default function ProductPage({ product, relatedProducts }) {
                 alt="Icones de paiements"
               />
             </div>
-            
           </ProductContent>
         </ColWrapper>
       </Center>
@@ -159,7 +188,6 @@ export async function getServerSideProps(context) {
     null,
     { sort: { _id: -1 }, limit: 4 }
   );
-
 
   return {
     props: {

@@ -15,13 +15,9 @@ const StyledProductsGrid = styled.div`
 
 // ProductsGrid functional component
 export default function ProductsGrid({products}) {
-  // Render the products grid
   return (
-    // Styled container for the products grid
     <StyledProductsGrid>
-      {/* Check if products exist and map through each product to render ProductBox */}
       {products?.length > 0 && products.map(product => (
-        // Each product is represented by a ProductBox component
         <ProductBox key={product._id} {...product} />
       ))}
     </StyledProductsGrid>

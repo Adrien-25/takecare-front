@@ -46,7 +46,7 @@ function MyAccount({ clientOrders }) {
       >
         {selectedTab === "Dashboard" || selectedTab === undefined ? (
           <>
-            <h2>Dashboard</h2>
+            <h2>Tableau de bord</h2>
             Bonjour <b>{session?.user?.name}</b> ( Vous n'êtes pas
             <b> {session?.user?.name}</b> ?
             <b className="btn-logout" onClick={logout}>

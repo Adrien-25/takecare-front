@@ -156,7 +156,7 @@ function DashboardNavigation({ children, selectedTab, handleTabChange }) {
                 className={selectedTab === "Dashboard" ? "active" : ""}
                 onClick={() => handleTabChange("Dashboard")}
               >
-                <a>Dashboard</a>
+                <a>Tableau de bord</a>
               </li>
               <li
                 className={selectedTab === "Commandes" ? "active" : ""}
