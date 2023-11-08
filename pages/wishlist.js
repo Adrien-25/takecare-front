@@ -10,6 +10,7 @@ import { Product } from "@/models/Product";
 import mongoose from "mongoose";
 import { mongooseConnect } from "@/lib/mongoose";
 import Table from "@/components/UI/Table";
+import Xmark from "@/components/icons/Xmark";
 
 const WishlistContainer = styled.div`
   margin: 50px 0;
@@ -34,6 +35,19 @@ const WishlistContainer = styled.div`
       padding: 20px 0;
       gap: 20px;
       align-items: center;
+      .delete-wish {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        & > svg {
+          width: 20px;
+          color: red;
+        }
+      }
     }
   }
 `;
@@ -86,28 +100,23 @@ export default function WishlistPage(products) {
   const wishlistData = [];
 
   wishlist.forEach((element) => {
-    // console.log(element);
-    // console.log(products.products);
-
     const product = Object.values(products.products).find(
       (p) => p._id === String(element)
     );
     wishlistData.push(product);
-    // console.log(product);
   });
-
-  //   const wishlistData = wishlist.map((wishlistId) => {
-  //     const product = Object.values(products).find(
-  //       (p) => p._id === String(wishlistId)
-  //     );
-  //     console.log()
-  //     return product;
-  //   });
-
-  console.log(wishlistData);
 
   const handleGoToHomePage = () => {
     window.location.href = "/";
+  };
+
+  const removeWish = (wishId) => {
+    const updatedWishlist = wishlist.filter((id) => id !== wishId);
+
+    const existingWishlist = JSON.parse(localStorage.getItem("wishlist"));
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+
+    setWishlist(updatedWishlist);
   };
 
   return (
@@ -138,6 +147,11 @@ export default function WishlistPage(products) {
                   <div className="wish-content">
                     {wishlistData.map((product) => (
                       <div className="wish-item" key={product._id}>
+                        
+                        <div className="delete-wish" onClick={() => removeWish(product._id)}>
+                          <Xmark className="" />
+                        </div>
+
                         <ProductImageBox>
                           <img src={product.images[0]} alt="" />
                         </ProductImageBox>
