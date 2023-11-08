@@ -120,6 +120,11 @@ export default function ProductPage({ product, relatedProducts }) {
       const newWishlist = [wishId];
       localStorage.setItem("wishlist", JSON.stringify(newWishlist));
     }
+    const wishlistChangeEvent = new CustomEvent('wishlistChange', {
+      
+    });
+    
+    window.dispatchEvent(wishlistChangeEvent);
   };
 
   return (

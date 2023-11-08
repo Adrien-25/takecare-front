@@ -2,7 +2,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Center from "@/components/UI/Center";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 
 import CartIcon from "../icons/CartIcon";
@@ -310,6 +310,7 @@ export default function Header({ ListCategory }) {
   const [mobileNavActive, setMobileNavActive] = useState(false);
   // const [expandedCategories, setExpandedCategories] = useState({false});
   const [expandedCategories, setExpandedCategories] = useState({});
+  const [wishlength, setWishlength] = useState(0);
 
   // To be used with CartContext, but currently commented out
   // function addFeaturedToCart() {
@@ -335,6 +336,28 @@ export default function Header({ ListCategory }) {
 
   // console.log(cartProducts);
   // console.log(CartContext);
+
+  useEffect(() => {
+    if (localStorage.getItem("wishlist")) {
+      setWishlength(JSON.parse(localStorage.getItem("wishlist")).length);
+    }
+    window.addEventListener("wishlistChange", handleStorageChange);
+    // return () => {
+    //   // Assurez-vous de retirer l'écouteur lorsque le composant est démonté
+    //   window.removeEventListener('storage', handleStorageChange);
+    // };
+  }, []);
+
+  const handleStorageChange = (event) => {
+    console.log(event);
+    console.log("event");
+    // Si l'événement concerne le stockage local "wishlist", mettez à jour la longueur de la liste de souhaits
+    if (localStorage.getItem("wishlist")) {
+      setWishlength(JSON.parse(localStorage.getItem("wishlist")).length);
+    } else {
+      setWishlength(0);
+    }
+  };
 
   return (
     // Header section
@@ -439,7 +462,7 @@ export default function Header({ ListCategory }) {
           </IconLink>
           <IconLink href={"/wishlist"}>
             <Heart />
-            {/* <CartCount>{cartProducts.length}</CartCount> */}
+            <CartCount>{wishlength}</CartCount>
           </IconLink>
           <IconLink href={"/my-account"}>
             <AccountIcon />

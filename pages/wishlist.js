@@ -117,6 +117,13 @@ export default function WishlistPage(products) {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
 
     setWishlist(updatedWishlist);
+    const wishlistChangeEvent = new CustomEvent('wishlistChange', {
+        detail: {
+          length: updatedWishlist.length,
+        },
+      });
+      
+      window.dispatchEvent(wishlistChangeEvent);
   };
 
   return (
