@@ -104,6 +104,7 @@ const ProductContent = styled.div`
       transform: translate(-50%) translateY(-50%);
       padding: 0 20px;
       background-color: white;
+      white-space: nowrap;
     }
     padding: 25px 0 20px 0;
     border: 1px solid #e5e8ec;
@@ -127,7 +128,15 @@ export default function ProductPage({ product, relatedProducts }) {
       if (!existingWishlist.includes(wishId)) {
         existingWishlist.push(wishId);
         localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
-      } 
+      } else {
+        // existingWishlist.remove(wishId);
+        // localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
+        const index = existingWishlist.indexOf(wishId);
+        if (index !== -1) {
+          existingWishlist.splice(index, 1);
+          localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
+        }
+      }
     } else {
       const newWishlist = [wishId];
       localStorage.setItem("wishlist", JSON.stringify(newWishlist));
@@ -176,7 +185,7 @@ export default function ProductPage({ product, relatedProducts }) {
                 onClick={() => addWish(product._id)}
               >
                 <Heart />
-                Wishlist
+                
               </Button>
             </PriceRow>
             <div className="bottom-detail">
