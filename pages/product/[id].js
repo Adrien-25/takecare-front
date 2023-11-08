@@ -12,7 +12,7 @@ import WhiteBox from "@/components/UI/WhiteBox";
 import ProductImages from "@/components/Product/ProductImages";
 import Button from "@/components/UI/Button";
 import CartIcon from "@/components/icons/CartIcon";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import NewProducts from "@/components/Product/NewProducts";
 import ReassuranceSection from "@/components/Sections/ReassuranceSection";
@@ -47,6 +47,13 @@ const PriceRow = styled.div`
   margin-bottom: 30px;
   margin-top: 20px;
   .add-wish {
+    padding: 10px 20px;
+    &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+  button:not(.add-wish) {
     padding: 10px 20px;
   }
   @media screen and (max-width: 600px) {
@@ -84,7 +91,7 @@ const ProductContent = styled.div`
     > p {
       margin: 0;
       margin-bottom: 5px;
-      font-size: 12px;
+      /* font-size: 12px; */
     }
   }
   .paiement-container {
@@ -108,6 +115,11 @@ const ProductContent = styled.div`
 export default function ProductPage({ product, relatedProducts }) {
   // Get the "addProduct" function from the CartContext using useContext
   const { addProduct } = useContext(CartContext);
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
+  useEffect(() => {
+    checkIfInWishlist();
+  }, []);
 
   const addWish = (wishId) => {
     if (localStorage.getItem("wishlist")) {
@@ -115,16 +127,26 @@ export default function ProductPage({ product, relatedProducts }) {
       if (!existingWishlist.includes(wishId)) {
         existingWishlist.push(wishId);
         localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
-      }
+      } 
     } else {
       const newWishlist = [wishId];
       localStorage.setItem("wishlist", JSON.stringify(newWishlist));
     }
-    const wishlistChangeEvent = new CustomEvent('wishlistChange', {
-      
-    });
-    
+    const wishlistChangeEvent = new CustomEvent("wishlistChange", {});
+
     window.dispatchEvent(wishlistChangeEvent);
+    checkIfInWishlist();
+  };
+
+  const checkIfInWishlist = () => {
+    if (localStorage.getItem("wishlist")) {
+      const wishlist = JSON.parse(localStorage.getItem("wishlist"));
+      if (wishlist.includes(product._id)) {
+        setIsInWishlist(true);
+      } else {
+        setIsInWishlist(false);
+      }
+    }
   };
 
   return (
@@ -150,7 +172,7 @@ export default function ProductPage({ product, relatedProducts }) {
               <Button
                 black
                 outline
-                className="add-wish"
+                className={`add-wish ${isInWishlist ? "active" : ""}`}
                 onClick={() => addWish(product._id)}
               >
                 <Heart />
@@ -159,7 +181,7 @@ export default function ProductPage({ product, relatedProducts }) {
             </PriceRow>
             <div className="bottom-detail">
               <p>SKU : {product.reference}</p>
-              <p>Available : En stock</p>
+              <p>En stock</p>
             </div>
             <div className="paiement-container">
               <div>Paiement sécurisé</div>

@@ -349,8 +349,8 @@ export default function Header({ ListCategory }) {
   }, []);
 
   const handleStorageChange = (event) => {
-    console.log(event);
-    console.log("event");
+    // console.log(event);
+    // console.log("event");
     // Si l'événement concerne le stockage local "wishlist", mettez à jour la longueur de la liste de souhaits
     if (localStorage.getItem("wishlist")) {
       setWishlength(JSON.parse(localStorage.getItem("wishlist")).length);
