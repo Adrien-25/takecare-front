@@ -1,57 +1,65 @@
-// Import the required dependencies
-import {createContext, useEffect, useState} from "react";
+import { createContext, useEffect, useState } from "react";
 
-// Create a new context called CartContext
 export const CartContext = createContext({});
 
-// Define the CartContextProvider component
-export function CartContextProvider({children}) {
-  // Get a reference to the local storage (ls) object if available
+export function CartContextProvider({ children }) {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
-  
-  // Define a state variable to hold the list of cart products
-  const [cartProducts,setCartProducts] = useState([]);
-  
-  // Save the cartProducts to local storage whenever it changes
+  const [cartProducts, setCartProducts] = useState([]);
+
   useEffect(() => {
     if (cartProducts?.length > 0) {
-      // Use localStorage to store the cartProducts in the browser
-      ls?.setItem('cart', JSON.stringify(cartProducts));
+      ls?.setItem("cart", JSON.stringify(cartProducts));
     }
   }, [cartProducts]);
-  
-  // Load the cartProducts from local storage when the component mounts
+
   useEffect(() => {
-    if (ls && ls.getItem('cart')) {
-      setCartProducts(JSON.parse(ls.getItem('cart')));
+    if (ls && ls.getItem("cart")) {
+      setCartProducts(JSON.parse(ls.getItem("cart")));
     }
   }, []);
-  
-  // Function to add a product to the cart
+
   function addProduct(productId) {
-    setCartProducts(prev => [...prev,productId]);
+    setCartProducts((prev) => [...prev, productId]);
   }
-  
-  // Function to remove a product from the cart
+
   function removeProduct(productId) {
-    setCartProducts(prev => {
+    setCartProducts((prev) => {
       const pos = prev.indexOf(productId);
       if (pos !== -1) {
-        // Filter out the product with the given productId from the cartProducts
-        return prev.filter((value,index) => index !== pos);
+        return prev.filter((value, index) => index !== pos);
       }
       return prev;
     });
   }
+  function removeAllProducts(productId) {
+    setCartProducts((prev) => {
+      return prev.filter((value) => value !== productId);
+    });
+  }
   
-  // Function to clear the cart, removing all products
+
   function clearCart() {
     setCartProducts([]);
   }
-  
-  // Provide the cartProducts state and the functions to manipulate the cart as context value
+
+  // const handleQuantityChange = (productId, newQuantity) => {
+  //   setProductQuantities((prevQuantities) => ({
+  //     ...prevQuantities,
+  //     [productId]: parseInt(newQuantity, 10),
+  //   }));
+  // };
+
   return (
-    <CartContext.Provider value={{cartProducts,setCartProducts,addProduct,removeProduct,clearCart}}>
+    <CartContext.Provider
+      value={{
+        cartProducts,
+        setCartProducts,
+        addProduct,
+        removeProduct,
+        clearCart,
+        removeAllProducts
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
