@@ -65,6 +65,7 @@ const ProductImageBox = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  cursor: pointer;
   img {
     max-width: 60px;
     max-height: 60px;
@@ -125,6 +126,11 @@ export default function WishlistPage(products) {
       
       window.dispatchEvent(wishlistChangeEvent);
   };
+  console.log(products);
+
+  const productLink = (id) => {
+    window.location.href = '/product/'+id;;
+  };
 
   return (
     <>
@@ -159,7 +165,7 @@ export default function WishlistPage(products) {
                           <Xmark className="" />
                         </div>
 
-                        <ProductImageBox>
+                        <ProductImageBox onClick={() => productLink(product._id)}>
                           <img src={product.images[0]} alt="" />
                         </ProductImageBox>
                         {product.title}

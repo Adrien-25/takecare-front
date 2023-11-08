@@ -111,6 +111,7 @@ const ProductImageBox = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  cursor: pointer;
   img {
     max-width: 60px;
     max-height: 60px;
@@ -229,6 +230,10 @@ export default function CartPage({ Categories }) {
     }));
   };
 
+  const productLink = (id) => {
+    window.location.href = '/product/'+id;;
+  };
+
   // Render the success message if the order is successful
   if (isSuccess) {
     return (
@@ -262,7 +267,7 @@ export default function CartPage({ Categories }) {
                   {products.map((product) => (
                     <tr key={product._id}>
                       <ProductInfoCell>
-                        <ProductImageBox>
+                        <ProductImageBox onClick={() => productLink(product._id)}>
                           <img src={product.images[0]} alt="" />
                         </ProductImageBox>
                         {product.title}
@@ -271,7 +276,7 @@ export default function CartPage({ Categories }) {
                       <td>
                         <div className="right-content">
                           <div>
-                            <select
+                            {/* <select
                               className="select-price"
                               value={productQuantities[product._id] || 1}
                               onChange={(e) =>
@@ -290,7 +295,7 @@ export default function CartPage({ Categories }) {
                                   {quantity}
                                 </option>
                               ))}
-                            </select>
+                            </select> */}
                             <p className="price">
                               <span className="total-text">TOTAL </span>
                               {cartProducts.filter((id) => id === product._id)
@@ -390,17 +395,4 @@ export default function CartPage({ Categories }) {
     </>
   );
 }
- {/* <td>
-                        <Button onClick={() => lessOfThisProduct(product._id)}>
-                          -
-                        </Button>
-                        <QuantityLabel>
-                          {
-                            cartProducts.filter((id) => id === product._id)
-                              .length
-                          }
-                        </QuantityLabel>
-                        <Button onClick={() => moreOfThisProduct(product._id)}>
-                          +
-                        </Button>
-                      </td> */}
+
