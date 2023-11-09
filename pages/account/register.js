@@ -135,10 +135,10 @@ const SignIn = (props) => {
     email: "",
     password: "",
     role: "user",
-    city: "",
-    postalCode: "",
-    streetAddress: "",
-    country: "",
+    city: "test",
+    postalCode: "test",
+    streetAddress: "test",
+    country: "test",
   });
 
   const [validationErrors, setValidationErrors] = useState([]);
@@ -193,9 +193,9 @@ const SignIn = (props) => {
 
     if (isValid) {
       // sign up
-      console.log('Valide')
       try {
         console.log('Test connexion');
+        console.log(userInfo);
 
         setLoading(true);
         const apiRes = await axios.post(

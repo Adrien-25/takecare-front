@@ -14,7 +14,16 @@ const handler = async (req, res) => {
         return res.status(400).json({ error: "Les données sont manquantes" });
       }
 
-      const { name, email, password,role,city,postalCode,streetAddress,country } = req.body;
+      const {
+        name,
+        email,
+        password,
+        role,
+        city,
+        postalCode,
+        streetAddress,
+        country,
+      } = req.body;
 
       const userExists = await User.findOne({ email });
       //   return res.status(200).json({ userExists});
@@ -29,13 +38,6 @@ const handler = async (req, res) => {
         }
 
         const hashedPassword = await hash(password, 12);
-        // const role = "user";
-        // const city = "";
-        // const postalCode = "";
-        // const streetAddress = "";
-        // const country = "";
-
-        // return res.status(300).json({ city });
 
         User.create({
           name: name,
