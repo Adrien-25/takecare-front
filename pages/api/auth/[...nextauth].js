@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { mongooseConnect } from "@/lib/mongoose";
-
+import { User } from "@/models/User";
 
 export const authOptions = {
   secret: process.env.SECRET,
@@ -13,18 +13,40 @@ export const authOptions = {
     CredentialsProvider({
       type: "Credentials",
       credentials: {
-        // name: { label: "Text", type: "name" },
+        // fullName: { label: "Text", type: "name" },
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = {   email: credentials.email,password: credentials.password };
+        try {
+          await mongooseConnect();
 
-        if (user) {
-          console.log(user);
-          return user;
-        } else {
-          return null;
+          const user = await User.findOne({
+            email: credentials && credentials.email,
+          }).select("+password");
+
+          if (!user) {
+            throw new Error("Les informations d'identification sont invalides");
+          }
+
+          const isPasswordCorrect = await compare(
+            (credentials && credentials.password) || "",
+            user.password
+          );
+
+          if (!isPasswordCorrect) {
+            throw new Error("Mot de passe incorrecte");
+          }
+
+          if (user) {
+            console.log(user);
+            return user;
+          } else {
+            return null;
+          }
+        } catch (error) {
+          console.error("Une erreur s'est produite: ", error);
+          throw new Error("Authentification échouée");
         }
       },
     }),
