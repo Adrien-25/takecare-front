@@ -127,22 +127,12 @@ const SignIn = (props) => {
     // validate your userinfo
     e.preventDefault();
 
-    // const res = await signUp("credentials", {
-    //   //   name: userInfo.name,
-    //   email: userInfo.email,
-    //   password: userInfo.password,
-    //   redirect: false,
-    // });
-
-    axios.post("/api/register", {
+    const res = await signIn("credentials", {
+      //   name: userInfo.name,
       email: userInfo.email,
       password: userInfo.password,
+      redirect: false,
     });
-    // after user registered in database
-    // login("credential", {
-    //   email: email,
-    //   password: password,
-    // });
 
     console.log(res);
   };

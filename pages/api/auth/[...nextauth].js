@@ -6,44 +6,23 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { mongooseConnect } from "@/lib/mongoose";
 
+
 export const authOptions = {
   secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
-      type: "credentials",
+      type: "Credentials",
       credentials: {
         // name: { label: "Text", type: "name" },
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch("/api/register", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
+        const user = {   email: credentials.email,password: credentials.password };
 
-        await mongooseConnect();
-        const { email, password } = credentials;
-        const existingUser = await User.findOne({ email });
-
-        if (existingUser) {
-          throw new Error("Informations d'identification non valides");
-        } else {
-        }
-
-        // const passwordHash = await hash(password, 10);
-
-        // const newUser = new User({
-        //   email,
-        //   passwordHash,
-        // });
-
-        // await newUser.save();
-
-        if (res.ok && user) {
-          return user; //<---- is this actually returning the full user object to the session?
+        if (user) {
+          console.log(user);
+          return user;
         } else {
           return null;
         }
