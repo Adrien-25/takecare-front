@@ -3,17 +3,18 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { User } from "@/models/User";
 import { hash } from "bcryptjs";
+import mongoose from "mongoose";
 
 const handler = async (req, res) => {
   try {
     await mongooseConnect();
-    console.log("test");
+    // console.log("test");
     if (req.method === "POST") {
       if (!req.body) {
         return res.status(400).json({ error: "Les données sont manquantes" });
       }
 
-      const { fullName, email, password } = req.body;
+      const { name, email, password,role,city,postalCode,streetAddress,country } = req.body;
 
       const userExists = await User.findOne({ email });
       //   return res.status(200).json({ userExists});
@@ -28,18 +29,34 @@ const handler = async (req, res) => {
         }
 
         const hashedPassword = await hash(password, 12);
-        // return res.status(200).json({ email });
+        // const role = "user";
+        // const city = "";
+        // const postalCode = "";
+        // const streetAddress = "";
+        // const country = "";
+
+        // return res.status(300).json({ city });
 
         User.create({
-          fullName,
-          email,
+          name: name,
+          email: email,
           password: hashedPassword,
+          role: role,
+          city: city,
+          postalCode: postalCode,
+          streetAddress: streetAddress,
+          country: country,
         })
           .then((data) => {
             const user = {
               email: data.email,
-              fullName: data.fullName,
+              name: data.name,
               _id: data._id,
+              role: data.role,
+              city: data.city,
+              postalCode: data.postalCode,
+              streetAddress: data.streetAddress,
+              country: data.country,
             };
 
             return res.status(201).json({
@@ -50,7 +67,6 @@ const handler = async (req, res) => {
           .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
               // MongoDB retournera un tableau
-              // mais nous ne voulons afficher qu'une seule erreur à la fois
 
               for (let field in error.errors) {
                 const msg = error.errors[field].message;
@@ -62,35 +78,6 @@ const handler = async (req, res) => {
               .status(500)
               .json({ error: "Erreur lors de la création du compte" });
           });
-
-        // User.create(
-        //   {
-        //     fullName,
-        //     email,
-        //     password: hashedPassword,
-        //   },
-        //   (error, data) => {
-        //     if (error && error instanceof mongoose.Error.ValidationError) {
-        //       // MongoDB retournera un tableau
-
-        //       for (let field in error.errors) {
-        //         const msg = error.errors[field].message;
-        //         return res.status(409).json({ error: msg });
-        //       }
-        //     }
-
-        //     const user = {
-        //       email: data.email,
-        //       fullName: data.fullName,
-        //       _id: data._id,
-        //     };
-
-        //     return res.status(201).json({
-        //       success: true,
-        //       user,
-        //     });
-        //   }
-        // );
       }
     } else {
       res.status(405).json({ error: "Méthode Non Autorisée" });
@@ -101,4 +88,5 @@ const handler = async (req, res) => {
   }
 };
 
-module.exports = handler;
+// module.exports = handler;
+export default handler;

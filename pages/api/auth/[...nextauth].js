@@ -13,7 +13,6 @@ export const authOptions = {
     CredentialsProvider({
       type: "Credentials",
       credentials: {
-        // fullName: { label: "Text", type: "name" },
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
@@ -39,7 +38,6 @@ export const authOptions = {
           }
 
           if (user) {
-            console.log(user);
             return user;
           } else {
             return null;

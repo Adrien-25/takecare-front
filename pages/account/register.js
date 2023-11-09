@@ -131,18 +131,15 @@ const SigninContainer = styled.div`
 
 const SignIn = (props) => {
   const [userInfo, setUserInfo] = useState({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    role: "user",
+    city: "",
+    postalCode: "",
+    streetAddress: "",
+    country: "",
   });
-
-  // const [data, setData] = useState({
-  //   fullName: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [submitError, setSubmitError] = useState("");
@@ -152,13 +149,13 @@ const SignIn = (props) => {
   const validateData = () => {
     const err = [];
 
-    if (userInfo.fullName && userInfo.fullName.length < 4) {
+    if (userInfo.name && userInfo.name.length < 4) {
       err.push({
-        fullName: "Le nom complet doit comporter au moins 4 caractères",
+        name: "Le nom complet doit comporter au moins 4 caractères",
       });
-    } else if (userInfo.fullName && userInfo.fullName.length > 30) {
+    } else if (userInfo.name && userInfo.name.length > 30) {
       err.push({
-        fullName: "Le nom complet doit comporter moins de 30 caractères",
+        name: "Le nom complet doit comporter moins de 30 caractères",
       });
     } else if (userInfo.password && userInfo.password.length < 6) {
       err.push({
@@ -275,16 +272,16 @@ const SignIn = (props) => {
               <label htmlFor="text">Nom entier</label>
               {validationErrors.map(
                 (err, index) =>
-                  err.hasOwnProperty("fullName") && (
+                  err.hasOwnProperty("name") && (
                     <div className="error" key={index}>
-                      {err.fullName}
+                      {err.name}
                     </div>
                   )
               )}
               <input
-                value={userInfo.fullName}
+                value={userInfo.name}
                 onChange={({ target }) =>
-                  setUserInfo({ ...userInfo, fullName: target.value })
+                  setUserInfo({ ...userInfo, name: target.value })
                 }
                 type="text"
                 placeholder="john murphy"

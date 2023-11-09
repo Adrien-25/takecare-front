@@ -1,9 +1,8 @@
 import mongoose, { model, Schema, models } from "mongoose";
 
-
 const userSchema = new Schema(
   {
-    fullName: {
+    name: {
       type: String,
       required: true,
       minlength: 4,
@@ -18,13 +17,34 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+      default:""
+    },
+    postalCode: {
+      type: String,
+      required: true,
+      default:""
+    },
+    streetAddress: {
+      type: String,
+      required: true,
+      default:""
+    },
+    country: {
+      type: String,
+      required: true,
+      default:""
+    },
   },
   {
     timestamps: true,
   }
 );
-export const User = models.User || model('User', userSchema);
+export const User = models.User || model("User", userSchema);
 // const User = model("User", userSchema);
-
-// module.exports = User;
-
