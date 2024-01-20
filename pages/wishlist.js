@@ -5,12 +5,15 @@ import Cookies from "js-cookie";
 import Title from "@/components/UI/Title";
 import Button from "@/components/UI/Button";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Product } from "@/models/Product";
 import mongoose from "mongoose";
 import { mongooseConnect } from "@/lib/mongoose";
 import Table from "@/components/UI/Table";
 import Xmark from "@/components/icons/Xmark";
+import CartIcon from "@/components/icons/CartIcon";
+import { CartContext } from "@/components/CartContext";
+
 
 const WishlistContainer = styled.div`
   margin: 50px 0;
@@ -32,9 +35,16 @@ const WishlistContainer = styled.div`
   .wish-content {
     .wish-item {
       display: flex;
-      padding: 20px 0;
-      gap: 20px;
+      /* padding: 20px 0;
+      gap: 20px; */
       align-items: center;
+      justify-content: space-between;
+      .product-content {
+        display: flex;
+        gap: 20px;
+        padding: 20px 0;
+        align-items: center;
+      }
       .delete-wish {
         width: 30px;
         height: 30px;
@@ -47,6 +57,12 @@ const WishlistContainer = styled.div`
           width: 20px;
           color: red;
         }
+      }
+      .add-cart-product {
+        /* padding: 10px;
+        & > svg {
+          margin: 0;
+        } */
       }
     }
   }
@@ -84,6 +100,8 @@ const ProductImageBox = styled.div`
 // ProductsPage component
 export default function WishlistPage(products) {
   const [wishlist, setWishlist] = useState([]);
+  const { addProduct } = useContext(CartContext);
+
   //   const wishProduct = {} ;
 
   useEffect(() => {
@@ -118,18 +136,18 @@ export default function WishlistPage(products) {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
 
     setWishlist(updatedWishlist);
-    const wishlistChangeEvent = new CustomEvent('wishlistChange', {
-        detail: {
-          length: updatedWishlist.length,
-        },
-      });
-      
-      window.dispatchEvent(wishlistChangeEvent);
+    const wishlistChangeEvent = new CustomEvent("wishlistChange", {
+      detail: {
+        length: updatedWishlist.length,
+      },
+    });
+
+    window.dispatchEvent(wishlistChangeEvent);
   };
-  console.log(products);
+  // console.log(products);
 
   const productLink = (id) => {
-    window.location.href = '/product/'+id;;
+    window.location.href = "/product/" + id;
   };
 
   return (
@@ -160,15 +178,29 @@ export default function WishlistPage(products) {
                   <div className="wish-content">
                     {wishlistData.map((product) => (
                       <div className="wish-item" key={product._id}>
-                        
-                        <div className="delete-wish" onClick={() => removeWish(product._id)}>
-                          <Xmark className="" />
+                        <div className="product-content">
+                          <div
+                            className="delete-wish"
+                            onClick={() => removeWish(product._id)}
+                          >
+                            <Xmark className="" />
+                          </div>
+                          <ProductImageBox
+                            onClick={() => productLink(product._id)}
+                          >
+                            <img src={product.images[0]} alt="" />
+                          </ProductImageBox>
+                          {product.title}
                         </div>
 
-                        <ProductImageBox onClick={() => productLink(product._id)}>
-                          <img src={product.images[0]} alt="" />
-                        </ProductImageBox>
-                        {product.title}
+                        <Button
+                          className="add-cart-product"
+                          primary
+                          onClick={() => addProduct(product._id)}
+                        >
+                          <CartIcon />
+                          Ajouter au panier
+                        </Button>
                       </div>
                     ))}
                   </div>

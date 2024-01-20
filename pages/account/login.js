@@ -125,14 +125,16 @@ const SignIn = (props) => {
   const handleSubmit = async (e) => {
     // validate your userinfo
     e.preventDefault();
+    console.log(userInfo);
 
-    const res = await signIn("credentials", {
+    const res = await signIn("Credentials", {
       email: userInfo.email,
       password: userInfo.password,
-      redirect: false,
+      redirect: true,
+      callbackUrl: "/my-account"
     });
 
-    console.log(res);
+    // console.log(res);
   };
 
   return (
@@ -146,13 +148,17 @@ const SignIn = (props) => {
         <SigninContainer>
           <div className="container-login">
             <div className="button-signin">
-              <button onClick={() => signIn('google', { callbackUrl: '/my-account' })}>
+              <button
+                onClick={() => signIn("google", { callbackUrl: "/my-account" })}
+              >
                 <GoogleIcon />
                 Google
               </button>
             </div>
             <div className="button-signin">
-              <button onClick={() => signIn("github", { callbackUrl: '/my-account' })}>
+              <button
+                onClick={() => signIn("github", { callbackUrl: "/my-account" })}
+              >
                 <GithubIcon />
                 Github
               </button>

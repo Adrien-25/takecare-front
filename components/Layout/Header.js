@@ -393,7 +393,6 @@ export default function Header({ ListCategory }) {
             {/* Display parent categories */}
             {parentCategories.map((parentCategory) => (
               <div
-                key={parentCategory._id}
                 className={`parent-category ${
                   expandedCategories[parentCategory._id] ? "expanded" : ""
                 }`}
@@ -407,7 +406,7 @@ export default function Header({ ListCategory }) {
                 {/* Display child categories inside a list */}
                 <ul>
                   <li
-                    key={parentCategory._id}
+                    // key={parentCategory._id}
                     className="child-category title"
                     onClick={() => toggleCategoryExpansion(parentCategory._id)}
                   >
@@ -429,7 +428,9 @@ export default function Header({ ListCategory }) {
                         childCategory.parent === parentCategory._id
                     )
                     .map((childCategory) => (
-                      <li key={childCategory._id} className="child-category">
+                      <li 
+                      // key={childCategory._id} 
+                      className="child-category">
                         <NavLink
                           href={`/category/${childCategory._id}`}
                           onClick={disableHeader}

@@ -17,34 +17,32 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        try {
-          await mongooseConnect();
+        console.log("Début du processus d'authentification");
 
-          const user = await User.findOne({
-            email: credentials && credentials.email,
-          }).select("+password");
+        await mongooseConnect();
 
-          if (!user) {
-            throw new Error("Les informations d'identification sont invalides");
-          }
+        const user = await User.findOne({
+          email: credentials && credentials.email,
+        }).select("+password");
+        // throw new Error("Les informations d'identification sont invalides");
 
-          const isPasswordCorrect = await compare(
-            (credentials && credentials.password) || "",
-            user.password
-          );
+        if (!user) {
+          throw new Error("Les informations d'identification sont invalides");
+        }
 
-          if (!isPasswordCorrect) {
-            throw new Error("Mot de passe incorrecte");
-          }
+        const isPasswordCorrect = await compare(
+          (credentials && credentials.password) || "",
+          user.password
+        );
 
-          if (user) {
-            return user;
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.error("Une erreur s'est produite: ", error);
-          throw new Error("Authentification échouée");
+        if (!isPasswordCorrect) {
+          throw new Error("Mot de passe incorrecte");
+        }
+
+        if (user) {
+          return user;
+        } else {
+          return null;
         }
       },
     }),
@@ -87,8 +85,19 @@ export const authOptions = {
   // session: {
   //   jwt: true,
   // },
+
   callbacks: {
-    session: ({ session, token, user }) => {
+    // session: ({ session, token, user }) => {
+    //   session.user.address = {
+    //     city: user.city || "",
+    //     postalCode: user.postalCode || "",
+    //     streetAddress: user.streetAddress || "",
+    //     country: user.country || "",
+    //   };
+    //   return session;
+    // },
+
+    async session({ session, token, user }) {
       session.user.address = {
         city: user.city || "",
         postalCode: user.postalCode || "",
@@ -98,16 +107,6 @@ export const authOptions = {
       return session;
     },
 
-    // async session(session, user) {
-    //   session.user.address = {
-    //     city: userWithAddress.city || "",
-    //     postalCode: userWithAddress.postalCode || "",
-    //     streetAddress: userWithAddress.streetAddress || "",
-    //     country: userWithAddress.country || "",
-    //   };
-
-    //   return session;
-    // },
   },
   pages: {
     signIn: "/account/login",

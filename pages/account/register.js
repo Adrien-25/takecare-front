@@ -119,6 +119,9 @@ const SigninContainer = styled.div`
       color: red;
     }
   }
+  .register-container{
+    margin-bottom: 20px;
+  }
   .register-container > a {
     font-size: 14px;
     color: black;
